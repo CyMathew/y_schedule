@@ -24,7 +24,11 @@ public class User_TableBeansImpl {
 		query = session.createQuery(hql);
 		query.setParameter("nuname", username);
 		bean = (User_TableBeans)query.uniqueResult();
-		if(bean.getUser_password().equals(password)) {
+		if (bean == null) {
+			session.close();
+			return "Failure";
+		}
+		else if(bean.getUser_password().equals(password)) {
 			session.close();
 			return "Success";
 			}
