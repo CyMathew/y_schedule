@@ -11,6 +11,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient) { }
 
+  username: string;
+  password: string;
+
   ngOnInit() {
 
   }
@@ -18,10 +21,10 @@ export class LoginComponent implements OnInit {
   public tryLogin() {
 
     let param = {
-        action: 'login',
-        username: 'Test',
-        password: 'Test'
-    }
+      action: "login",
+      username: this.username,
+      password: this.password
+    };
 
     let url: string = "http://localhost:8085/y_schedule/login.do";
     this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
@@ -30,8 +33,21 @@ export class LoginComponent implements OnInit {
   }
 
   public doLogin(data: Object) {
-    //this.router.navigate(["home"])
-    console.log(data);
+    if (data["result"] == "success") {
+      switch (data["role"]) {
+        case "employee":
+          this.router.navigate(["home"]);
+          break;
+        case "manager":
+          this.router.navigate(["manage"]);
+          break;
+        case "coordinator":
+          this.router.navigate(["coordinate"]);
+          break;
+      }
+    } else {
+      //TODO fail message
+    }
   }
 
 }
