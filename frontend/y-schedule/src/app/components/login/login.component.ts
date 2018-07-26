@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         password: 'Test'
     }
 
-    let url: string = "http://localhost:8081/y_schedule/login.do";
+    let url: string = "http://localhost:8085/y_schedule/login.do";
     this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
 
 

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { EmployeeHomeComponent } from './employee-home/employee-home.component';
+import { LoginComponent } from './components/login/login.component';
+import { EmployeeHomeComponent } from './components/employee-home/employee-home.component';
 
 
 export const approutes: Routes = [

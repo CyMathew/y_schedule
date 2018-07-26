@@ -56,11 +56,18 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(username);
 		System.out.println(password);
 		
-		session.setAttribute("username", username);
+		
 
 		switch (action) {
 		case "login":
-			JSONHelper.sendResponse(response, implbean.getSecLvlByUsernameAndPassword(username, password));
+			JSONObject loginObj = implbean.getSecLvlByUsernameAndPassword(username, password);
+			
+			if(loginObj.getString("result").equals("success")) {
+				session.setAttribute("userid", (Integer)loginObj.get("userid"));
+				session.setAttribute("username", username);
+			}
+			
+			JSONHelper.sendResponse(response, loginObj);
 			logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
 			break;
 

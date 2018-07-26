@@ -72,6 +72,7 @@ public class User_TableBeansImpl {
 		query.setParameter("nuname", username);
 		bean = (User_TableBeans)query.uniqueResult();
 		if(password.equals(bean.getUser_password())){
+			tempo.put("userid", bean.getUser_id());
 			switch(bean.getSec_lvl()) {
 			case 1: 
 				tempo.put("result", "success");
