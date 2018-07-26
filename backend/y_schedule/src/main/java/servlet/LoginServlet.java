@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		JSONObject temp = JSONHelper.parseRequest(request.getReader());
 		PrintWriter out = response.getWriter();
 		
-		System.out.println(temp);
+		logger.info(temp);
 
 		logger.info("Test ");
 
@@ -52,9 +52,9 @@ public class LoginServlet extends HttpServlet {
 		password = temp.getString("password");
 		action = temp.getString("action");
 		
-		System.out.println(action);
-		System.out.println(username);
-		System.out.println(password);
+		logger.info(action);
+		logger.info(username);
+		logger.info(password);
 		
 		
 
