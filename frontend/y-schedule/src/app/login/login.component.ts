@@ -16,13 +16,22 @@ export class LoginComponent implements OnInit {
   }
 
   public tryLogin() {
-    let url: string = "http://18.191.179.128:8085/y_schedule/login";
-    this.http.get<Object>(url).subscribe(data => this.doLogin(data), Error => this.router.navigate(["home"]));
+
+    let param = {
+        action: 'login',
+        username: 'Test',
+        password: 'Test'
+    }
+
+    let url: string = "http://localhost:8081/y_schedule/login.do";
+    this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
+
 
   }
 
   public doLogin(data: Object) {
-    this.router.navigate(["home"])
+    //this.router.navigate(["home"])
+    console.log(data);
   }
 
 }

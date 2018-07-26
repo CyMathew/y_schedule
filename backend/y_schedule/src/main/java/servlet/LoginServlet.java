@@ -19,13 +19,13 @@ import util.JSONHelper;
 /**
  * Servlet implementation class testservlet
  */
-public class testservlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Default constructor.
 	 */
-	public testservlet() {
+	public LoginServlet() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,11 +35,15 @@ public class testservlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final Logger logger = Logger.getLogger(testservlet.class);
+		final Logger logger = Logger.getLogger(LoginServlet.class);
 		User_TableBeansImpl implbean = new User_TableBeansImpl();
 		HttpSession session = request.getSession();
 		JSONObject temp = JSONHelper.parseRequest(request.getReader());
 		PrintWriter out = response.getWriter();
+		
+		System.out.println(temp);
+
+		logger.info("Test ");
 
 		String username = null;
 		String password = null;
@@ -47,6 +51,12 @@ public class testservlet extends HttpServlet {
 		username = temp.getString("username");
 		password = temp.getString("password");
 		action = temp.getString("action");
+		
+		System.out.println(action);
+		System.out.println(username);
+		System.out.println(password);
+		
+		session.setAttribute("username", username);
 
 		switch (action) {
 		case "login":
