@@ -1,5 +1,6 @@
 package daos;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.json.JSONObject;
@@ -8,7 +9,7 @@ import beans.User_TableBeans;
 import util.HibernateUtil;
 
 public class User_TableBeansImpl {
-	
+	final static Logger logger = Logger.getLogger(User_TableBeansImpl.class);
 	/**
 	 * This will return one of two strings: "Success" or "Failure"
 	 * Success if the password matches the password that is given with the username from the DB
@@ -26,14 +27,17 @@ public class User_TableBeansImpl {
 		bean = (User_TableBeans)query.uniqueResult();
 		if (bean == null) {
 			session.close();
+			logger.error("Failure" + username);
 			return "Failure";
 		}
 		else if(bean.getUser_password().equals(password)) {
 			session.close();
+			logger.info("Success" + username +" "+ password);
 			return "Success";
 			}
 		else {
 			session.close();
+			logger.error("Failure" + username +" "+ password);
 			return "Failure";
 		}
 		
@@ -52,6 +56,7 @@ public class User_TableBeansImpl {
 		query = session.createQuery(hql);
 		query.setParameter("nuname", username);
 		bean = (User_TableBeans)query.uniqueResult();
+		logger.info("UserName" + username);
 		return bean.getSec_lvl();
 	}
 
@@ -71,14 +76,17 @@ public class User_TableBeansImpl {
 			case 1: 
 				tempo.put("result", "success");
 				tempo.put("role", "employee");
+				logger.info("Case 1" + tempo);
 				return tempo;
 			case 2:
 				tempo.put("result", "success");
 				tempo.put("role", "manager");
+				logger.info("Case 2" + tempo);
 				return tempo;
 			case 3:	
 				tempo.put("result", "success");
 				tempo.put("role", "coordinator");
+				logger.info("Case 3" + tempo);
 				return tempo;
 			}
 		}
