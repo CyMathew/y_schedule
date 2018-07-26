@@ -93,6 +93,7 @@ public class User_TableBeansImpl {
 		}
 		
 		tempo.put("result", "failure");
+		logger.info("Default " + tempo);
 		return tempo;		
 	}
 }
