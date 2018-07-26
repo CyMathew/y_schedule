@@ -2,16 +2,16 @@
 
   <div class="row justify-content-center">
     <div class="col-sm-6" style="max-width: 480px;">
-      <form action='Login.do' method="post">
+      <form action='Login.do' method="post" (ngSubmit)="tryLogin()">
         <div class="form-group">
           <label for="username">username</label>
-          <input class="form-control" type="text" name="username" required="required" [(ngModel)]="username">
+          <input class="form-control" type="text" name="username" required [(ngModel)]="username">
         </div>
         <div class="form-group">
           <label for="password">password</label>
-          <input class="form-control" type="password" name="password" required="required" [(ngModel)]="password">
+          <input class="form-control" type="password" name="password" required [(ngModel)]="password">
         </div>
-        <button (click)="tryLogin()" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </div>
   </div>

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import daos.User_TableBeansImpl;
+import service.LoginService;
 import util.HtmlTemplates;
 import util.JSONHelper;
 
@@ -36,44 +37,39 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		final Logger logger = Logger.getLogger(LoginServlet.class);
-		User_TableBeansImpl implbean = new User_TableBeansImpl();
+		
 		HttpSession session = request.getSession();
-		JSONObject temp = JSONHelper.parseRequest(request.getReader());
+		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());
 		PrintWriter out = response.getWriter();
 		
-		logger.info(temp);
+		logger.info(jsonIn);
 
 		logger.info("Test ");
 
-		String username = null;
-		String password = null;
-		String action = null;
-		username = temp.getString("username");
-		password = temp.getString("password");
-		action = temp.getString("action");
+		String username = jsonIn.getString("username");
+		String action = jsonIn.getString("action");
 		
 		logger.info(action);
 		logger.info(username);
-		logger.info(password);
-		
-		
+
 
 		switch (action) {
 		case "login":
-			JSONObject loginObj = implbean.getSecLvlByUsernameAndPassword(username, password);
+			JSONObject jsonOut = LoginService.validateLogin(jsonIn);
 			
-			if(loginObj.getString("result").equals("success")) {
-				session.setAttribute("userid", (Integer)loginObj.get("userid"));
+			if(jsonOut.getString("result").equals("success")) {
+				session.setAttribute("userid", (Integer)jsonOut.get("userid"));
 				session.setAttribute("username", username);
+				logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
+			}else {
+				logger.info("invalid login");
 			}
+			JSONHelper.sendResponse(response, jsonOut);
 			
-			JSONHelper.sendResponse(response, loginObj);
-			logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
 			break;
 
 		case "logout":
-			logger.info("Loging is Failure");
-			HtmlTemplates.goBackButton(out);
+			logger.info("attempt logout");
 		}
 	}
 

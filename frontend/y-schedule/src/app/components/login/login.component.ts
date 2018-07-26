@@ -20,15 +20,16 @@ export class LoginComponent implements OnInit {
 
   public tryLogin() {
 
-    let param = {
-      action: "login",
-      username: this.username,
-      password: this.password
-    };
+    if (this.username != null && this.password != null) {
+      let param = {
+        action: "login",
+        username: this.username,
+        password: this.password
+      };
+      let url: string = "http://localhost:8085/y_schedule/login.do";
 
-    let url: string = "http://localhost:8085/y_schedule/login.do";
-    this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
-
+      this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
+    }
 
   }
 
