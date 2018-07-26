@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import daos.User_TableBeansImpl;
+import util.HtmlTemplates;
 import util.JSONHelper;
 
 /**
@@ -37,6 +39,7 @@ public class testservlet extends HttpServlet {
 		User_TableBeansImpl implbean = new User_TableBeansImpl();
 		HttpSession session = request.getSession();
 		JSONObject temp = JSONHelper.parseRequest(request.getReader());
+		PrintWriter out = response.getWriter();
 
 		String username = null;
 		String password = null;
@@ -48,12 +51,12 @@ public class testservlet extends HttpServlet {
 		switch (action) {
 		case "login":
 			JSONHelper.sendResponse(response, implbean.getSecLvlByUsernameAndPassword(username, password));
-			logger.info("Loging is Success");
+			logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
 			break;
 
 		case "logout":
 			logger.info("Loging is Failure");
-
+			HtmlTemplates.goBackButton(out);
 		}
 	}
 
@@ -63,7 +66,6 @@ public class testservlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
