@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { GetUrlService } from '../../services/get-url.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,17 @@ import { environment } from '../../../environments/environment';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private url: GetUrlService) { }
 
   username: string;
   password: string;
 
   ngOnInit() {
 
+  }
+
+  ngAfterViewInit(){
+    console.log(this.url.get());
   }
 
   public tryLogin() {
@@ -28,7 +34,7 @@ export class LoginComponent implements OnInit {
         password: this.password
       };
       
-      let url: string = environment.url + "/y_schedule/login.do";
+      let url: string = this.url.get() + "/y_schedule/login.do";
       console.log(url);
       this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
     }

@@ -14,7 +14,7 @@ export class ManagerHomeComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    console.log(environment);
+    
   }
 
 }
