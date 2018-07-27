@@ -34,9 +34,7 @@ public class RegistrationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		JSONObject temp = JSONHelper.parseRequest(request.getReader());
 		RegistrationService regiser = new RegistrationService();
-		JSONObject jsonreply = new JSONObject();
-		String reply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"));
-		jsonreply.put("result", reply);
+		JSONObject jsonreply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"));
 		JSONHelper.sendResponse(response, jsonreply);
 	}
 

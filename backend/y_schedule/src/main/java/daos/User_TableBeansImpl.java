@@ -96,27 +96,4 @@ public class User_TableBeansImpl {
 		tempo.put("result", "failure");
 		return tempo;		
 	}
-
-	
-	public String createNewEmployee(String username, String lastname, String password, String firstname) {
-		Session session = HibernateUtil.getSession();
-		Transaction tx = null;
-		User_TableBeans newemployee = new User_TableBeans(firstname, lastname, password, username);
-		try{
-			tx = session.beginTransaction();
-			session.save(newemployee);
-			tx.commit();
-			
-		}catch(HibernateException e){
-			if(tx!=null){
-				tx.rollback();
-			}
-			e.printStackTrace();
-			return "Failure";
-		}finally{
-			session.close();
-		}
-		return "Success";
-	}
-
 }
