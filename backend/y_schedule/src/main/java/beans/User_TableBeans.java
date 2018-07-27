@@ -28,7 +28,7 @@ public class User_TableBeans {
 	@Column
 	private Integer sec_lvl;
 	@Column
-	private Integer storeId;
+	private Integer store_Id;
 	
 	public User_TableBeans(String firstname, String Lastname, String password, String username) {
 		this.user_fname = firstname;
@@ -36,7 +36,7 @@ public class User_TableBeans {
 		this.user_password = password;
 		this.user_username = username;
 		this.sec_lvl = 1;
-		this.storeId = 2367;
+		this.store_Id = 2367;
 	}
 	
 	public User_TableBeans() {
@@ -81,11 +81,12 @@ public class User_TableBeans {
 	}
 
 	public Integer getStoreId() {
-		return storeId;
+		return store_Id;
 	}
 
 	public void setStoreId(Integer storeId) {
-		this.storeId = storeId;
+		if (storeId != null) {this.store_Id = storeId;}
+		else {this.store_Id = (Integer)2367;}
 	}
 	
 	
