@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,10 @@ export class LoginComponent implements OnInit {
 
   }
 
+  ngAfterViewInit(){
+    console.log(environment);
+  }
+
   public tryLogin() {
 
     if (this.username != null && this.password != null) {
@@ -26,14 +31,16 @@ export class LoginComponent implements OnInit {
         username: this.username,
         password: this.password
       };
-      let url: string = "http://localhost:8085/y_schedule/login.do";
-
+      
+      let url: string = environment.url + "/y_schedule/login.do";
+      console.log(url);
       this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
     }
 
   }
 
   public doLogin(data: Object) {
+    console.log(data);
     if (data["result"] == "success") {
       switch (data["role"]) {
         case "employee":
