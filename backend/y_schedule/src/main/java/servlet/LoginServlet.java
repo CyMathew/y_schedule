@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet {
 		logger.info(action);
 		logger.info(username);
 
-
 		switch (action) {
 		case "login":
 			JSONObject jsonOut = LoginService.validateLogin(jsonIn);
