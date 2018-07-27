@@ -168,3 +168,39 @@
 2018-07-27 18:33:31 INFO  EmployeeService:20 - Case 3beans.User_TableBeans@1f130eaf
 2018-07-27 18:33:31 INFO  EmployeeService:11 - 2
 2018-07-27 18:33:31 INFO  EmployeeService:17 - Case 2beans.User_TableBeans@bc57b40
+2018-07-27 18:42:46 DEBUG logging:194 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-07-27 18:42:46 WARN  DriverManagerConnectionProviderImpl:93 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2018-07-27 18:42:50 INFO  User_TableBeansImpl:59 - UserNamenull
+2018-07-27 18:42:51 INFO  User_TableBeansImpl:59 - UserNameSwuzzy
+2018-07-27 18:42:52 INFO  User_TableBeansImpl:59 - UserNameMilisdowered
+2018-07-27 18:42:52 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:42:53 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:43:56 DEBUG logging:194 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-07-27 18:43:57 WARN  DriverManagerConnectionProviderImpl:93 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2018-07-27 18:44:01 INFO  User_TableBeansImpl:59 - UserNamenull
+2018-07-27 18:44:01 INFO  User_TableBeansImpl:59 - UserNameSwuzzy
+2018-07-27 18:44:02 INFO  User_TableBeansImpl:59 - UserNameMilisdowered
+2018-07-27 18:44:02 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:44:03 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:44:41 DEBUG logging:194 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-07-27 18:44:41 WARN  DriverManagerConnectionProviderImpl:93 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2018-07-27 18:44:45 INFO  User_TableBeansImpl:59 - UserNamenull
+2018-07-27 18:44:45 INFO  User_TableBeansImpl:59 - UserNameSwuzzy
+2018-07-27 18:44:46 INFO  User_TableBeansImpl:59 - UserNameMilisdowered
+2018-07-27 18:44:47 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:44:47 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:45:53 DEBUG logging:194 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-07-27 18:45:53 WARN  DriverManagerConnectionProviderImpl:93 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2018-07-27 18:45:59 INFO  User_TableBeansImpl:59 - UserNamenull
+2018-07-27 18:46:00 INFO  User_TableBeansImpl:59 - UserNameMilisdowered
+2018-07-27 18:46:00 INFO  User_TableBeansImpl:59 - UserNameSwuzzy
+2018-07-27 18:46:01 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:46:02 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:46:54 DEBUG logging:194 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+2018-07-27 18:46:54 WARN  DriverManagerConnectionProviderImpl:93 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2018-07-27 18:46:58 INFO  User_TableBeansImpl:59 - UserNameMilisdowered
+2018-07-27 18:46:59 INFO  User_TableBeansImpl:59 - UserNameSwuzzy
+2018-07-27 18:46:59 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:47:00 INFO  User_TableBeansImpl:59 - UserNamePosuraid68
+2018-07-27 18:47:01 INFO  User_TableBeansImpl:59 - UserNameOferds
+2018-07-27 18:47:01 INFO  User_TableBeansImpl:59 - UserNamenull
