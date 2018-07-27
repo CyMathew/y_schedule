@@ -7,8 +7,8 @@ import beans.User_TableBeans;
 
 public class EmployeeService {
 	public static String getUserBySecLev(User_TableBeans bean){
-		Logger logger = Logger.getLogger(LoginService.class);
-		System.out.println(bean.getSec_lvl());
+		Logger logger = Logger.getLogger(EmployeeService.class);
+		logger.info(bean.getSec_lvl());
 		switch (bean.getSec_lvl()) {
 		case 1:
 			logger.info("Case 1" + bean);
