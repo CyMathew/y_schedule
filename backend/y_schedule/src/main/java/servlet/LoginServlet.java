@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			if(jsonOut.getString("result").equals("success")) {
 				session.setAttribute("userid", (Integer)jsonOut.get("userid"));
 				session.setAttribute("username", username);
-				session.setAttribute("userrole", (Integer)jsonOut.get("role"));
+				session.setAttribute("userrole", jsonOut.get("role"));
 				logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
 			}else {
 				logger.info("invalid login");
