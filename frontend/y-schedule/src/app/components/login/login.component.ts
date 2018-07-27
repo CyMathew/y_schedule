@@ -19,10 +19,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ngAfterViewInit(){
-    console.log(environment);
-  }
-
   public tryLogin() {
 
     if (this.username != null && this.password != null) {
