@@ -27,13 +27,16 @@ public class User_TableBeans {
 	private String  user_password;
 	@Column
 	private Integer sec_lvl;
+	@Column
+	private Integer storeId;
 	
 	public User_TableBeans(String firstname, String Lastname, String password, String username) {
 		this.user_fname = firstname;
 		this.user_lname = Lastname;
 		this.user_password = password;
 		this.user_username = username;
-		this.sec_lvl = 0;
+		this.sec_lvl = 1;
+		this.storeId = 2367;
 	}
 	
 	public User_TableBeans() {
