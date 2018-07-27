@@ -47,12 +47,12 @@
   </filter-mapping>
   <servlet>
     <description></description>
-    <display-name>managerServlet</display-name>
-    <servlet-name>managerServlet</servlet-name>
-    <servlet-class>servlet.managerServlet</servlet-class>
+    <display-name>ManagerServlet</display-name>
+    <servlet-name>ManagerServlet</servlet-name>
+    <servlet-class>servlet.ManagerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>managerServlet</servlet-name>
-    <url-pattern>/managerServlet</url-pattern>
+    <servlet-name>ManagerServlet</servlet-name>
+    <url-pattern>/ManagerServlet</url-pattern>
   </servlet-mapping>
 </web-app>

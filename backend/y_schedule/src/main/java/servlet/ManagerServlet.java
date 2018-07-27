@@ -36,10 +36,11 @@ public class ManagerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final Logger logger = Logger.getLogger(LoginServlet.class);
 		HttpSession session = request.getSession();
-		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());
-		User_TableBeans bean = new User_TableBeans();		
+		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());	
 		
-		JSONObject jsonOut = ManagerService.selectEmpInfo(jsonIn);
+		Integer userId = (Integer)session.getAttribute("userid");
+		System.out.println(userId);
+		JSONObject jsonOut = ManagerService.selectEmpInfo(jsonIn, userId);
 		
 		JSONHelper.sendResponse(response, jsonOut);
 		logger.info("JSON Object Sent");

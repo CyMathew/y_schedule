@@ -25,6 +25,8 @@ public class LoginService {
 				tempo.put("userid", bean.getUser_id());
 				tempo.put("result", "success");
 				tempo.put("role", EmployeeService.getUserBySecLev(bean));
+				
+				return tempo;
 			}
 		}
 

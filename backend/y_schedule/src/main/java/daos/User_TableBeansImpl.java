@@ -76,4 +76,19 @@ public class User_TableBeansImpl {
 
 		return bean;		
 	}
+
+
+	public User_TableBeans getUserById(Integer userId) {
+		User_TableBeans bean = null;
+		Session session = HibernateUtil.getSession();
+		
+		Query query;
+		String hql;
+		hql = "FROM User_TableBeans WHERE user_id = :nuid";
+		query = session.createQuery(hql);
+		query.setParameter("nuid", userId);
+		bean = (User_TableBeans)query.uniqueResult();
+
+		return bean;
+	}
 }

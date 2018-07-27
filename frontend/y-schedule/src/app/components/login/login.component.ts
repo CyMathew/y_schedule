@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
-
+  
   ngOnInit() {
 
   }
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       };
       
       let url: string = this.url.get() + "/y_schedule/login.do";
-      console.log(url);
       this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
     }
 
@@ -44,15 +43,19 @@ export class LoginComponent implements OnInit {
   public doLogin(data: Object) {
     console.log(data);
     if (data["result"] == "success") {
+
+      localStorage.setItem("")
+
+
       switch (data["role"]) {
-        case "employee":
-          this.router.navigate(["home"]);
-          break;
         case "manager":
           this.router.navigate(["manage"]);
           break;
         case "coordinator":
           this.router.navigate(["coordinate"]);
+          break;
+        default:
+          this.router.navigate(["home"]);
           break;
       }
     } else {
