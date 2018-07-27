@@ -21,7 +21,7 @@ public class RegistrationTest {
 		RegistrationServlet servlet = new RegistrationServlet();
 		RegistrationService testserv = new RegistrationService();
 		testserv.setImpl(beantest);
-		assertEquals("Success", testserv.CreateNewEmployee("blech", "blech", "blech", "blech").get("result"));
+		assertEquals("success", testserv.CreateNewEmployee("blech", "blech", "blech", "blech").get("result"));
 		
 		
 	}
