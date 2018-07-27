@@ -28,22 +28,15 @@ public class RegistrationServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		JSONObject temp = JSONHelper.parseRequest(request.getReader());
-		RegistrationService regiser = new RegistrationService();
-		JSONObject jsonreply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"));
-		JSONHelper.sendResponse(response, jsonreply);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("Got the post request");
+		JSONObject temp = JSONHelper.parseRequest(request.getReader());
+		RegistrationService regiser = new RegistrationService();
+		JSONObject jsonreply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"));
+		JSONHelper.sendResponse(response, jsonreply);
 	}
 
 }

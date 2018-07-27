@@ -1,0 +1,33 @@
+<form action="#" class="container-fluid">
+    <div class="row">
+        <div class="col">
+          <input type="text" [(ngModel)]="user.first_name" class="form-control" name="firstname" placeholder="First name" required>
+          <div class="invalid-feedback">
+            Please provide your first name
+          </div>
+        </div>
+        <div class="col">
+          <input type="text" [(ngModel)]="user.last_name" class="form-control" name="lastname" placeholder="Last name" required>
+        </div>
+      </div>
+
+  <div class="form-group col-md-6">
+    <label for="username">Username</label> 
+    <input type="text" [(ngModel)]="user.username" class="form-control" name="username" id="username" required>
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="password">Password</label>
+    <input type="password" [(ngModel)]="user.password" class="form-control" name="password" id="password" required>
+  </div>
+
+  <div class="form-group col-md-6">
+    <label for="confirm_password">Confirm Password</label>
+    <input type="password" [(ngModel)]="user.confirmPassword" class="form-control" name="confirm_password" id="confirm_password" required>
+  </div>
+
+  <div class="form-group col-md-6">
+    <input type="reset">  
+    <button (click)="register()" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
