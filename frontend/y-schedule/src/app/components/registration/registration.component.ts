@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-
-
-
 const httpOptions = { 
   header: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -19,7 +16,7 @@ const httpOptions = {
 
 export class RegistrationComponent implements OnInit 
 {
-  public user = {
+  user = {
     first_name: "",
     last_name: "",
     username: "",
@@ -27,7 +24,16 @@ export class RegistrationComponent implements OnInit
     confirmPassword: ""
   };
 
+  inputNotValid = {
+    first_name: false,
+    last_name: false,
+    username: false,
+    password: false,
+    confirmPassword: false
+  }
+  
   userTaken = false;
+  passNoMatch = false;
   
   // url: string = "http://18.191.179.128:8085/y_schedule/register";
   url = "http://localhost:8085/y_schedule/register";
@@ -41,20 +47,42 @@ export class RegistrationComponent implements OnInit
 
   public register() 
   {
+    this.reset();
 
-    if(this.user.password != this.user.confirmPassword)
+    if(this.checkIfEmpty(this.user))
+    {
+      
+    }
+    else if(this.user.password != this.user.confirmPassword)
+    {
       console.log('Passwords do not match');
+      this.passNoMatch = true;
+    }
     else
     {
       this.http.post<Object>(this.url, this.user)
         .subscribe(
-          data => this.afterRegister(data), 
+          (data) => this.afterRegister(data),
           err => {
             console.log("Error occurred");
-            this.router.navigate(["home"])
+            // this.router.navigate(["home"])
           }
         );
     }
+  }
+
+  private checkIfEmpty(user: Object)
+  {
+    for(let item in user)
+    {
+      if(user[item] == "")
+      {
+        this.inputNotValid[item] = true;
+        return true;      
+      }
+    }
+
+    return false;
   }
 
   public afterRegister(data: Object) {
@@ -66,8 +94,20 @@ export class RegistrationComponent implements OnInit
     else
     {
       console.log('Username is taken');
+      this.userTaken = true;
     }
     
+  }
+
+  private reset()
+  {
+    this.userTaken = false;
+    this.passNoMatch = false;
+
+    for(let item in this.inputNotValid)
+    {
+      this.inputNotValid[item] = false;
+    }
   }
 
 }
