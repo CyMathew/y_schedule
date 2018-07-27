@@ -13,7 +13,7 @@ public class LoginService {
 	public static JSONObject validateLogin(JSONObject inputObj) {
 
 		JSONObject tempo = new JSONObject();
-
+		
 		String username = inputObj.getString("username");
 		String password = inputObj.getString("password");
 
@@ -24,21 +24,9 @@ public class LoginService {
 
 				tempo.put("userid", bean.getUser_id());
 				tempo.put("result", "success");
-
-				switch (bean.getSec_lvl()) {
-				case 1:
-					tempo.put("role", "employee");
-					logger.info("Case 1" + tempo);
-					return tempo;
-				case 2:
-					tempo.put("role", "manager");
-					logger.info("Case 2" + tempo);
-					return tempo;
-				case 3:
-					tempo.put("role", "coordinator");
-					logger.info("Case 3" + tempo);
-					return tempo;
-				}
+				tempo.put("role", EmployeeService.getUserBySecLev(bean));
+				
+				return tempo;
 			}
 		}
 

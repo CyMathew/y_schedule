@@ -45,6 +45,10 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("LoginServlet");
 			rd.forward(request, response);
 			break;
+		case "manager":
+			rd = request.getRequestDispatcher("ManagerServlet");
+			rd.forward(request, response);
+			break;
 		default:
 			System.out.println("hullo?");
 			response.sendError(404);

@@ -40,18 +40,18 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());
-		PrintWriter out = response.getWriter();
 		
 		logger.info(jsonIn);
 
 		logger.info("Test ");
 
 		String username = jsonIn.getString("username");
+		
 		String action = jsonIn.getString("action");
 		
 		logger.info(action);
 		logger.info(username);
-
+		logger.info(jsonIn.getString("password"));
 
 		switch (action) {
 		case "login":
@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("username", username);
 				session.setAttribute("userrole", jsonOut.get("role"));
 				logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
+				logger.info("LOGIN ID: " + (Integer)session.getAttribute("userid"));
 			}else {
 				logger.info("invalid login");
 			}
