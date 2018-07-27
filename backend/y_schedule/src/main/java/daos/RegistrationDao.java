@@ -9,10 +9,11 @@ import util.HibernateUtil;
 
 public class RegistrationDao {
 	
-	public String createNewEmployee(String username, String lastname, String password, String firstname) {
+	public String createNewEmployee(String username, String lastname, String password, String firstname, Integer storeid) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		User_TableBeans newemployee = new User_TableBeans(firstname, lastname, password, username);
+		newemployee.setStoreId(storeid);
 		try{
 			tx = session.beginTransaction();
 			session.save(newemployee);

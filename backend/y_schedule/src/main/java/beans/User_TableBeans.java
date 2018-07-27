@@ -79,6 +79,14 @@ public class User_TableBeans {
 	public void setSec_lvl(Integer sec_lvl) {
 		this.sec_lvl = sec_lvl;
 	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
 	
 	
 }

@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -35,7 +36,8 @@ public class RegistrationServlet extends HttpServlet {
 		System.out.println("Got the post request");
 		JSONObject temp = JSONHelper.parseRequest(request.getReader());
 		RegistrationService regiser = new RegistrationService();
-		JSONObject jsonreply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"));
+		HttpSession session = request.getSession();
+		JSONObject jsonreply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"),(Integer)session.getAttribute("storeid"));
 		JSONHelper.sendResponse(response, jsonreply);
 	}
 
