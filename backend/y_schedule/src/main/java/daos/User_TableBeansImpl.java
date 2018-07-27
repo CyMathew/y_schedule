@@ -57,7 +57,9 @@ public class User_TableBeansImpl {
 		query.setParameter("nuname", username);
 		bean = (User_TableBeans)query.uniqueResult();
 		logger.info("UserName" + username);
-		return bean.getSec_lvl();
+		if(bean != null) {
+			return bean.getSec_lvl();
+		}else return 0;
 	}
 
 	

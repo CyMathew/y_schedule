@@ -10,7 +10,7 @@ import org.junit.Test;
 public class getSecLvlByUsernameAndPasswordTest {
 	final static Logger logger = Logger.getLogger(getSecLvlByUsernameAndPasswordTest.class);
 	daos.User_TableBeansImpl utbi = new daos.User_TableBeansImpl();
-//come back to latter
+
 //	@Before
 //	public void setUp() throws Exception {
 //	}
