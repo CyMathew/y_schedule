@@ -24,7 +24,6 @@ public class RegistrationTest {
 		assertEquals("Success", testserv.CreateNewEmployee("blech", "blech", "blech", "blech").get("result"));
 		
 		
-		
 	}
 
 }

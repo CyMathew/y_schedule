@@ -23,10 +23,10 @@ public class RegistrationDao {
 				tx.rollback();
 			}
 			e.printStackTrace();
-			return "Failure";
+			return "failure";
 		}finally{
 			session.close();
 		}
-		return "Success";
+		return "success";
 	}
 }
