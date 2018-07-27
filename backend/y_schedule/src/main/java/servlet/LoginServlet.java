@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());
-		PrintWriter out = response.getWriter();
+	
 		
 		logger.info(jsonIn);
 
