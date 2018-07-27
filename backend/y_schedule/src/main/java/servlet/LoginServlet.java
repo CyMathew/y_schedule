@@ -13,19 +13,20 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import daos.User_TableBeansImpl;
+import service.LoginService;
 import util.HtmlTemplates;
 import util.JSONHelper;
 
 /**
  * Servlet implementation class testservlet
  */
-public class testservlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Default constructor.
 	 */
-	public testservlet() {
+	public LoginServlet() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,28 +36,41 @@ public class testservlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final Logger logger = Logger.getLogger(testservlet.class);
-		User_TableBeansImpl implbean = new User_TableBeansImpl();
+		final Logger logger = Logger.getLogger(LoginServlet.class);
+		
 		HttpSession session = request.getSession();
-		JSONObject temp = JSONHelper.parseRequest(request.getReader());
+		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());
 		PrintWriter out = response.getWriter();
+		
+		logger.info(jsonIn);
 
-		String username = null;
-		String password = null;
-		String action = null;
-		username = temp.getString("username");
-		password = temp.getString("password");
-		action = temp.getString("action");
+		logger.info("Test ");
+
+		String username = jsonIn.getString("username");
+		String action = jsonIn.getString("action");
+		
+		logger.info(action);
+		logger.info(username);
+
 
 		switch (action) {
 		case "login":
-			JSONHelper.sendResponse(response, implbean.getSecLvlByUsernameAndPassword(username, password));
-			logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
+			JSONObject jsonOut = LoginService.validateLogin(jsonIn);
+			
+			if(jsonOut.getString("result").equals("success")) {
+				session.setAttribute("userid", (Integer)jsonOut.get("userid"));
+				session.setAttribute("username", username);
+				session.setAttribute("userrole", (Integer)jsonOut.get("role"));
+				logger.info("LOGIN STARTED: " + (String)session.getAttribute("username"));
+			}else {
+				logger.info("invalid login");
+			}
+			JSONHelper.sendResponse(response, jsonOut);
+			
 			break;
 
 		case "logout":
-			logger.info("Loging is Failure");
-			HtmlTemplates.goBackButton(out);
+			logger.info("attempt logout");
 		}
 	}
 
