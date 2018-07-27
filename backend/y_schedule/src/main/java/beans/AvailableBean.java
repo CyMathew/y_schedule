@@ -3,7 +3,25 @@ package beans;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.Table;
 
+@NamedNativeQueries({
+	@NamedNativeQuery(
+			/*
+			 * Within a NativeQuery you are writing the ACTUAL
+			 * SQL that your engine is using. NOT HQL.
+			 */
+				name="removeRequests",
+				query="DELETE * FROM availabletimes WHERE userid = :id",
+				resultClass=AvailableBean.class
+			)
+})
+
+@Entity 
+@Table(name="availabletimes") 
 public class AvailableBean {
 	
 	@Column
