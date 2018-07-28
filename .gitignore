@@ -22,6 +22,7 @@
 **/.springBeans
 backend/y_schedule/.settings/org.eclipse.wst.common.component
 backend/y_schedule/.settings/exampleLog.log
+backend/y_schedule/logs
 
 #IDEA
 **/.idea/
