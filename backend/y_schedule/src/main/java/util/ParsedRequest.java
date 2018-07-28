@@ -6,14 +6,18 @@ public class ParsedRequest {
 	private Integer userId;
 	private String userRole;
 	private String userName;
+	private Integer storeId;
 
 	private JSONObject parameters;
 
 	public ParsedRequest(JSONObject sessionData, JSONObject parameters) {
 		if (sessionData.getString("userid") != null)
 			this.userId = Integer.parseInt(sessionData.getString("userid"));
+		if (sessionData.getString("storeid") != null)
+			this.storeId = Integer.parseInt(sessionData.getString("storeid"));
+		
 		this.userName = sessionData.getString("username");
-		this.userRole = sessionData.getString("userrole");
+		this.userRole = sessionData.getString("userrole");		
 		this.parameters = parameters;
 	}
 
@@ -48,4 +52,14 @@ public class ParsedRequest {
 	public void setParameters(JSONObject parameters) {
 		this.parameters = parameters;
 	}
+
+	public Integer getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(Integer storeId) {
+		this.storeId = storeId;
+	}
+	
+	
 }

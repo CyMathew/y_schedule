@@ -29,6 +29,7 @@ export class AuthService {
     this.cookie.set("userid", "" + data["userid"], 120);
     this.cookie.set("userrole", "" + data["role"], 120);
     this.cookie.set("username", "" + username, 120);
+    this.cookie.set("storeid", "" + data["storeid"], 120);
   }
 
   send(url: string, param: object) {
@@ -36,7 +37,8 @@ export class AuthService {
       sessionData: {
         userid: this.cookie.get('userid'),
         username: this.cookie.get('username'),
-        userrole: this.cookie.get('userrole')
+        userrole: this.cookie.get('userrole'),
+        storeid: this.cookie.get('storeid')
       },
       param: param
     }
