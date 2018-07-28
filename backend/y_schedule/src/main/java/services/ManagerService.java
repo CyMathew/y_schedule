@@ -1,6 +1,10 @@
 package services;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -36,16 +40,32 @@ public class ManagerService {
 	 * @param storeId
 	 * @return
 	 */
-	public static JSONObject selectScheduledTimesByWeek(Timestamp weekStart, Integer storeId) {
-		List bean = new ManagerDao().getScheduleByStoreId(storeId);
-		JSONObject tempo = new JSONObject();
-		
-		tempo.put("userid", bean.get(0));
-		tempo.put("storeId", bean.get(1));
-		tempo.put("start", bean.get(2));
-		tempo.put("end", bean.get(3));
-		
-		return tempo;
+	public static JSONObject selectScheduledTimesByWeek(long weekStart, Integer storeId) {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = null;
+		try {
+			date = (Date) dateFormat.parse("29/07/2018");
+			new Timestamp(weekStart);
+			int x = 1;
+			
+			do {
+				List bean = new ManagerDao().getScheduleByStoreId(storeId);
+				JSONObject tempo = new JSONObject();
+				
+				tempo.put("userid", bean.get(0));
+				tempo.put("storeId", bean.get(1));
+				tempo.put("start", bean.get(2));
+				tempo.put("end", bean.get(3));
+				x++;
+				logger.info("JSON Object Created: " + bean);
+				return tempo;
+			}while(x<7);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}	
+		logger.info("JSON Object NOT Created: ");
+		return null;
 	}
 
 	public static JSONObject selectAvailableEmployeesByDay(Timestamp weekStart, Integer storeId, String day) {
