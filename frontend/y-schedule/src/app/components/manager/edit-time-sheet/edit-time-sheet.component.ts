@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-edit-time-sheet',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTimeSheetComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
+
+  showWeek: boolean = true;
 
   ngOnInit() {
+    //this.authService.send()
   }
+
+
 
 }

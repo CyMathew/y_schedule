@@ -34,13 +34,23 @@ public class ManagerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		final Logger logger = Logger.getLogger(LoginServlet.class);
-		
+
 		ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
 
 		logger.info("Manager userId: " + r.getUserId());
+		logger.info("ManagerServlet Action: " + r.getAction());
 
-		JSONObject jsonOut = ManagerService.selectEmpInfo(r.getParameters(), r.getUserId());
+		JSONObject jsonOut = null;
 
+		switch (r.getAction()) {
+		case "viewHome":
+			jsonOut = ManagerService.selectEmpInfo(r.getParameters(), r.getUserId());
+			break;
+		case "viewSchedule":
+			jsonOut = ManagerService.selectScheduledTimesByWeek(r.getParameters());
+			break;
+		}
+		
 		JSONHelper.sendResponse(response, jsonOut);
 		logger.info("JSON Object Sent");
 	}

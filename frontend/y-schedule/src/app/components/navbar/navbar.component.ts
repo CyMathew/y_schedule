@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie: CookieService) { }
 
-  ngOnInit() {
-  }
+  role: String;
+
+  ngOnInit() { this.role = this.cookie.get('userrole'); }
+
+  ngAfterViewInit() { this.role = this.cookie.get('userrole'); }
+
 
 }

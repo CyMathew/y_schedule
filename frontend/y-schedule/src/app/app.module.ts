@@ -10,10 +10,17 @@ import { approutes } from './routing';
 import { LoginComponent } from './components/login/login.component';
 import { EmployeeHomeComponent } from './components/employee-home/employee-home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { ManagerHomeComponent } from './components/manager-home/manager-home.component';
+import { ManagerHomeComponent } from './components/manager/manager-home/manager-home.component';
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { CookieService } from 'ngx-cookie-service';
-import { EditTimeSheetComponent } from './components/edit-time-sheet/edit-time-sheet.component';
+import { ManagerHomePanelComponent } from './components/manager/manager-home-panel/manager-home-panel.component';
+import { Globals } from './globals';
+import { UserSidebarComponent } from './components/user-sidebar/user-sidebar.component';
+import { EditTsWeekComponent } from './components/manager/edit-ts-week/edit-ts-week.component';
+import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts-graph.component';
+import { EditTsSidebarComponent } from './components/manager/edit-ts-sidebar/edit-ts-sidebar.component';
+import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
+
 
 
 @NgModule({
@@ -25,7 +32,12 @@ import { EditTimeSheetComponent } from './components/edit-time-sheet/edit-time-s
     RegistrationComponent,
     ManagerHomeComponent,
     CoordinatorHomeComponent,
-    EditTimeSheetComponent
+    ManagerHomePanelComponent,
+    UserSidebarComponent,
+    EditTimeSheetComponent,
+    EditTsWeekComponent,
+    EditTsGraphComponent,
+    EditTsSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,7 @@ import { EditTimeSheetComponent } from './components/edit-time-sheet/edit-time-s
     }),
     RouterModule.forRoot(approutes),
   ],
-  providers: [CookieService],
+  providers: [CookieService, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
