@@ -21,13 +21,18 @@ public class getSecLvlByUsernameTest {
 
 	@Test
 	public void getSecLvlTrue() {
-		assertEquals(Integer.valueOf(1), utbi.getSecLvlByUsername("Test"));
+		assertEquals(Integer.valueOf(1), utbi.getSecLvlByUsername("Milisdowered"));
+		assertEquals(Integer.valueOf(3), utbi.getSecLvlByUsername("Swuzzy"));
+		assertEquals(Integer.valueOf(2), utbi.getSecLvlByUsername("Posuraid68"));
 	}
 	
 	@Test
 	public void getSecLvlFalse() {
-		assertNotEquals(Integer.valueOf(3), utbi.getSecLvlByUsername("Test"));
+		assertNotEquals(Integer.valueOf(4), utbi.getSecLvlByUsername("Posuraid68"));
+		assertNotEquals(Integer.valueOf(3), utbi.getSecLvlByUsername("Oferds"));
+		assertNotEquals(Integer.valueOf(4), utbi.getSecLvlByUsername(null));
 	}
+
 	
 
 }

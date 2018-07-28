@@ -10,7 +10,7 @@
 **/issue_template.md
 **/target/
 **/bin/
-**/META-INF/**
+*/META-INF/*
 
 #Eclipse
 **/.metadata
@@ -20,6 +20,8 @@
 **/.recommenders/**
 **/Servers
 **/.springBeans
+backend/y_schedule/.settings/org.eclipse.wst.common.component
+backend/y_schedule/.settings/exampleLog.log
 
 #IDEA
 **/.idea/

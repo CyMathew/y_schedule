@@ -1,0 +1,15 @@
+#content
+{
+    margin-top: 40px;
+}
+
+h2
+{
+    text-align: center;
+    margin: 20px 0px;
+}
+
+#button-group > *
+{
+    margin-right: 10px;
+}
