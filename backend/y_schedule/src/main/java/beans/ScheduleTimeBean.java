@@ -8,7 +8,27 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
+
+@NamedNativeQueries({
+	@NamedNativeQuery(
+				name="showUserIdAndTime",
+				query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
+						+ "FROM user_table INNER JOIN ScheduleTime "
+						+ "ON user_table.user_id = ScheduleTime.user_id"
+						+ "WHERE store_Id = :id AND start = :startDate AND end =endDate"
+			),
+	@NamedNativeQuery(
+			name="showEmployee",
+			query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
+					+ "FROM user_table INNER JOIN ScheduleTime "
+					+ "ON user_table.user_id = ScheduleTime.user_id"
+					+ "WHERE user_id = :id "
+			)
+})
+
 
 @Entity
 @Table(name = "ScheduleTime")
@@ -17,6 +37,8 @@ public class ScheduleTimeBean {
 	@Id
 	@Column
 	private Integer Schedule_id;
+	@Column
+	private String Day;
 	@Column
 	private Timestamp start;
 	@Column
@@ -33,6 +55,12 @@ public class ScheduleTimeBean {
 	}
 	public ScheduleTimeBean() {
 		super();
+	}
+	public String getDay() {
+		return Day;
+	}
+	public void setDay(String day) {
+		Day = day;
 	}
 	public Integer getSchedule_id() {
 		return Schedule_id;
