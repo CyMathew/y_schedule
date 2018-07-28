@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity 
 @Table(name="user_table") 
-public class User_TableBeans {
+public class UserBean {
 
 	@Id
 	@Column
@@ -30,7 +30,7 @@ public class User_TableBeans {
 	@Column
 	private Integer store_Id;
 	
-	public User_TableBeans(String firstname, String Lastname, String password, String username) {
+	public UserBean(String firstname, String Lastname, String password, String username) {
 		this.user_fname = firstname;
 		this.user_lname = Lastname;
 		this.user_password = password;
@@ -39,7 +39,7 @@ public class User_TableBeans {
 		this.store_Id = 2367;
 	}
 	
-	public User_TableBeans() {
+	public UserBean() {
 		super();
 	}
 	

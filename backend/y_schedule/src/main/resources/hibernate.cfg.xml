@@ -63,7 +63,7 @@
 		<mapping class="com.revature.beans.Npc"/>
 		<mapping class="com.revature.beans.Job"/>
 		<mapping class="beans.LoginBean"/>-->
-				<mapping class="beans.User_TableBeans"/>
+				<mapping class="beans.UserBean"/>
 		
 
 	</session-factory>

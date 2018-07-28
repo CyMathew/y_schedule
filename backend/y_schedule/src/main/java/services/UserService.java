@@ -1,13 +1,11 @@
-package service;
+package services;
 
+import beans.UserBean;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 
-import beans.User_TableBeans;
-
-public class EmployeeService {
-	public static String getUserBySecLev(User_TableBeans bean){
-		Logger logger = Logger.getLogger(EmployeeService.class);
+public class UserService {
+	public static String getRoleName(UserBean bean){
+		Logger logger = Logger.getLogger(UserService.class);
 		logger.info(bean.getSec_lvl());
 		switch (bean.getSec_lvl()) {
 		case 1:

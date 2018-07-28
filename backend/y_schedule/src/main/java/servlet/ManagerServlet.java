@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
-import service.ManagerService;
+import services.ManagerService;
 import util.JSONHelper;
 import util.ParsedRequest;
 

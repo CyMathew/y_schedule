@@ -2,17 +2,17 @@ package com.revature.test;
 
 import static org.junit.Assert.assertEquals;
 
+import beans.UserBean;
+import daos.UserDao;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import beans.User_TableBeans;
-
 public class getSecLvlByUsernameAndPasswordTest {
 	final static Logger logger = Logger.getLogger(getSecLvlByUsernameAndPasswordTest.class);
-	daos.User_TableBeansImpl utbi = new daos.User_TableBeansImpl();
-	User_TableBeans bean = null;
+	UserDao utbi = new UserDao();
+	UserBean bean = null;
 	
 	@Before
 	public void setUp() throws Exception {
