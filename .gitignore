@@ -20,6 +20,8 @@
 **/.recommenders/**
 **/Servers
 **/.springBeans
+backend/y_schedule/.settings/org.eclipse.wst.common.component
+backend/y_schedule/.settings/exampleLog.log
 
 #IDEA
 **/.idea/
