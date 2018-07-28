@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,7 @@ import { EmployeeHomeComponent } from './components/employee-home/employee-home.
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ManagerHomeComponent } from './components/manager-home/manager-home.component';
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { CoordinatorHomeComponent } from './components/coordinator-home/coordina
     NavbarComponent,
     LoginComponent,
     EmployeeHomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
     ManagerHomeComponent,
     CoordinatorHomeComponent
   ],
@@ -28,10 +29,13 @@ import { CoordinatorHomeComponent } from './components/coordinator-home/coordina
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'My-Xsrf-Cookie',
+      headerName: 'My-Xsrf-header'
+    }),
     RouterModule.forRoot(approutes),
-    
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
