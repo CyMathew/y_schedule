@@ -5,6 +5,7 @@ import { EmployeeHomeComponent } from './components/employee-home/employee-home.
 import { ManagerHomeComponent } from './components/manager-home/manager-home.component';
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { EditTimeSheetComponent } from './components/edit-time-sheet/edit-time-sheet.component';
 
 
 export const approutes: Routes = [
@@ -13,5 +14,6 @@ export const approutes: Routes = [
     { path: 'register', component: RegistrationComponent },
     { path: 'manage', component: ManagerHomeComponent},
     { path: 'coordinate', component: CoordinatorHomeComponent},
+    { path: 'edit-time-sheet', component: EditTimeSheetComponent}
 
 ];

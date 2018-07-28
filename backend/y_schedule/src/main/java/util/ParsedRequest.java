@@ -7,6 +7,7 @@ public class ParsedRequest {
 	private String userRole;
 	private String userName;
 	private Integer storeId;
+	private String action;
 
 	private JSONObject parameters;
 
@@ -15,10 +16,12 @@ public class ParsedRequest {
 			this.userId = Integer.parseInt(sessionData.getString("userid"));
 		//if (sessionData.getString("storeid") != null)
 		//	this.storeId = Integer.parseInt(sessionData.getString("storeid"));
+		
 		this.storeId = 2367;
 		this.userName = sessionData.getString("username");
 		this.userRole = sessionData.getString("userrole");		
 		this.parameters = parameters;
+		this.action = parameters.getString("action");
 	}
 
 	public Integer getUserId() {
@@ -59,6 +62,14 @@ public class ParsedRequest {
 
 	public void setStoreId(Integer storeId) {
 		this.storeId = storeId;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 	
 	
