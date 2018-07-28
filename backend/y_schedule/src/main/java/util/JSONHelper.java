@@ -1,13 +1,13 @@
 package util;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class JSONHelper
 {
@@ -26,5 +26,19 @@ public class JSONHelper
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         out.println(jsonObject);
+    }
+    
+    public static ParsedRequest parseAngRequest(BufferedReader reader) throws IOException
+    {
+    	JSONObject jsonObject = parseRequest(reader);
+    	
+    	Integer userId = null;
+    	if(jsonObject.getString("userid") != null)
+    		userId = Integer.parseInt(jsonObject.getString("userid"));
+    	
+    	JSONObject parameters = jsonObject.getJSONObject("param");
+    	
+    	return new ParsedRequest(userId, parameters);
+    	
     }
 }
