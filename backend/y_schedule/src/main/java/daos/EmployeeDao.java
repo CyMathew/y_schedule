@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import beans.EmployeeAvailabilityBean;
+import beans.UserBean;
 import util.HibernateUtil;
 
 public class EmployeeDao {
@@ -17,10 +18,14 @@ public class EmployeeDao {
 	 * */
 	public boolean removeAllReguests(Integer id) {
 		Session session = HibernateUtil.getSession();
-		Query query1 = session.getNamedQuery("removeRequests");
-		query1.setParameter("id", id);
+		Query query1 = session.getNamedQuery("getAvail");
 		try {
-			query1.list();
+			List req = query1.list();
+			for(int i=0; i<= req.size(); i++) {
+				if(((EmployeeAvailabilityBean)req.get(i)).getUser().getUser_id() == id) {
+					session.delete((EmployeeAvailabilityBean)req.get(i));
+					}
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
@@ -31,10 +36,10 @@ public class EmployeeDao {
 	/**
 	 * returns a string if the table was successfully updated with the new availability times
 	 * */
-	public String updateRequests(String start,String end, Integer id) {
+	public String updateRequests(String start,String end, String day, UserBean id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;		
-		EmployeeAvailabilityBean bean = new EmployeeAvailabilityBean(start, end, id);
+		EmployeeAvailabilityBean bean = new EmployeeAvailabilityBean(start, end, id, day);
 		try{
 			tx = session.beginTransaction();
 			session.save(bean);
@@ -56,10 +61,17 @@ public class EmployeeDao {
 	/**
 	 * Returns a list of the times to the services that needs to be parsed into the proper JSON
 	 */
-	public List getStartTimesById(Integer id){
+	public List getStartTimesByDay(String day){
 		Session session = HibernateUtil.getSession();
 		Query query = session.getNamedQuery("getTimes");
-		query.setParameter("userid", id);
+		query.setParameter("day", day);
+		return query.list();
+	}
+	
+	public List getStartTimesById(Integer id) {
+		Session session = HibernateUtil.getSession();
+		Query query = session.getNamedQuery("getAvail");
+		query.setParameter("id", id);
 		return query.list();
 	}
 }

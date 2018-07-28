@@ -1,9 +1,11 @@
 package beans;
 
-import java.sql.Timestamp;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
@@ -12,68 +14,68 @@ import javax.persistence.Table;
 
 
 @NamedQueries({
-	@NamedQuery(name="getTimes", query="FROM EmployeeAvailability WHERE userid = :id")
+	@NamedQuery(name="getTimes", query="FROM EmployeeAvailability WHERE day = :day"),
+	@NamedQuery(name="getAvail", query="FROM EmployeeAvailability WHERE user_id = :id")
 })
 
-@NamedNativeQueries({
-	@NamedNativeQuery(
-			/*
-			 * Within a NativeQuery you are writing the ACTUAL
-			 * SQL that your engine is using. NOT HQL.
-			 */
-				name="removeRequests",
-				query="DELETE * FROM EmployeeAvailability WHERE userid = :id"
-			)
-})
+
 
 @Entity 
 @Table(name="EmployeeAvailability") 
 public class EmployeeAvailabilityBean {
 	
 	@Column
-	private Timestamp start;
+	private String start;
 	@Column
-	private Timestamp end;
+	private String end;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id")
+	private UserBean user;
 	@Column
-	private Integer userid;
-	@Column
-	private String approved;
+	private String day;
+
 	
-	public EmployeeAvailabilityBean(String start, String end, Integer userid) {
-		this.start  = Timestamp.valueOf(start);
-		this.end    = Timestamp.valueOf(end);
-		this.userid = userid;
-		this.approved = "false";
+	public EmployeeAvailabilityBean(String start, String end, UserBean userid, String day) {
+		this.start  = start;
+		this.end    = end;
+		this.user = userid;
+		this.day = day;
 	}
 
 	public EmployeeAvailabilityBean() {
 		super();
 	}
 
-	public Timestamp getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Timestamp start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
-	public Timestamp getEnd() {
+	public String getEnd() {
 		return end;
 	}
 
-	public void setEnd(Timestamp end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
 
-	public Integer getUserid() {
-		return userid;
+    @ManyToOne(cascade=CascadeType.ALL)  
+	public UserBean getUser() {
+		return user;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setUserid(UserBean user) {
+		this.user = user;
 	}
-	
-	
-	
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
 }
