@@ -15,6 +15,7 @@ import oracle.jdbc.proxy.annotation.Post;
 public class EmployeeBean {
 
 	@Id 
+	@Column
 	private Integer user_id;
 	@Column
 	private String department;
