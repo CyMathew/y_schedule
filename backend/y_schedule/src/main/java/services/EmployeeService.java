@@ -51,7 +51,7 @@ public class EmployeeService {
 					timestore = timearray.getJSONObject(l);
 					start = timestore.getString("startTime");
 					end = timestore.getString("endTime");
-					response = ad.updateRequests((date+" "+start), (date+" "+end), id);
+					response = ad.updateRequests((date+" "+start+":00"), (date+" "+end+":00"), id);
 					if(response.equals("failure")) {
 						reply.put("result", "failure");
 						return reply;
