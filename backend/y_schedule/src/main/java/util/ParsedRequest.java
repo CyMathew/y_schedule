@@ -13,9 +13,9 @@ public class ParsedRequest {
 	public ParsedRequest(JSONObject sessionData, JSONObject parameters) {
 		if (sessionData.getString("userid") != null)
 			this.userId = Integer.parseInt(sessionData.getString("userid"));
-		if (sessionData.getString("storeid") != null)
-			this.storeId = Integer.parseInt(sessionData.getString("storeid"));
-		
+		//if (sessionData.getString("storeid") != null)
+		//	this.storeId = Integer.parseInt(sessionData.getString("storeid"));
+		this.storeId = 2367;
 		this.userName = sessionData.getString("username");
 		this.userRole = sessionData.getString("userrole");		
 		this.parameters = parameters;

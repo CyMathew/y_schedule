@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+
   ngAfterViewInit() {
     console.log(this.url.get());    
   }
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
     } else {
       //TODO fail message
     }
+
   }
 
 }
