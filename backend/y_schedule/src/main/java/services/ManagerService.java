@@ -40,17 +40,13 @@ public class ManagerService {
 	 * @param storeId
 	 * @return
 	 */
-	public static JSONObject selectScheduledTimesByWeek(Timestamp weekStart, Integer storeId) {
-		int x = 1;
-
-		List bean = new ManagerDao().getScheduleByStoreId(storeId,weekStart);
+	public static JSONObject selectScheduledTimesByWeek(Timestamp startDate, Timestamp endDate, Integer storeId) {
+		List bean = new ManagerDao().getScheduleByStoreId(storeId,startDate, endDate);
 		JSONObject tempo = new JSONObject();
-			
 		tempo.put("userid", bean.get(0));
 		tempo.put("storeId", bean.get(1));
 		tempo.put("start", bean.get(2));
 		tempo.put("end", bean.get(3));
-		x++;
 		logger.info("JSON Object Created: " + bean);
 		return tempo;
 	}
@@ -65,8 +61,15 @@ public class ManagerService {
 		return null;
 	}
 	
-	public static Boolean scheduleEmployee(Integer id, Timestamp timeStart, Timestamp timeEnd) {
-		
-		return null;
+	public static JSONObject scheduleEmployee(Integer id) {
+		List bean = new ManagerDao().getScheduleByEmployee(id);
+		JSONObject tempo = new JSONObject();
+		tempo.put("userid", bean.get(0));
+		tempo.put("storeId", bean.get(1));
+		tempo.put("start", bean.get(2));
+		tempo.put("end", bean.get(3));
+		logger.info("JSON Object Created: " + bean);
+		return tempo;
+
 	}
 }

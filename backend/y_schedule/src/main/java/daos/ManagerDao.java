@@ -36,12 +36,20 @@ public class ManagerDao {
 		bean = (ScheduleTimeBean)query.uniqueResult();
 		return bean;
 	}
-	public List getScheduleByStoreId(Integer id, Timestamp startTime) {
+	public List getScheduleByStoreId(Integer id, Timestamp startDate, Timestamp endDate ) {
 		Session session = HibernateUtil.getSession();
 		
 		Query query = session.getNamedQuery("showUserIdAndTime");
 		query.setParameter("store_Id", id);
-		query.setParameter("start", startTime);
+		query.setParameter("start", startDate);
+		query.setParameter("end", endDate);
+		return query.list();
+	}
+	public List getScheduleByEmployee(Integer id) {
+		Session session = HibernateUtil.getSession();
+		
+		Query query = session.getNamedQuery("showEmployee");
+		query.setParameter("store_Id", id);
 		return query.list();
 	}
 }
