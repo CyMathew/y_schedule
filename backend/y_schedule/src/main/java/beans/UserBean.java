@@ -39,6 +39,14 @@ public class UserBean {
 		this.store_Id = 2367;
 	}
 	
+	public Integer getStore_Id() {
+		return store_Id;
+	}
+
+	public void setStore_Id(Integer store_Id) {
+		this.store_Id = store_Id;
+	}
+
 	public UserBean() {
 		super();
 	}

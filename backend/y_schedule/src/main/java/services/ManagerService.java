@@ -22,6 +22,7 @@ public class ManagerService {
 			tempo.put("userfname", bean.getUser_fname());
 			tempo.put("userlname", bean.getUser_lname());
 			tempo.put("seclvl", UserService.getRoleName(bean));
+			tempo.put("storeId", bean.getStore_Id());
 		}
 		
 		return tempo;
