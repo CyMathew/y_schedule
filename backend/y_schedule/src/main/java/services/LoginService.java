@@ -1,10 +1,10 @@
-package service;
+package services;
 
+import beans.UserBean;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
-import beans.User_TableBeans;
-import daos.User_TableBeansImpl;
+import daos.UserDao;
 
 public class LoginService {
 
@@ -17,14 +17,14 @@ public class LoginService {
 		String username = inputObj.getString("username");
 		String password = inputObj.getString("password");
 
-		User_TableBeans bean = new User_TableBeansImpl().getSecLvlByUsernameAndPassword(username, password);
+		UserBean bean = new UserDao().getSecLvlByUsernameAndPassword(username, password);
 
 		if (bean != null) {
 			if (password.equals(bean.getUser_password())) {
 
 				tempo.put("userid", "" + bean.getUser_id());
 				tempo.put("result", "success");
-				tempo.put("role", EmployeeService.getUserBySecLev(bean));
+				tempo.put("role", UserService.getRoleName(bean));
 				
 				return tempo;
 			}

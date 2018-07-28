@@ -2,6 +2,7 @@ package com.revature.test;
 
 import static org.junit.Assert.*;
 
+import daos.UserDao;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 public class getSecLvlByUsernameTest {
 	final static Logger logger = Logger.getLogger(getSecLvlByUsernameTest.class);
-	daos.User_TableBeansImpl utbi = new daos.User_TableBeansImpl();
+	UserDao utbi = new UserDao();
 	
 	@Before
 	public void setUp() throws Exception {

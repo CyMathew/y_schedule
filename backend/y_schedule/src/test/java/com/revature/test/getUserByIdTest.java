@@ -4,18 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
 
+import beans.UserBean;
+import daos.UserDao;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import beans.User_TableBeans;
-import service.EmployeeService;
-
 public class getUserByIdTest {
 	final static Logger logger = Logger.getLogger(getSecLvlByUsernameAndPasswordTest.class);
-	static User_TableBeans bean,bean2,bean3,bean4 = new  User_TableBeans();
-	daos.User_TableBeansImpl utbi = new daos.User_TableBeansImpl();
+	static UserBean bean,bean2,bean3,bean4 = new UserBean();
+	UserDao utbi = new UserDao();
 	
 	
 	@Before

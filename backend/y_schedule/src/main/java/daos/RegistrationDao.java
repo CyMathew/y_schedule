@@ -4,7 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import beans.User_TableBeans;
+import beans.UserBean;
 import util.HibernateUtil;
 
 public class RegistrationDao {
@@ -12,7 +12,7 @@ public class RegistrationDao {
 	public String createNewEmployee(String username, String lastname, String password, String firstname, Integer storeid) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		User_TableBeans newemployee = new User_TableBeans(firstname, lastname, password, username);
+		UserBean newemployee = new UserBean(firstname, lastname, password, username);
 		newemployee.setStoreId(storeid);
 		try{
 			tx = session.beginTransaction();
