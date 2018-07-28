@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetUrlService } from '../../services/get-url.service';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -10,13 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ManagerHomeComponent implements OnInit {
 
-  constructor(private url: GetUrlService, private http: HttpClient) { }
+  constructor(private url: GetUrlService, private authService: AuthService) { }
 
   ngOnInit() {
     let param = {action: "viewHome"};
-
-    let url: string = this.url.get() + "/y_schedule/manager.do";
-    this.http.post(url, param).subscribe(data => this.fillManagerData(data));
+    this.authService.send("/y_schedule/manager.do", param).subscribe(data => this.fillManagerData(data));
   }
 
   ngAfterViewInit(){

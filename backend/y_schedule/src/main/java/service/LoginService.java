@@ -22,7 +22,7 @@ public class LoginService {
 		if (bean != null) {
 			if (password.equals(bean.getUser_password())) {
 
-				tempo.put("userid", bean.getUser_id());
+				tempo.put("userid", "" + bean.getUser_id());
 				tempo.put("result", "success");
 				tempo.put("role", EmployeeService.getUserBySecLev(bean));
 				
