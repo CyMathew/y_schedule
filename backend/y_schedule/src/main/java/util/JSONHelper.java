@@ -32,13 +32,10 @@ public class JSONHelper
     {
     	JSONObject jsonObject = parseRequest(reader);
     	
-    	Integer userId = null;
-    	if(jsonObject.getString("userid") != null)
-    		userId = Integer.parseInt(jsonObject.getString("userid"));
-    	
+    	JSONObject sessionData = jsonObject.getJSONObject("sessionData");
     	JSONObject parameters = jsonObject.getJSONObject("param");
     	
-    	return new ParsedRequest(userId, parameters);
+    	return new ParsedRequest(sessionData, parameters);
     	
     }
 }

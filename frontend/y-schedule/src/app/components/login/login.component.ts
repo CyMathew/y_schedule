@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     console.log(data);
     if (data["result"] == "success") {
       
-      this.authService.setSession(data["userid"]);
+      this.authService.setSession(data, this.username);
 
       switch (data["role"]) {
         case "manager":

@@ -25,13 +25,19 @@ export class AuthService {
 
   }
 
-  setSession(userid: number){
-    this.cookie.set("userid", "" + userid, 120);
+  setSession(data: object, username: string) {
+    this.cookie.set("userid", "" + data["userid"], 120);
+    this.cookie.set("userrole", "" + data["role"], 120);
+    this.cookie.set("username", "" + username, 120);
   }
 
-  send(url: string, param: object){
+  send(url: string, param: object) {
     let body = {
-      userid: this.cookie.get('userid'),
+      sessionData: {
+        userid: this.cookie.get('userid'),
+        username: this.cookie.get('username'),
+        userrole: this.cookie.get('userrole')
+      },
       param: param
     }
     return this.http.post(this.url.get() + url, body);
