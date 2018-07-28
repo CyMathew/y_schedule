@@ -1,5 +1,6 @@
 package daos;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -35,11 +36,12 @@ public class ManagerDao {
 		bean = (ScheduleTimeBean)query.uniqueResult();
 		return bean;
 	}
-	public List getScheduleByStoreId(Integer id) {
+	public List getScheduleByStoreId(Integer id, Timestamp startTime) {
 		Session session = HibernateUtil.getSession();
 		
 		Query query = session.getNamedQuery("showUserIdAndTime");
 		query.setParameter("store_Id", id);
+		query.setParameter("start", startTime);
 		return query.list();
 	}
 }

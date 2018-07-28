@@ -18,7 +18,7 @@ import javax.persistence.Table;
 				query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
 						+ "FROM user_table INNER JOIN ScheduleTime "
 						+ "ON user_table.user_id = ScheduleTime.user_id"
-						+ "WHERE store_Id = :id"
+						+ "WHERE store_Id = :id AND start = :startTime"
 			)
 })
 

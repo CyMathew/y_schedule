@@ -40,32 +40,19 @@ public class ManagerService {
 	 * @param storeId
 	 * @return
 	 */
-	public static JSONObject selectScheduledTimesByWeek(long weekStart, Integer storeId) {
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = null;
-		try {
-			date = (Date) dateFormat.parse("29/07/2018");
-			new Timestamp(weekStart);
-			int x = 1;
+	public static JSONObject selectScheduledTimesByWeek(Timestamp weekStart, Integer storeId) {
+		int x = 1;
+
+		List bean = new ManagerDao().getScheduleByStoreId(storeId,weekStart);
+		JSONObject tempo = new JSONObject();
 			
-			do {
-				List bean = new ManagerDao().getScheduleByStoreId(storeId);
-				JSONObject tempo = new JSONObject();
-				
-				tempo.put("userid", bean.get(0));
-				tempo.put("storeId", bean.get(1));
-				tempo.put("start", bean.get(2));
-				tempo.put("end", bean.get(3));
-				x++;
-				logger.info("JSON Object Created: " + bean);
-				return tempo;
-			}while(x<7);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}	
-		logger.info("JSON Object NOT Created: ");
-		return null;
+		tempo.put("userid", bean.get(0));
+		tempo.put("storeId", bean.get(1));
+		tempo.put("start", bean.get(2));
+		tempo.put("end", bean.get(3));
+		x++;
+		logger.info("JSON Object Created: " + bean);
+		return tempo;
 	}
 
 	public static JSONObject selectAvailableEmployeesByDay(Timestamp weekStart, Integer storeId, String day) {
