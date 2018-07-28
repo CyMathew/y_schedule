@@ -2,7 +2,10 @@ package beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity 
@@ -11,6 +14,8 @@ public class User_TableBeans {
 
 	@Id
 	@Column
+	@SequenceGenerator(initialValue= 1 , allocationSize = 1, sequenceName="userIdSeq", name="userIdSeq")
+	@GeneratedValue(generator="userIdSeq", strategy=GenerationType.SEQUENCE)
 	private Integer user_id;
 	@Column
 	private String  user_fname;
@@ -22,6 +27,22 @@ public class User_TableBeans {
 	private String  user_password;
 	@Column
 	private Integer sec_lvl;
+	@Column
+	private Integer store_Id;
+	
+	public User_TableBeans(String firstname, String Lastname, String password, String username) {
+		this.user_fname = firstname;
+		this.user_lname = Lastname;
+		this.user_password = password;
+		this.user_username = username;
+		this.sec_lvl = 1;
+		this.store_Id = 2367;
+	}
+	
+	public User_TableBeans() {
+		super();
+	}
+	
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -57,6 +78,15 @@ public class User_TableBeans {
 	}
 	public void setSec_lvl(Integer sec_lvl) {
 		this.sec_lvl = sec_lvl;
+	}
+
+	public Integer getStoreId() {
+		return store_Id;
+	}
+
+	public void setStoreId(Integer storeId) {
+		if (storeId != null) {this.store_Id = storeId;}
+		else {this.store_Id = (Integer)2367;}
 	}
 	
 	
