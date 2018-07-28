@@ -53,10 +53,13 @@ public class EmployeeDao {
 		return "success";
 	}
 	
-	public List<String> getStartTimesById(Integer id){
-		List<String> stringlist = null;
-		
-		
-		return stringlist;
+	/**
+	 * Returns a list of the times to the services that needs to be parsed into the proper JSON
+	 */
+	public List getStartTimesById(Integer id){
+		Session session = HibernateUtil.getSession();
+		Query query = session.getNamedQuery("getTimes");
+		query.setParameter("userid", id);
+		return query.list();
 	}
 }

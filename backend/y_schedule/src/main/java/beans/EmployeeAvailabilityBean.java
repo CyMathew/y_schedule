@@ -6,7 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+
+@NamedQueries({
+	@NamedQuery(name="getTimes", query="FROM EmployeeAvailability WHERE userid = :id")
+})
 
 @NamedNativeQueries({
 	@NamedNativeQuery(
