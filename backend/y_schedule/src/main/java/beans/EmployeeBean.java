@@ -2,15 +2,19 @@ package beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import oracle.jdbc.proxy.annotation.Post;
 
 @Entity
 @Table(name = "EmployeeInfo")
 public class EmployeeBean {
 
-	@Id
-	@Column
+	@Id 
 	private Integer user_id;
 	@Column
 	private String department;
@@ -20,7 +24,11 @@ public class EmployeeBean {
 	private Integer workableHours;
 	@Column
 	private Integer hourlyWage;
-
+	@OneToOne 
+	@MapsId 
+	UserBean user;
+	
+	
 	public EmployeeBean(Integer user_id, String department, String tittle, Integer workableHours, Integer hourlyWage) {
 		super();
 		this.user_id = user_id;
