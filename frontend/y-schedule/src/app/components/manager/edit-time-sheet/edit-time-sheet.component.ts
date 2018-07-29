@@ -32,4 +32,8 @@ export class EditTimeSheetComponent implements OnInit {
     this.showWeek = false;
   }
 
+  onBackToWeekView(){
+    this.showWeek = true;
+  }
+
 }

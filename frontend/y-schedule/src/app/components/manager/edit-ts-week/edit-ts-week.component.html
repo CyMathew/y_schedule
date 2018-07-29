@@ -2,13 +2,13 @@
   <thead>
     <tr>
       <th>Employee</th>
-      <th (click)="selectDay(1)">Sunday</th>
-      <th (click)="selectDay(2)">Monday</th>
-      <th (click)="selectDay(3)">Tuesday</th>
-      <th (click)="selectDay(4)">Wednesday</th>
-      <th (click)="selectDay(5)">Thursday</th>
-      <th (click)="selectDay(6)">Friday</th>
-      <th (click)="selectDay(7)">Saturday</th>
+      <th (click)="selectDay(0)">Sunday</th>
+      <th (click)="selectDay(1)">Monday</th>
+      <th (click)="selectDay(2)">Tuesday</th>
+      <th (click)="selectDay(3)">Wednesday</th>
+      <th (click)="selectDay(4)">Thursday</th>
+      <th (click)="selectDay(5)">Friday</th>
+      <th (click)="selectDay(6)">Saturday</th>
       <th >total</th>
     </tr>
   </thead>
@@ -16,9 +16,9 @@
     <tr *ngFor="let emp of scheduleData.employees">
       <th>{{emp.name}}</th>
 
-      <td *ngFor="let i of ['1','2','3','4','5','6','7']" (click)="selectDay(i)">
+      <td *ngFor="let i of ['0','1','2','3','4','5','6']" (click)="selectDay(i)">
         <div *ngIf="emp.shifts[i] != null">
-          <p>{{emp["shifts"][i]["start"]}} to {{emp["shifts"][i]["end"]}}</p>
+          <p>{{dateTime.getTimeString(emp["shifts"][i]["start"])}}-{{dateTime.getTimeString(emp["shifts"][i]["end"])}}</p>
         </div>
       </td>
       <td>{{emp["hours"]}}</td>
