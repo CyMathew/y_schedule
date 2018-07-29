@@ -11,11 +11,25 @@ export class EditTimeSheetComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   showWeek: boolean = true;
+  currentDay: number;
+  scheduleData: Object = {employees:null};
 
   ngOnInit() {
-    //this.authService.send()
+    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule"}).subscribe(
+      data => this.receiveSchedule(data)
+    );
+
   }
 
+  receiveSchedule(data){
+    this.scheduleData = data;
+    console.log(data);
+  }
 
+  onDaySelected(day){
+    console.log("parent got: " + day);
+    this.currentDay = day;
+    this.showWeek = false;
+  }
 
 }

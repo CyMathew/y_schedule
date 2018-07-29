@@ -1,3 +1,40 @@
-<p>
-  edit-ts-sidebar works!
-</p>
+<div class="col-sm-3 text-left sidenav">
+  <h3>Schedule an Employee</h3>
+  <form>
+      <div class="form-group">
+          <label for="exampleFormControlSelect1">Department</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>All</option>
+          </select>
+        </div>
+    <div style="overflow-y: scroll; max-height: 400px">
+      <div id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
+        <label *ngFor="let i of ['1','2','3','4','5','6','7']" class="btn btn-block btn-outline-primary btn-sm" style="padding: 0px; margin: 0px">
+          <input type="radio" name="options" id="option{{i}}" autocomplete="off"> Employee{{i}}
+        </label>
+      </div>
+    </div>
+    <br>
+    <div class="form-row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Start" style="min-width: 60px;">
+      </div>
+      <div class="col-1">
+        to
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="End" style="min-width: 60px;">
+      </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div class="col">
+        <button type="button" class="btn btn-primary btn-block">Schedule</button>
+        </div>
+        <div class="col">
+        <button type="button" class="btn btn-warning btn-block">Back</button>
+      </div>
+    </div>
+    
+  </form>
+</div>
