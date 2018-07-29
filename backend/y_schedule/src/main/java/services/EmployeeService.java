@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,10 +12,11 @@ import daos.EmployeeDao;
 import daos.UserDao;
 
 public class EmployeeService {
-	private static EmployeeDao ed = new EmployeeDao();
-	private static JSONObject reply = new JSONObject();
-	private static UserBean userbean = new UserBean();
-	private static UserDao ud = new UserDao();
+
+	private EmployeeDao ed = new EmployeeDao();
+	private JSONObject reply = new JSONObject();
+	private UserBean userbean = new UserBean();
+	private UserDao ud = new UserDao();
 	
 	
 /**
@@ -56,13 +58,13 @@ public class EmployeeService {
 				day = jsonstore.getString("day");
 				timearray = jsonstore.getJSONArray("times");
 				
-				for(int l = 0; l <= timearray.length(); l++) {
+				for(int l = 0; l < timearray.length(); l++) {
 					timestore = timearray.getJSONObject(l);
 					start = timestore.getString("startTime");
 					end = timestore.getString("endTime");
-					day = timestore.getString("day");
 					if((ed.updateRequests(start, end, day, id)).equals("failure")) {
 						reply.put("result", "failure");
+						return reply;
 					}
 					
 				}
@@ -138,7 +140,7 @@ public class EmployeeService {
 				(((EmployeeAvailabilityBean)list.get(i)).getEnd());
 		 * */
 
-		for(int i=0; i <= list.size(); i++) {
+		for(int i=0; i < list.size(); i++) {
 			if(((EmployeeAvailabilityBean)list.get(i)).getDay().equals("monday")){
 				jsonAmonday.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean)list.get(i)).getStart())).put("endTime"  , (((EmployeeAvailabilityBean)list.get(i)).getEnd())));
 			}
@@ -182,5 +184,17 @@ public class EmployeeService {
 		
 		return weekdetails;
 	}
+
+
+
+	public void setEd(EmployeeDao ed) {
+		this.ed = ed;
+	}
+
+
+	public EmployeeDao getEd() {
+		return this.ed;
+	}
+	
 
 }

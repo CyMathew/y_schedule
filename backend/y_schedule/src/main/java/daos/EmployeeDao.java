@@ -15,7 +15,6 @@ import beans.UserBean;
 import util.HibernateUtil;
 
 public class EmployeeDao {
-	final static Logger logger = Logger.getLogger(EmployeeDao.class);
 
 	/**
 	 * Removes old records of employee availability returns true if success false if fail
@@ -29,9 +28,6 @@ public class EmployeeDao {
 			tx = session.beginTransaction();
 			for(EmployeeAvailabilityBean i : list) {
 				i.setActive(0);
-				System.out.println("=============");
-				System.out.println(i.getActive());
-				System.out.println("=============");
 				session.delete(i);
 			}
 			tx.commit();
@@ -74,15 +70,15 @@ public class EmployeeDao {
 	 */
 	public List getStartTimesByDay(String day){
 		Session session = HibernateUtil.getSession();
-		Query query = session.getNamedQuery("getTimes");
-		query.setParameter("day", day);
-		return query.list();
+		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("day", day)).list();
+		return list;
 	}
 	
 	public List getStartTimesById(Integer id) {
 		Session session = HibernateUtil.getSession();
-		Query query = session.getNamedQuery("getAvail");
-		query.setParameter("id", id);
-		return query.list();
+		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).list();
+		return list;
 	}
 }
