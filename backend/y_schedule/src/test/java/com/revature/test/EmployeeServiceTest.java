@@ -1,5 +1,7 @@
 package com.revature.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -13,13 +15,12 @@ public class EmployeeServiceTest {
 
 	@Test
 	public void test() {
-		List <EmployeeAvailabilityBean>l = null; 
-		UserBean b = new UserBean("Kevin", "Wang", "Psswrd", "wang3224");
+		UserBean b = new UserBean("Dad", "Master", "d", "dadma");
+		b.setUser_id(43);
 		EmployeeAvailabilityBean e1 = new EmployeeAvailabilityBean("9:00", "12:00", b, "monday");
-		l.add(e1);
 		EmployeeDao empdao = Mockito.mock(EmployeeDao.class);
-		Mockito.when(empdao.removeAllReguests(1)).thenReturn(true);
-		Mockito.when(empdao.getStartTimesById(1)).thenReturn((List) e1);
+		
+		assertEquals(true, empdao.removeAllReguests(43));
 	}
 
 }

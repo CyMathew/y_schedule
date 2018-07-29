@@ -2,32 +2,43 @@ package daos;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import beans.EmployeeAvailabilityBean;
 import beans.UserBean;
 import util.HibernateUtil;
 
 public class EmployeeDao {
-	
+	final static Logger logger = Logger.getLogger(EmployeeDao.class);
+
 	/**
 	 * Removes old records of employee availability returns true if success false if fail
 	 * */
 	public boolean removeAllReguests(Integer id) {
 		Session session = HibernateUtil.getSession();
-		Query query1 = session.getNamedQuery("getAvail");
+		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).list();
+		Transaction tx = null;
 		try {
-			List req = query1.list();
-			for(int i=0; i<= req.size(); i++) {
-				if(((EmployeeAvailabilityBean)req.get(i)).getUser().getUser_id() == id) {
-					session.delete((EmployeeAvailabilityBean)req.get(i));
-					}
+			tx = session.beginTransaction();
+			for(EmployeeAvailabilityBean i : list) {
+				i.setActive(0);
+				System.out.println("=============");
+				System.out.println(i.getActive());
+				System.out.println("=============");
+				session.delete(i);
 			}
+			tx.commit();
+
 		}catch(Exception e) {
 			e.printStackTrace();
+			tx.rollback();
 			return false;
 		}
 		return true;

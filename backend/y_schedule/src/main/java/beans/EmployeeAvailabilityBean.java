@@ -4,40 +4,51 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
+/*
 @NamedQueries({
 	@NamedQuery(name="getTimes", query="FROM EmployeeAvailability WHERE day = :day"),
 	@NamedQuery(name="getAvail", query="FROM EmployeeAvailability WHERE user_id = :id")
 })
-
+*/
 
 
 @Entity 
 @Table(name="EmployeeAvailability") 
-public class EmployeeAvailabilityBean {
+
 	
+public class EmployeeAvailabilityBean {
+
 	@Column
-	private String start;
+	private String starttime;
 	@Column
-	private String end;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
+	private String endtime;
+	@ManyToOne
 	private UserBean user;
 	@Column
 	private String day;
+	@Id
+	@Column
+	@SequenceGenerator(initialValue= 1 , allocationSize = 1, sequenceName="shiftId", name="shiftidseq")
+	@GeneratedValue(generator="shiftidseq", strategy=GenerationType.SEQUENCE)
+	private Integer shift_id;
+	
+	@Column
+	private int active = 1;
 
 	
-	public EmployeeAvailabilityBean(String start, String end, UserBean userid, String day) {
-		this.start  = start;
-		this.end    = end;
+	public EmployeeAvailabilityBean(String starttime, String endtime, UserBean userid, String day) {
+		this.starttime  = starttime;
+		this.endtime    = endtime;
 		this.user = userid;
 		this.day = day;
 	}
@@ -47,19 +58,19 @@ public class EmployeeAvailabilityBean {
 	}
 
 	public String getStart() {
-		return start;
+		return starttime;
 	}
 
-	public void setStart(String start) {
-		this.start = start;
+	public void setStart(String starttime) {
+		this.starttime = starttime;
 	}
 
 	public String getEnd() {
-		return end;
+		return endtime;
 	}
 
-	public void setEnd(String end) {
-		this.end = end;
+	public void setEnd(String endtime) {
+		this.endtime = endtime;
 	}
 
     @ManyToOne(cascade=CascadeType.ALL)  
@@ -78,4 +89,15 @@ public class EmployeeAvailabilityBean {
 	public void setDay(String day) {
 		this.day = day;
 	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+	
+	
+	
 }
