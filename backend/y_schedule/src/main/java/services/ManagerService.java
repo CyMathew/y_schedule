@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import beans.UserBean;
@@ -76,26 +77,34 @@ public class ManagerService {
 	public static JSONObject selectScheduledTimesByWeek(JSONObject parameters) {
 		
 		JSONObject schedule = new JSONObject();
-		
+		JSONArray employees = new JSONArray();
+		JSONObject employee;
 		JSONObject shift;
 		JSONObject shifts = null;
 		int start, end;
 		
 		for(int i = 0; i < 5; i++) {
+			employee = new JSONObject();
+			employee.put("name", "emp"+i);
 			shifts = new JSONObject();
-			for(int j = 0; j < 7; j++) {
+			
+			for(int j = 1; j <= 7; j++) {
 				if(Math.random()*7 < 2)
 					continue;
 				shift = new JSONObject();
 				start = (int)Math.floor(Math.random()*6 + 6);
 				end = start + (int)Math.floor(Math.random()*4 + 4);
-				shift.put("day", i);
+				shift.put("day", j);
 				shift.put("start", start);
 				shift.put("end", end);
 				shifts.put(""+j, shift);
 			}
-			schedule.put("emp"+i, shifts);
+			employee.put("hours", ""+0);
+			employee.put("shifts", shifts);
+			employees.put(employee);
 		}
+		
+		schedule.put("employees", employees);
 		
 		return schedule;
 	}
