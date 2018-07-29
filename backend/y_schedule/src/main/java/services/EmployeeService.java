@@ -106,6 +106,9 @@ public class EmployeeService {
 	}
 	*/
 	
+	/**
+	 * Get all shifts for employee with userID
+	 * */
 	public JSONObject getAvailableById(Integer id) {
 		JSONObject weekdetails    = new JSONObject();
 		JSONObject capsule		  = new JSONObject();
