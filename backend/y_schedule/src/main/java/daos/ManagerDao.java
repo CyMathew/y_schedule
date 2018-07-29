@@ -65,7 +65,7 @@ public class ManagerDao {
 		query.setParameter("StartTime", start);
 		query.setParameter("EndTime", end);
 		query.setParameter("nuid", userId);
-		bean = (ScheduleTimeBean)query.uniqueResult();
+		query.executeUpdate();
 		return bean;
 	} 
 }
