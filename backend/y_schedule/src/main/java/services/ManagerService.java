@@ -108,4 +108,14 @@ public class ManagerService {
 		
 		return schedule;
 	}
+	
+	public static JSONObject setScheduleEmployee(Integer userId, 
+			String startTime, String endTime, String date) {
+		JSONObject schedule = new JSONObject();
+		
+		
+		return schedule;
+	}
+	
+	
 }

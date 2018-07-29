@@ -52,4 +52,20 @@ public class ManagerDao {
 		query.setParameter("store_Id", id);
 		return query.list();
 	}
+	public ScheduleTimeBean setScheduleByUserId(Timestamp start, Timestamp end, Integer userId) {
+		ScheduleTimeBean bean = null;
+		Session session = HibernateUtil.getSession();
+		
+		Query query;
+		String hql;
+		hql = "UPDATE ScheduleTimeBean SET start = :StartTime,"
+				+ "end = :EndTime"
+				+ "WHERE user_id = :nuid";
+		query = session.createQuery(hql);
+		query.setParameter("StartTime", start);
+		query.setParameter("EndTime", end);
+		query.setParameter("nuid", userId);
+		bean = (ScheduleTimeBean)query.uniqueResult();
+		return bean;
+	} 
 }
