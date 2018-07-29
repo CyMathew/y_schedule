@@ -44,10 +44,10 @@ public class ManagerServlet extends HttpServlet {
 
 		switch (r.getAction()) {
 		case "viewHome":
-			jsonOut = ManagerService.selectEmpInfo(r.getParameters(), r.getUserId());
+			jsonOut = ManagerService.selectEmpInfo(r.getUserId());
 			break;
 		case "viewSchedule":
-			jsonOut = ManagerService.selectScheduledTimesByWeek(r.getParameters());
+			jsonOut = ManagerService.selectScheduledTimesByWeek(r.getStoreId(), r.getParameters());
 			break;
 		}
 		

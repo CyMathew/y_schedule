@@ -18,7 +18,8 @@ import daos.UserDao;
 public class ManagerService {
 	private static Logger logger = Logger.getLogger(ManagerService.class);
 
-	public static JSONObject selectEmpInfo(JSONObject inputObj, Integer userId) {
+
+	public static JSONObject selectEmpInfo(Integer userId) {
 		UserBean bean = new UserDao().getUserById(userId);
 		JSONObject tempo = new JSONObject();
 
@@ -41,7 +42,7 @@ public class ManagerService {
 	 * @param storeId
 	 * @return
 	 */
-	public static JSONObject selectScheduledTimesByWeek(Timestamp startDate, Timestamp endDate, Integer storeId) {
+	private static JSONObject selectScheduledTimesByWeek(Timestamp startDate, Timestamp endDate, Integer storeId) {
 		List bean = new ManagerDao().getScheduleByStoreId(storeId,startDate, endDate);
 		JSONObject tempo = new JSONObject();
 		tempo.put("userid", bean.get(0));
@@ -51,18 +52,8 @@ public class ManagerService {
 		logger.info("JSON Object Created: " + bean);
 		return tempo;
 	}
-
-	public static JSONObject selectAvailableEmployeesByDay(Timestamp weekStart, Integer storeId, String day) {
-
-		return null;
-	}
 	
-	public static JSONObject selectAvailableEmployeesByDay(Timestamp weekStart, Integer storeId, String day, Integer department) {
-
-		return null;
-	}
-	
-	public static JSONObject scheduleEmployee(Integer id) {
+	private static JSONObject scheduleEmployee(Integer id) {
 		List bean = new ManagerDao().getScheduleByEmployee(id);
 		JSONObject tempo = new JSONObject();
 		tempo.put("userid", bean.get(0));
@@ -74,7 +65,7 @@ public class ManagerService {
 
 	}
 
-	public static JSONObject selectScheduledTimesByWeek(JSONObject parameters) {
+	public static JSONObject selectScheduledTimesByWeek(Integer storeId, JSONObject parameters) {
 		
 		JSONObject schedule = new JSONObject();
 		JSONArray employees = new JSONArray();
@@ -109,7 +100,21 @@ public class ManagerService {
 		return schedule;
 	}
 	
-	public static JSONObject setScheduleEmployee(Integer userId, 
+	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer weekOffset) {
+		
+		return null;
+	}
+	
+	public static JSONObject setScheduleEmployee(JSONObject jsonObject) {
+		Integer userId = Integer.parseInt(jsonObject.getString("userId"));
+		String startTime = jsonObject.getString("startTime");
+		String endTime = jsonObject.getString("endTime");
+		String date = jsonObject.getString("date");
+		
+		return setScheduleEmployee(userId, startTime, endTime, date);
+	}
+	
+	private static JSONObject setScheduleEmployee(Integer userId, 
 			String startTime, String endTime, String date) {
 		JSONObject schedule = new JSONObject();
 		
