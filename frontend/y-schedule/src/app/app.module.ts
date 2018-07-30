@@ -13,6 +13,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { ManagerHomeComponent } from './components/manager-home/manager-home.component';
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { CookieService } from 'ngx-cookie-service';
+import { EmployeeWeekViewComponent } from './components/views/employee-week-view/employee-week-view.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CookieService } from 'ngx-cookie-service';
     EmployeeHomeComponent,
     RegistrationComponent,
     ManagerHomeComponent,
-    CoordinatorHomeComponent
+    CoordinatorHomeComponent,
+    EmployeeWeekViewComponent
   ],
   imports: [
     BrowserModule,
