@@ -19,6 +19,18 @@ export class DateTimeService {
       }
   }
 
+  getDayOfWeekNameCapitalized(day: number): string {
+    switch(day) {
+      case 0: return "Sunday";
+      case 1: return "Monday";
+      case 2: return "Tuesday";
+      case 3: return "Wednesday";
+      case 4: return "Thrusday";
+      case 5: return "Friday";
+      default: return "Saturday";
+      }
+  }
+
   getTimeString(time: number): string {
     let hour = ((time + 11) % 12) + 1;
     let minute = "" + (time % 1) * 60;

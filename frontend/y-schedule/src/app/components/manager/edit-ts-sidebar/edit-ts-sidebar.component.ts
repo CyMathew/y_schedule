@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-edit-ts-sidebar',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTsSidebarComponent implements OnInit {
 
+  @Output() backToWeekView = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  back(){
+    this.backToWeekView.emit(0);
+  }
+
+  
 }

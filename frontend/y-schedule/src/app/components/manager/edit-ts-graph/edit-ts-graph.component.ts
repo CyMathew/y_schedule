@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DateTimeService } from '../../../services/date-time.service';
 
 @Component({
   selector: 'app-edit-ts-graph',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTsGraphComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dateTimeService: DateTimeService) { }
+
+  @Input('currentDay') currentDay: number;
+  @Input('scheduleData') scheduleData: Object;
 
   ngOnInit() {
   }

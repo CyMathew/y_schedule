@@ -20,6 +20,7 @@ import { EditTsWeekComponent } from './components/manager/edit-ts-week/edit-ts-w
 import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts-graph.component';
 import { EditTsSidebarComponent } from './components/manager/edit-ts-sidebar/edit-ts-sidebar.component';
 import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
+import { HighlightColumnDirective } from './directives/highlight-column.directive';
 
 
 
@@ -38,6 +39,7 @@ import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edi
     EditTsWeekComponent,
     EditTsGraphComponent,
     EditTsSidebarComponent,
+    HighlightColumnDirective,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edi
     }),
     RouterModule.forRoot(approutes),
   ],
-  providers: [CookieService, Globals],
+  providers: [CookieService, Globals, URLSearchParams],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

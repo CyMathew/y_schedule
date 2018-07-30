@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-time-sheet',
@@ -8,17 +9,25 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class EditTimeSheetComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
   showWeek: boolean = true;
+  week: number;
   currentDay: number;
   scheduleData: Object = {employees:null};
 
   ngOnInit() {
-    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule"}).subscribe(
+    this.route.queryParams
+      .subscribe(params => {
+        this.week = parseInt(params["week"]);
+        this.fetchSchedule();
+      });
+  }
+
+  fetchSchedule(){
+    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: this.week}).subscribe(
       data => this.receiveSchedule(data)
     );
-
   }
 
   receiveSchedule(data){
