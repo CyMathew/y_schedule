@@ -4,12 +4,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import beans.ScheduleTimeBean;
 import util.HibernateUtil;
-
+import beans.UserBean;
 public class ManagerDao {
 	final static Logger logger = Logger.getLogger(UserDao.class);
 	public ScheduleTimeBean getScheduleByUserID(Integer userId) {
@@ -68,4 +70,26 @@ public class ManagerDao {
 		query.executeUpdate();
 		return bean;
 	} 
+	public String createScheduleTimeBean(Integer schId, Timestamp start, Timestamp end, UserBean id) {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		ScheduleTimeBean bean = new ScheduleTimeBean(schId,start,end,id);
+		
+		try{
+			tx = session.beginTransaction();
+			session.save(bean);
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+			return "failure";
+		}finally{
+			session.close();
+		}
+		return "success";
+	}
+	
 }

@@ -65,7 +65,7 @@
 		<mapping class="beans.LoginBean"/>-->
 				<mapping class="beans.UserBean"/>
 				<mapping class="beans.EmployeeAvailabilityBean"/>
-		
+				<mapping class="beans.ScheduleTimeBean"/>
 
 	</session-factory>
 </hibernate-configuration>
