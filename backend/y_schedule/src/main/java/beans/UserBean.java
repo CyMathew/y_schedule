@@ -30,6 +30,20 @@ public class UserBean {
 	@Column
 	private Integer store_Id;
 	
+	
+	
+	public UserBean(Integer user_id, String user_fname, String user_lname, String user_username, String user_password,
+			Integer sec_lvl, Integer store_Id) {
+		super();
+		this.user_id = user_id;
+		this.user_fname = user_fname;
+		this.user_lname = user_lname;
+		this.user_username = user_username;
+		this.user_password = user_password;
+		this.sec_lvl = sec_lvl;
+		this.store_Id = store_Id;
+	}
+
 	public UserBean(String firstname, String Lastname, String password, String username) {
 		this.user_fname = firstname;
 		this.user_lname = Lastname;
