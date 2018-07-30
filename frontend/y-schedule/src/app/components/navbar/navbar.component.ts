@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie: CookieService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  role: String;
+
+  ngOnInit() {  
+
+    this.route.fragment
+      .subscribe(data => {
+        console.log("update nav")
+        this.role = this.cookie.get('userrole');
+      });
   }
+
 
 }

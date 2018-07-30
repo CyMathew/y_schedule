@@ -1,0 +1,9 @@
+<div class="container-fluid text-center">
+    <app-edit-ts-week *ngIf="showWeek" [scheduleData]="scheduleData" (daySelected)="onDaySelected($event)">
+    </app-edit-ts-week>
+
+    <div *ngIf="!showWeek" class="d-flex flex-row">
+        <app-edit-ts-sidebar (backToWeekView)="onBackToWeekView($event)"></app-edit-ts-sidebar>
+        <app-edit-ts-graph [scheduleData]="scheduleData" [currentDay]="currentDay" style="width: 100%"></app-edit-ts-graph>
+    </div>
+</div>

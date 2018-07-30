@@ -1,38 +1,40 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class EmployeeServlet
- */
+import org.json.JSONObject;
+
+import services.EmployeeService;
+import util.JSONHelper;
+import util.ParsedRequest;
+
+
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public EmployeeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		JSONObject tempo = JSONHelper.parseRequest(request.getReader());
+		EmployeeService empser = new EmployeeService();
+		
+		//Get the request message
+		ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
+		//SEnds the proper response JSON with the JSON request and the Cookie for the ID
+		JSONHelper.sendResponse(response, empser.parseRequest(tempo, r.getUserId()));
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -1,77 +1,101 @@
 package beans;
 
-import java.sql.Timestamp;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
+/*
 @NamedQueries({
-	@NamedQuery(name="getTimes", query="FROM EmployeeAvailability WHERE userid = :id")
+	@NamedQuery(name="getTimes", query="FROM EmployeeAvailability WHERE day = :day"),
+	@NamedQuery(name="getAvail", query="FROM EmployeeAvailability WHERE user_id = :id")
 })
+*/
 
-@NamedNativeQueries({
-	@NamedNativeQuery(
-			/*
-			 * Within a NativeQuery you are writing the ACTUAL
-			 * SQL that your engine is using. NOT HQL.
-			 */
-				name="removeRequests",
-				query="DELETE * FROM EmployeeAvailability WHERE userid = :id"
-			)
-})
 
 @Entity 
 @Table(name="EmployeeAvailability") 
+
+	
 public class EmployeeAvailabilityBean {
+
+	@Column
+	private String starttime;
+	@Column
+	private String endtime;
+	@ManyToOne
+	private UserBean user;
+	@Column
+	private String day;
+	@Id
+	@Column
+	@SequenceGenerator(initialValue= 1 , allocationSize = 1, sequenceName="shiftId", name="shiftidseq")
+	@GeneratedValue(generator="shiftidseq", strategy=GenerationType.SEQUENCE)
+	private Integer shift_id;
 	
 	@Column
-	private Timestamp start;
-	@Column
-	private Timestamp end;
-	@Column
-	private Integer userid;
-	@Column
-	private String approved;
+	private int active = 1;
+
 	
-	public EmployeeAvailabilityBean(String start, String end, Integer userid) {
-		this.start  = Timestamp.valueOf(start);
-		this.end    = Timestamp.valueOf(end);
-		this.userid = userid;
-		this.approved = "false";
+	public EmployeeAvailabilityBean(String starttime, String endtime, UserBean userid, String day) {
+		this.starttime  = starttime;
+		this.endtime    = endtime;
+		this.user = userid;
+		this.day = day;
 	}
 
 	public EmployeeAvailabilityBean() {
 		super();
 	}
 
-	public Timestamp getStart() {
-		return start;
+	public String getStart() {
+		return starttime;
 	}
 
-	public void setStart(Timestamp start) {
-		this.start = start;
+	public void setStart(String starttime) {
+		this.starttime = starttime;
 	}
 
-	public Timestamp getEnd() {
-		return end;
+	public String getEnd() {
+		return endtime;
 	}
 
-	public void setEnd(Timestamp end) {
-		this.end = end;
+	public void setEnd(String endtime) {
+		this.endtime = endtime;
 	}
 
-	public Integer getUserid() {
-		return userid;
+    @ManyToOne(cascade=CascadeType.ALL)  
+	public UserBean getUser() {
+		return user;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setUserid(UserBean user) {
+		this.user = user;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
 	}
 	
 	

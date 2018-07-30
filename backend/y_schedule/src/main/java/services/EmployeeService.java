@@ -1,70 +1,215 @@
 package services;
 
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import beans.EmployeeAvailabilityBean;
+import beans.UserBean;
 import daos.EmployeeDao;
+import daos.UserDao;
+import util.DateTimeHelper;
 
 public class EmployeeService {
-	private static EmployeeDao ad = new EmployeeDao();
-	private static JSONObject reply = new JSONObject();
-	
-	
-/**
- * This takes the JSON object and parses the request to see what action it should take
- * */
+
+	private EmployeeDao ed = new EmployeeDao();
+	private JSONObject reply = new JSONObject();
+	private UserBean userbean = new UserBean();
+	private UserDao ud = new UserDao();
+
+	/**
+	 * This takes the JSON object and parses the request to see what action it
+	 * should take
+	 */
 	@SuppressWarnings("unused")
 	public JSONObject parseRequest(JSONObject json, Integer id) {
-		JSONArray args = json.getJSONArray("weekDetails");
-		
-		if(json != null) {
-			switch((String)json.get("action")) {
-			case "editWeekDetails": return editWeekDetails(args, id);
-									
-			case "getWeekDetails": return reply;//TODO make this 
-			default: return reply.put("result", "failure");
-			}}		
-		
-		else {return reply.put("result", "failure");}
-		
+		JSONArray args = json.getJSONArray("availDetails");
+		userbean = ud.getUserById(id);
+
+		if (json != null) {
+			switch ((String) json.get("action")) {
+
+			case "editAvailDetails":
+				return editAvailDetails(args, userbean);
+
+			case "getAvailDetails":
+				return getAvailableById(id);
+
+			default:
+				return reply.put("result", "failure");
+			}
+		}
+
+		else {
+			return reply.put("result", "failure");
+		}
+
 	}
-	
+
 	/**
-	 * This deletes all old records from the database and updates it with the new availability for the employee
-	 * */
-	public JSONObject editWeekDetails(JSONArray jsonarray, Integer id) {
+	 * This deletes all old records from the database and updates it with the new
+	 * availability for the employee
+	 */
+	public JSONObject editAvailDetails(JSONArray jsonarray, UserBean id) {
 		JSONObject jsonstore = new JSONObject();
 		JSONObject timestore = new JSONObject();
 		JSONArray timearray = new JSONArray();
-		String date = null;
+		String day = null;
 		String start = null;
 		String end = null;
-		String response = null;
-		
-		if(ad.removeAllReguests(id)) {
-			for(int i = 0; i < jsonarray.length(); i ++) {
+
+		if (ed.removeAllReguests(id.getUser_id())) {
+			for (int i = 0; i < jsonarray.length(); i++) {
 				jsonstore = jsonarray.getJSONObject(i);
-				date = jsonstore.getString("date");
+				day = jsonstore.getString("day");
 				timearray = jsonstore.getJSONArray("times");
-				
-				for(int l = 0; l < timearray.length(); l++) {
+
+				for (int l = 0; l < timearray.length(); l++) {
 					timestore = timearray.getJSONObject(l);
 					start = timestore.getString("startTime");
 					end = timestore.getString("endTime");
-					response = ad.updateRequests((date+" "+start), (date+" "+end), id);
-					if(response.equals("failure")) {
+					if ((ed.updateRequests(start, end, day, id)).equals("failure")) {
 						reply.put("result", "failure");
 						return reply;
-						}
+					}
+
 				}
 			}
 			reply.put("result", "success");
-			return reply;}
-		
+			return reply;
+		}
+
 		else {
 			reply.put("result", "failure");
 			return reply;
+		}
+	}
+
+	/*
+	 * public JSONObject getAvailByDate (String day) { JSONObject weekdetails = new
+	 * JSONObject(); JSONArray weekarray = new JSONArray(); JSONObject capsule = new
+	 * JSONObject(); JSONArray timearray = new JSONArray(); List list =
+	 * ed.getStartTimesById(day);
+	 * 
+	 * if(list.size() <=0) { capsule.put("day", "none available");
+	 * capsule.put("times", "none available"); weekarray.put(0,capsule);
+	 * weekdetails.put("availDetails", weekarray); return weekdetails; }
+	 * 
+	 * for(int i=0; i <=list.size();i++) { timearray.put(new
+	 * JSONObject().put("startTime",
+	 * ((EmployeeAvailabilityBean)list.get(i)).getStart()) .put("endTime",
+	 * ((EmployeeAvailabilityBean)list.get(i)).getEnd()) );
+	 * 
+	 * } weekdetails.put("weekdetails", weekarray);
+	 * 
+	 * return weekdetails; }
+	 */
+
+	public void setDefaultAvailability(UserBean user) {
+		
+		String start = DateTimeHelper.timeString(9, 0);
+		String end = DateTimeHelper.timeString(17, 0);
+		
+		ed.removeAllReguests(user.getUser_id());
+		
+		for (int i = 1; i < 6; i++)
+			ed.updateRequests(start, end, DateTimeHelper.getDayOfWeekName(i), user);
+	}
+
+	/**
+	 * Get all shifts for employee with userID
+	 */
+	public JSONObject getAvailableById(Integer id) {
+		JSONObject weekdetails = new JSONObject();
+		JSONObject capsule = new JSONObject();
+		JSONObject jsonmonday = new JSONObject();
+		JSONObject jsontuesday = new JSONObject();
+		JSONObject jsonwednesday = new JSONObject();
+		JSONObject jsonthursday = new JSONObject();
+		JSONObject jsonfriday = new JSONObject();
+		JSONObject jsonsaturday = new JSONObject();
+		JSONObject jsonsunday = new JSONObject();
+		JSONArray weekarray = new JSONArray();
+		JSONArray jsonAmonday = new JSONArray();
+		JSONArray jsonAtuesday = new JSONArray();
+		JSONArray jsonAwednesday = new JSONArray();
+		JSONArray jsonAthursday = new JSONArray();
+		JSONArray jsonAfriday = new JSONArray();
+		JSONArray jsonAsaturday = new JSONArray();
+		JSONArray jsonAsunday = new JSONArray();
+
+		List list = ed.getStartTimesById(id);
+
+		if (list.size() <= 0) {
+			capsule.put("day", "none available");
+			capsule.put("times", "none available");
+			weekarray.put(0, capsule);
+			weekdetails.put("availDetails", weekarray);
+			return weekdetails;
+		}
+		/*
+		 * (((EmployeeAvailabilityBean)list.get(i)).getStart());
+		 * (((EmployeeAvailabilityBean)list.get(i)).getEnd());
+		 */
+
+		for (int i = 0; i < list.size(); i++) {
+			if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("monday")) {
+				jsonAmonday.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+						.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
+			} else if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("tuesday")) {
+				jsonAtuesday
+						.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+								.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
+			} else if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("wednesday")) {
+				jsonAwednesday
+						.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+								.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
+			} else if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("thursday")) {
+				jsonAthursday
+						.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+								.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
+			} else if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("friday")) {
+				jsonAfriday.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+						.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
+			} else if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("saturday")) {
+				jsonAsaturday
+						.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+								.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
+			} else if (((EmployeeAvailabilityBean) list.get(i)).getDay().equals("sunday")) {
+				jsonAsunday.put(new JSONObject().put("startTime", (((EmployeeAvailabilityBean) list.get(i)).getStart()))
+						.put("endTime", (((EmployeeAvailabilityBean) list.get(i)).getEnd())));
 			}
+		}
+
+		jsonsunday.put("day", "sunday").put("times", jsonAsunday);
+		jsonmonday.put("day", "monday").put("times", jsonAmonday);
+		jsontuesday.put("day", "tuesday").put("times", jsonAtuesday);
+		jsonwednesday.put("day", "wednesday").put("times", jsonAwednesday);
+		jsonthursday.put("day", "thursday").put("times", jsonAthursday);
+		jsonfriday.put("day", "friday").put("times", jsonAfriday);
+		jsonsaturday.put("day", "saturday").put("times", jsonAsaturday);
+
+		weekarray.put(jsonsunday);
+		weekarray.put(jsonmonday);
+		weekarray.put(jsontuesday);
+		weekarray.put(jsonwednesday);
+		weekarray.put(jsonthursday);
+		weekarray.put(jsonfriday);
+		weekarray.put(jsonsaturday);
+
+		weekdetails.put("availDetails", weekarray);
+
+		return weekdetails;
+	}
+
+	public void setEd(EmployeeDao ed) {
+		this.ed = ed;
+	}
+
+	public EmployeeDao getEd() {
+		return this.ed;
 	}
 
 }
