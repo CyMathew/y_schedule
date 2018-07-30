@@ -25,14 +25,14 @@ public class EmployeeServiceTest {
 		EmployeeService service = new EmployeeService();
 		UserBean UB = new UserBean();
 		UB.setUser_id(30);
-		EmployeeAvailabilityBean monday      = new EmployeeAvailabilityBean("9:00", "10:00", UB, "monday");
-		EmployeeAvailabilityBean monday2     = new EmployeeAvailabilityBean("12:00", "5:00", UB, "monday");
-		EmployeeAvailabilityBean tuesday     = new EmployeeAvailabilityBean("9:00", "5:00", UB, "tuesday");
-		EmployeeAvailabilityBean wednesday   = new EmployeeAvailabilityBean("9:00", "5:00", UB, "wednesday");
-		EmployeeAvailabilityBean thursday    = new EmployeeAvailabilityBean("9:00", "5:00", UB, "thursday");
-		EmployeeAvailabilityBean friday      = new EmployeeAvailabilityBean("9:00", "5:00", UB, "friday");
-		EmployeeAvailabilityBean saturday    = new EmployeeAvailabilityBean("9:00", "5:00", UB, "saturday");
-		EmployeeAvailabilityBean sunday      = new EmployeeAvailabilityBean("9:00", "5:00", UB, "sunday");
+		EmployeeAvailabilityBean monday      = new EmployeeAvailabilityBean("9:00",  "10:00", UB, "monday");
+		EmployeeAvailabilityBean monday2     = new EmployeeAvailabilityBean("12:00", "5:00",  UB, "monday");
+		EmployeeAvailabilityBean tuesday     = new EmployeeAvailabilityBean("9:00",  "5:00",  UB, "tuesday");
+		EmployeeAvailabilityBean wednesday   = new EmployeeAvailabilityBean("9:00",  "5:00",  UB, "wednesday");
+		EmployeeAvailabilityBean thursday    = new EmployeeAvailabilityBean("9:00",  "5:00",  UB, "thursday");
+		EmployeeAvailabilityBean friday      = new EmployeeAvailabilityBean("9:00",  "5:00",  UB, "friday");
+		EmployeeAvailabilityBean saturday    = new EmployeeAvailabilityBean("9:00",  "5:00",  UB, "saturday");
+		EmployeeAvailabilityBean sunday      = new EmployeeAvailabilityBean("9:00",  "5:00",  UB, "sunday");
 
 		List<EmployeeAvailabilityBean> mockList = new ArrayList<>();
 		mockList.add(monday);
@@ -50,36 +50,36 @@ public class EmployeeServiceTest {
 		JSONObject object = service.getAvailableById(30);
 		JSONArray array = object.getJSONArray("weekDetails");
 		
-		assertEquals("9:00", array.getJSONObject(0).get("startTime"));
-		assertEquals("10:00", array.getJSONObject(0).get("endTime"));
-		assertEquals("monday", array.getJSONObject(0).get("day"));
-		assertEquals("12:00", array.getJSONObject(1).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(1).get("endTime"));
-		assertEquals("monday", array.getJSONObject(1).get("day"));
+		assertEquals("9:00",      array.getJSONObject(0).get("startTime"));
+		assertEquals("10:00",     array.getJSONObject(0).get("endTime"));
+		assertEquals("monday",    array.getJSONObject(0).get("day"));
+		assertEquals("12:00",     array.getJSONObject(1).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(1).get("endTime"));
+		assertEquals("monday",    array.getJSONObject(1).get("day"));
 		
-		assertEquals("9:00", array.getJSONObject(2).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(2).get("endTime"));
-		assertEquals("tuesday", array.getJSONObject(2).get("day"));
+		assertEquals("9:00",      array.getJSONObject(2).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(2).get("endTime"));
+		assertEquals("tuesday",   array.getJSONObject(2).get("day"));
 		
-		assertEquals("9:00", array.getJSONObject(3).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(3).get("endTime"));
+		assertEquals("9:00",      array.getJSONObject(3).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(3).get("endTime"));
 		assertEquals("wednesday", array.getJSONObject(3).get("day"));
 		
-		assertEquals("9:00", array.getJSONObject(4).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(4).get("endTime"));
-		assertEquals("thursday", array.getJSONObject(4).get("day"));
+		assertEquals("9:00",      array.getJSONObject(4).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(4).get("endTime"));
+		assertEquals("thursday",  array.getJSONObject(4).get("day"));
 		
-		assertEquals("9:00", array.getJSONObject(5).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(5).get("endTime"));
-		assertEquals("friday", array.getJSONObject(5).get("day"));
+		assertEquals("9:00",      array.getJSONObject(5).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(5).get("endTime"));
+		assertEquals("friday",    array.getJSONObject(5).get("day"));
 		
-		assertEquals("9:00", array.getJSONObject(6).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(6).get("endTime"));
-		assertEquals("saturday", array.getJSONObject(6).get("day"));
+		assertEquals("9:00",      array.getJSONObject(6).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(6).get("endTime"));
+		assertEquals("saturday",  array.getJSONObject(6).get("day"));
 		
-		assertEquals("9:00", array.getJSONObject(7).get("startTime"));
-		assertEquals("5:00", array.getJSONObject(7).get("endTime"));
-		assertEquals("sunday", array.getJSONObject(7).get("day"));
+		assertEquals("9:00",      array.getJSONObject(7).get("startTime"));
+		assertEquals("5:00",      array.getJSONObject(7).get("endTime"));
+		assertEquals("sunday",    array.getJSONObject(7).get("day"));
 
 
 	}
@@ -108,7 +108,7 @@ public class EmployeeServiceTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void editTimesTestfailure() {
 		EmployeeDao mockDao = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();

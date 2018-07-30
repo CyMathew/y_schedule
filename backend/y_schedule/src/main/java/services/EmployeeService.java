@@ -54,14 +54,20 @@ public class EmployeeService {
 		String start = null;
 		String end = null;
 		
-		for(int i = 0; i < jsonarray.length(); i++) {
-			day = jsonarray.getJSONObject(i).getString("day");
-			end = jsonarray.getJSONObject(i).getString("endTime");
-			start = jsonarray.getJSONObject(i).getString("startTime");
-			if((ed.updateRequests(start, end, day, id)).equals("failure")) {
-				reply.put("result", "failure");
-				return reply;
+		if(ed.removeAllReguests(id.getUser_id())) {
+			for(int i = 0; i < jsonarray.length(); i++) {
+				day = jsonarray.getJSONObject(i).getString("day");
+				end = jsonarray.getJSONObject(i).getString("endTime");
+				start = jsonarray.getJSONObject(i).getString("startTime");
+				if((ed.updateRequests(start, end, day, id)).equals("failure")) {
+					reply.put("result", "failure");
+					return reply;
+				}
 			}
+		}
+		else {
+			reply.put("result", "failure");
+			return reply;
 		}
 		reply.put("result", "success");
 		return reply;
