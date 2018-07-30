@@ -1,0 +1,20 @@
+
+<div class="week-view" [ngStyle]="setViewStyle()">
+  <span id="sun">Sun</span>
+  <span id="mon">Mon</span>
+  <span id="tue">Tue</span>
+  <span id="wed">Wed</span>
+  <span id="thu">Thu</span>
+  <span id="fri">Fri</span>
+  <span id="sat">Sat</span>
+
+
+  <!--Prints out hour slots-->
+  <ng-container *ngFor="let hourString of storeHoursArray; index as i">
+    <p class="hour" [ngStyle]="setHourStyle(i)">{{hourString}}</p>
+  </ng-container>
+
+  <ng-container *ngFor="let event of eventsArray; index as i">
+    <div class="timeslot" [ngStyle]="setEventStyle(event)">{{getTimeString(event.startTime)}} - {{getTimeString(event.endTime)}}</div>
+  </ng-container>
+</div>
