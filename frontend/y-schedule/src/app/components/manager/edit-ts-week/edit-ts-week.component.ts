@@ -29,8 +29,6 @@ export class EditTsWeekComponent implements OnInit {
   selectDay(day) {
     console.log("emit day: " + day);
     this.daySelected.emit(day);
-
-
   }
 
   getWeek(n: number){

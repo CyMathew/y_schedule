@@ -212,4 +212,29 @@ public class EmployeeService {
 		return this.ed;
 	}
 
+	public static JSONObject getAvailableEmployeesOnDay(JSONObject parameters) {
+		
+		String weekday = parameters.getString("day");
+		
+		return getAvailableEmployeesOnDay(weekday);
+	}
+	
+	private static JSONObject getAvailableEmployeesOnDay(String weekday) {
+		JSONObject jsonObj = new JSONObject();
+		JSONArray availEmployees = new JSONArray();
+		
+		List<EmployeeAvailabilityBean> list = new EmployeeDao().getStartTimesByDay(weekday);
+		
+		for(EmployeeAvailabilityBean b : list) {
+			JSONObject temp = new JSONObject();
+			temp.put("userId", b.getUser().getUser_id());
+			temp.put("name", b.getUser().getUser_fname() + " " + b.getUser().getUser_lname());
+			availEmployees.put(temp);
+		}
+		
+		jsonObj.put("availEmployees", availEmployees);
+		
+		return jsonObj;
+	}
+
 }

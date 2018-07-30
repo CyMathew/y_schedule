@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
+import services.EmployeeService;
 import services.ManagerService;
 import util.JSONHelper;
 import util.ParsedRequest;
@@ -48,6 +49,9 @@ public class ManagerServlet extends HttpServlet {
 			break;
 		case "viewSchedule":
 			jsonOut = ManagerService.selectScheduledTimesByWeek(r.getStoreId(), r.getParameters());
+			break;
+		case "getAvailEmployees":
+			jsonOut = EmployeeService.getAvailableEmployeesOnDay(r.getParameters());
 			break;
 		}
 		

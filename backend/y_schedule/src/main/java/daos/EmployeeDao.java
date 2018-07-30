@@ -68,7 +68,7 @@ public class EmployeeDao {
 	/**
 	 * Returns a list of the times to the services that needs to be parsed into the proper JSON
 	 */
-	public List getStartTimesByDay(String day){
+	public List<EmployeeAvailabilityBean> getStartTimesByDay(String day){
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("day", day)).list();
