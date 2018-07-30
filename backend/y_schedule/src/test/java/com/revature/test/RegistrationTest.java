@@ -22,7 +22,7 @@ public class RegistrationTest {
 		RegistrationService testserv = new RegistrationService();
 		testserv.setImpl(beantest);
 		assertNotNull(testserv.getImpl());
-		assertEquals("Success", testserv.CreateNewEmployee("blech", "blech", "blech", "blech",(Integer)1).get("result"));
+		assertEquals("success", testserv.CreateNewEmployee("blech", "blech", "blech", "blech",(Integer)1).get("result"));
 		
 		
 	}
