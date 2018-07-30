@@ -8,12 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EmployeeWeekViewComponent implements OnInit 
 {
   @Input() storeHours;
-  @Input() events;
+  @Input() eventsJSON;
   
   startHour: number;
   endHour: number;
 
   storeHoursArray = new Array<string>();
+
+  eventsArray: any;
 
   constructor() {
     
@@ -30,6 +32,8 @@ export class EmployeeWeekViewComponent implements OnInit
     }
 
     console.log(this.startHour, this.endHour);
+
+    this.eventsArray = this.eventsJSON["weekDetails"];
   }
 
   setHourStyle(i: number)
@@ -44,26 +48,35 @@ export class EmployeeWeekViewComponent implements OnInit
   {
     return {
       'display': 'grid',
-      'box-shadow': '0 1px 5px rgba(0,0,0.45)',
+      'box-shadow': '0 1px 5px rgba(0,0,0, .45)',
       'padding': '5px 15px 20px 0px',
       'border-radius': '5px',
       'margin': '10px',
       'grid-template-rows': '50px repeat(' + this.storeHoursArray.length + ', 1fr)',
-      'grid-template-columns': '1fr repeat(7, 1fr)'
-    }
+      'grid-template-columns': '1fr repeat(7, 1fr)',
+      'grid-column-gap': '3px',
+    };
   }
 
   setEventStyle(event)
   {
-    let dayOfWeek = event.dayOfWeek + 2;
-    let startHour = event.startTime - this.startHour + 2;
-    let endHour =  event.endTime - this.startHour +2;
-    console.log(dayOfWeek, startHour, endHour);
+    // let dayOfWeek = event.dayOfWeek + 2;
+    // let startHour = event.startTime - this.startHour + 2;
+    // let endHour =  event.endTime - this.startHour +2;
+    // console.log(dayOfWeek, startHour, endHour);
+
+    //Start hour + 2 here is used as an offset to align it properly in CSS Grid lines
+    let dayOfWeek = this.getDayInt(event["day"]) + 2;
+    console.log('Day: ' + event["day"] + " makes " + dayOfWeek );
+    let startHour = this.getIntFromTime(event["startTime"]) - this.startHour + 2;
+    let endHour = this.getIntFromTime(event["endTime"]) - this.startHour + 2;
+
     return {
       'grid-column': dayOfWeek + "/" + dayOfWeek,
       'grid-row': startHour + "/" + endHour,
+      'box-shadow': '0 1px 5px rgba(0,0,0,.25)',
 
-    }
+    };
   }
 
   getTimeString(time: number): string
@@ -74,6 +87,30 @@ export class EmployeeWeekViewComponent implements OnInit
       return (time + " PM");
     else
       return (time + ' AM');
+  }
+
+  getDayInt(dayOfWeek: string)
+  {
+    console.log(dayOfWeek);
+    switch(dayOfWeek)
+    {
+      case "sunday": return 0;
+      case "monday": return 1;
+      case "tuesday": return 2;
+      case "wednesday": return 3;
+      case "thursday": return 4;
+      case "friday": return 5;
+      case "saturday": return 6;
+    }
+  }
+
+  getIntFromTime(time: string)
+  {
+    let timeArray = time.split(":");
+    let hour = parseInt(timeArray[0]);
+    let minute = parseInt(timeArray[1])/60;
+
+    return hour;
   }
   
 
