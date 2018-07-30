@@ -60,8 +60,8 @@ export class EmployeeWeekViewComponent implements OnInit
     let endHour =  event.endTime - this.startHour +2;
     console.log(dayOfWeek, startHour, endHour);
     return {
-      'grid-column': dayOfWeek + "/" + dayOfWeek;
-      'grid-row': startHour + "/" + endHour;
+      'grid-column': dayOfWeek + "/" + dayOfWeek,
+      'grid-row': startHour + "/" + endHour,
 
     }
   }
