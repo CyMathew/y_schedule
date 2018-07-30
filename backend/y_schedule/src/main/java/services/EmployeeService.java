@@ -107,11 +107,12 @@ public class EmployeeService {
 	 * return weekdetails; }
 	 */
 
-	public void setDefaultAvailability(Integer id) {
+	public void setDefaultAvailability(UserBean user) {
 		
-		UserBean user = ud.getUserById(id);
 		String start = DateTimeHelper.timeString(9, 0);
 		String end = DateTimeHelper.timeString(17, 0);
+		
+		ed.removeAllReguests(user.getUser_id());
 		
 		for (int i = 1; i < 6; i++)
 			ed.updateRequests(start, end, DateTimeHelper.getDayOfWeekName(i), user);

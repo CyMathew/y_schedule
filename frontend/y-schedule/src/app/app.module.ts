@@ -14,7 +14,6 @@ import { ManagerHomeComponent } from './components/manager/manager-home/manager-
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { ManagerHomePanelComponent } from './components/manager/manager-home-panel/manager-home-panel.component';
-import { Globals } from './globals';
 import { UserSidebarComponent } from './components/user-sidebar/user-sidebar.component';
 import { EditTsWeekComponent } from './components/manager/edit-ts-week/edit-ts-week.component';
 import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts-graph.component';
@@ -51,7 +50,7 @@ import { HighlightColumnDirective } from './directives/highlight-column.directiv
     }),
     RouterModule.forRoot(approutes),
   ],
-  providers: [CookieService, Globals, URLSearchParams],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

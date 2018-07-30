@@ -12,6 +12,13 @@ import javax.persistence.Table;
 @Table(name="user_table") 
 public class UserBean {
 
+	@Override
+	public String toString() {
+		return "UserBean [user_id=" + user_id + ", user_fname=" + user_fname + ", user_lname=" + user_lname
+				+ ", user_username=" + user_username + ", user_password=" + user_password + ", sec_lvl=" + sec_lvl
+				+ ", store_Id=" + store_Id + "]";
+	}
+
 	@Id
 	@Column
 	@SequenceGenerator(initialValue= 1 , allocationSize = 1, sequenceName="userIdSeq", name="userIdSeq")

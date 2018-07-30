@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { GetUrlService } from '../../services/get-url.service';
 import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Globals } from '../../globals';
 
 
 
@@ -15,7 +14,7 @@ import { Globals } from '../../globals';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private globals: Globals, private router: Router, private authService: AuthService, private url: GetUrlService, private cookie: CookieService) { }
+  constructor(private router: Router, private authService: AuthService, private url: GetUrlService, private cookie: CookieService) { }
 
   username: string;
   password: string;
@@ -50,7 +49,6 @@ export class LoginComponent implements OnInit {
     if (data["result"] == "success") {
       
       this.authService.setSession(data, this.username);
-      this.globals.role = data["role"];
 
       switch (data["role"]) {
         case "manager":
