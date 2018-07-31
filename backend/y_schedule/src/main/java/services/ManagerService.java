@@ -50,17 +50,17 @@ public class ManagerService {
 //		return tempo;
 //	}
 	
-	private static JSONObject scheduleEmployee(Integer id) {
-		List bean = new ManagerDao().getScheduleByEmployee(id);
-		JSONObject tempo = new JSONObject();
-		tempo.put("userid", bean.get(0));
-		tempo.put("storeId", bean.get(1));
-		tempo.put("start", bean.get(2));
-		tempo.put("end", bean.get(3));
-		logger.info("JSON Object Created: " + bean);
-		return tempo;
-
-	}
+//	private static JSONObject scheduleEmployee(Integer id) {
+//		List bean = new ManagerDao().getScheduleByEmployee(id);
+//		JSONObject tempo = new JSONObject();
+//		tempo.put("userid", bean.get(0));
+//		tempo.put("storeId", bean.get(1));
+//		tempo.put("start", bean.get(2));
+//		tempo.put("end", bean.get(3));
+//		logger.info("JSON Object Created: " + bean);
+//		return tempo;
+//
+//	}
 
 	public static JSONObject selectScheduledTimesByWeek(Integer storeId, JSONObject parameters) {
 		
