@@ -1,7 +1,5 @@
 package beans;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,15 +21,10 @@ public class MessageListBean {
 	private Integer user1;
 	@Column
 	private Integer user2;
-	@Column
-	private Timestamp sentTime;
 	
-	public MessageListBean(Integer message_list_id, Integer user1, Integer user2, Timestamp sentTime) {
-		super();
-		this.message_list_id = message_list_id;
+	public MessageListBean(Integer user1, Integer user2) {
 		this.user1 = user1;
 		this.user2 = user2;
-		this.sentTime = sentTime;
 	}
 	
 	public Integer getMessage_list_id() {
@@ -56,13 +49,5 @@ public class MessageListBean {
 	
 	public void setUser2(Integer user2) {
 		this.user2 = user2;
-	}
-	
-	public Timestamp getSentTime() {
-		return sentTime;
-	}
-	
-	public void setSentTime(Timestamp sentTime) {
-		this.sentTime = sentTime;
 	}
 }

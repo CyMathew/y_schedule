@@ -14,26 +14,30 @@ import beans.MessageBean;
 import beans.MessageListBean;
 import util.HibernateUtil;
 
-public class MessageDao {
-	public ArrayList<MessageBean> getMessageListsByUserID(Integer id){
-		ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
+public class ManagerListDao {
+
+	public ArrayList<MessageListBean> getMessageListsByUserID(Integer id){
+		ArrayList<MessageListBean> messages = new ArrayList<MessageListBean>();
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(MessageListBean.class);
-		List<MessageBean> list1 = crit.add(Restrictions.like("Message.message_list_id", id)).list();
-		for(MessageBean m: list1) {
+		List<MessageListBean> list1 = crit.add(Restrictions.like("MessageList.user1", id)).list();
+		List<MessageListBean> list2 = crit.add(Restrictions.like("MessageList.user2", id)).list();
+		for(MessageListBean m: list1) {
 			messages.add(m);
 		}
-		session.close();
+		for(MessageListBean m: list2) {
+			messages.add(m);
+		}
 		return messages;
 	}
 	
-	public String createNewMessage(Integer uID, String message, Timestamp time) {
+	public String createNewMessageList(Integer uID, Integer uID2) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		MessageBean newMessage = new MessageBean(uID,message,time);
+		MessageListBean newMessageList = new MessageListBean(uID,uID2);
 		try {
 			tx = session.beginTransaction();
-			session.save(newMessage);
+			session.save(newMessageList);
 			tx.commit();
 		}catch(HibernateException e){
 			if(tx!=null) {

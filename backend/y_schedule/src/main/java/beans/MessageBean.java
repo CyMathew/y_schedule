@@ -27,11 +27,9 @@ public class MessageBean {
 	@Column
 	private Timestamp sentTime;
 	@ManyToOne
-	private MessageListBean messageList;
+	private MessageListBean message_list_id;
 	
-	public MessageBean(Integer message_id, Integer uID, String message, Timestamp sentTime) {
-		super();
-		this.message_id = message_id;
+	public MessageBean(Integer uID, String message, Timestamp sentTime) {
 		this.uID = uID;
 		this.message = message;
 		this.sentTime = sentTime;
