@@ -4,10 +4,12 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import beans.ScheduleTimeBean;
 import util.HibernateUtil;
@@ -38,21 +40,20 @@ public class ManagerDao {
 		bean = (ScheduleTimeBean)query.uniqueResult();
 		return bean;
 	}
-	public List getScheduleByStoreId(Integer id, Timestamp startDate, Timestamp endDate ) {
+	public List<ScheduleTimeBean> getScheduleByStoreId(Integer id) {
 		Session session = HibernateUtil.getSession();
-		
-		Query query = session.getNamedQuery("showUserIdAndTime");
-		query.setParameter("store_Id", id);
-		query.setParameter("start", startDate);
-		query.setParameter("end", endDate);
-		return query.list();
+		Criteria crit = session.createCriteria(UserBean.class);
+		List<ScheduleTimeBean> list = (crit.add(Restrictions.like("store_Id", id)).list());
+		Transaction tx = null;
+		return list;
 	}
-	public List getScheduleByEmployee(Integer id) {
+	public List<ScheduleTimeBean> getScheduleByEmployee(Integer id) {
 		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
+		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", id)).list();
+		Transaction tx = null;
 		
-		Query query = session.getNamedQuery("showEmployee");
-		query.setParameter("store_Id", id);
-		return query.list();
+		return list;
 	}
 	public ScheduleTimeBean setScheduleByUserId(Timestamp start, Timestamp end, Integer userId) {
 		ScheduleTimeBean bean = null;

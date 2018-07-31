@@ -15,22 +15,22 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@NamedNativeQueries({
-	@NamedNativeQuery(
-				name="showUserIdAndTime",
-				query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
-						+ "FROM user_table INNER JOIN ScheduleTime "
-						+ "ON user_table.user_id = ScheduleTime.user_id"
-						+ "WHERE store_Id = :id AND start = :startDate AND end =endDate"
-			),
-	@NamedNativeQuery(
-			name="showEmployee",
-			query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
-					+ "FROM user_table INNER JOIN ScheduleTime "
-					+ "ON user_table.user_id = ScheduleTime.user_id"
-					+ "WHERE user_id = :id "
-			)
-})
+//@NamedNativeQueries({
+//	@NamedNativeQuery(
+//				name="showUserIdAndTime",
+//				query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
+//						+ "FROM user_table INNER JOIN ScheduleTime "
+//						+ "ON user_table.user_id = ScheduleTime.user_id"
+//						+ "WHERE store_Id = :id AND start = :startDate AND end =endDate"
+//			),
+//	@NamedNativeQuery(
+//			name="showEmployee",
+//			query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
+//					+ "FROM user_table INNER JOIN ScheduleTime "
+//					+ "ON user_table.user_id = ScheduleTime.user_id"
+//					+ "WHERE user_id = :id "
+//			)
+//})
 
 
 @Entity
@@ -56,6 +56,13 @@ public class ScheduleTimeBean {
 		this.endTime = end;
 		this.users = user;
 	}
+	
+	@Override
+	public String toString() {
+		return "ScheduleTimeBean [Schedule_id=" + Schedule_id + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", users=" + users + "]";
+	}
+
 	public ScheduleTimeBean() {
 		super();
 	}
