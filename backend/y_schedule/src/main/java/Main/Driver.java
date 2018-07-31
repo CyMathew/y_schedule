@@ -10,6 +10,6 @@ public class Driver {
 		ManagerDao md = new ManagerDao();
 		UserDao ud = new UserDao();
 		Timestamp s = new Timestamp(0);
-		md.createScheduleTimeBean(5, s, s, ud.getUserById(4));
+		md.getScheduleByStoreId(2327);
 	}
 }
