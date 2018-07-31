@@ -1,1 +1,1 @@
-<employee-week-view [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>
+<employee-week-view *ngIf="events != null" [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>

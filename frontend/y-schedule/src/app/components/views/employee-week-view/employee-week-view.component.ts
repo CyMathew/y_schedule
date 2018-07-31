@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'employee-week-view',
   templateUrl: './employee-week-view.component.html',
-  styleUrls: ['./employee-week-view.component.css']
+  styleUrls: ['./employee-week-view.component.css'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeeWeekViewComponent implements OnInit 
 {
@@ -33,7 +34,15 @@ export class EmployeeWeekViewComponent implements OnInit
 
     console.log(this.startHour, this.endHour);
 
+    
+  }
+  
+  ngAfterViewInit() 
+  {
+    setTimeout(()=>{
     this.eventsArray = this.eventsJSON["weekDetails"];
+    console.log("In WEEK VIEW", this.eventsArray);
+    }, 5000);
   }
 
   setHourStyle(i: number)
@@ -98,7 +107,8 @@ export class EmployeeWeekViewComponent implements OnInit
       case "monday": return 1;
       case "tuesday": return 2;
       case "wednesday": return 3;
-      case "thursday": return 4;
+      // case "thursday": return 4;
+      case "thrusday": return 4;
       case "friday": return 5;
       case "saturday": return 6;
     }
