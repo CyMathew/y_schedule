@@ -35,6 +35,14 @@ export class EditTsWeekComponent implements OnInit {
     return this.week + n;
   }
 
+  getWeekHeader(){
+    if(this.scheduleData["dates"] == null)
+      return "...";
+    else{
+      return this.scheduleData["dates"]["0"] + " - " + this.scheduleData["dates"]["6"];
+    }
+  }
+
   updateWeek(week: number){
     this.week = week;
     this.weekSelected.emit(week);

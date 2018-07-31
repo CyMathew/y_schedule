@@ -103,7 +103,6 @@ public class ManagerService {
 		
 		schedule.put("employees", employees);
 		
-		
 		return schedule;
 	}
 	

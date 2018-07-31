@@ -32,7 +32,7 @@ public class DateTimeHelper {
 
 	public static Timestamp getWeekStartByOffset(int offset) {
 		LocalDateTime temp = LocalDateTime.now();
-		temp.minusDays(7 * offset);
+		temp = temp.plusDays(7 * offset);
 
 		return getWeekStart(temp);
 	}
@@ -79,22 +79,15 @@ public class DateTimeHelper {
 	}
 
 	public static String formatDate(LocalDateTime localDateTime) {
-		return localDateTime.getDayOfMonth()+"/"+localDateTime.getMonthValue()+"/"+localDateTime.getYear();
+		return localDateTime.getMonthValue()+"/"+localDateTime.getDayOfMonth()+"/"+localDateTime.getYear();
 	}
 
 	public static Timestamp getTimestamp(String date, String time) {
-//		String[] dateParts = date.split("/");
-//		int day = Integer.parseInt(dateParts[0]);
-//		int month = Integer.parseInt(dateParts[1]);
-//		int year = Integer.parseInt(dateParts[2]);
-//		
-//		String[] timeParts = time.split(":");
-//		int hour = Integer.parseInt(timeParts[0]);
-//		int minute = Integer.parseInt(timeParts[1]);
 		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
 		Timestamp ts = null;
+		
 		try {
 			ts = new Timestamp(simpleDateFormat.parse(date+" "+time).getTime());
 		} catch (ParseException e) {

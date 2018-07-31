@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 const httpOptions = { 
   header: new HttpHeaders({
@@ -35,10 +36,9 @@ export class RegistrationComponent implements OnInit
   userTaken = false;
   passNoMatch = false;
   
-  // url: string = "http://18.191.179.128:8085/y_schedule/register";
-  url = "http://localhost:8085/y_schedule/register";
+  url = "y_schedule/register.do";
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private authService: AuthService) {
     // this.first_name="Hello";
    }
 
@@ -60,7 +60,8 @@ export class RegistrationComponent implements OnInit
     }
     else
     {
-      this.http.post<Object>(this.url, this.user)
+
+      this.authService.send(this.url, this.user)
         .subscribe(
           (data) => this.afterRegister(data),
           err => {

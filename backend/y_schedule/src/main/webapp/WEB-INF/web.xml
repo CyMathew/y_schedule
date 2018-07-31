@@ -19,16 +19,6 @@
     <servlet-name>FrontController</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
   <filter>
     <filter-name>corsFilter</filter-name>
     <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
@@ -45,6 +35,27 @@
     <filter-name>corsFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <filter>
+    <display-name>ManagerFilter</display-name>
+    <filter-name>ManagerFilter</filter-name>
+    <filter-class>filters.ManagerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ManagerFilter</filter-name>
+    <url-pattern>/manage/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>ManagerServlet</display-name>
@@ -53,7 +64,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ManagerServlet</servlet-name>
-    <url-pattern>/ManagerServlet</url-pattern>
+    <url-pattern>/manage/ManagerServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -65,4 +76,25 @@
     <servlet-name>RegistrationServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeServlet</display-name>
+    <servlet-name>EmployeeServlet</servlet-name>
+    <servlet-class>servlet.EmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeServlet</servlet-name>
+    <url-pattern>/employee/EmployeeServlet</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>EmployeeFilter</display-name>
+    <filter-name>EmployeeFilter</filter-name>
+    <filter-class>filters.EmployeeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EmployeeFilter</filter-name>
+    <url-pattern>/employee/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
 </web-app>

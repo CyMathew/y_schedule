@@ -28,14 +28,4 @@ public class JSONHelper
         out.println(jsonObject);
     }
     
-    public static ParsedRequest parseAngRequest(BufferedReader reader) throws IOException
-    {
-    	JSONObject jsonObject = parseRequest(reader);
-    	
-    	JSONObject sessionData = jsonObject.getJSONObject("sessionData");
-    	JSONObject parameters = jsonObject.getJSONObject("param");
-    	
-    	return new ParsedRequest(sessionData, parameters);
-    	
-    }
 }

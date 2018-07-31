@@ -17,7 +17,7 @@ export class EditTimeSheetComponent implements OnInit {
   week: number;
   currentDay: number;
   UTCDates: number[];
-  scheduleData: Object = {employees:null};
+  scheduleData: Object = {employees:null, dates:null};
 
   ngOnInit() {
     this.route.queryParams
@@ -28,6 +28,7 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   fetchSchedule(){
+    console.log("fetching week: " + this.week);
     this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
       data => this.receiveSchedule(data)
     );
@@ -39,14 +40,14 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   onDaySelected(day){
-    console.log("parent got: " + day);
+    //console.log("parent got: " + day);
     this.currentDay = day;
     this.showWeek = false;
   }
 
   onWeekSelected(week){
-    console.log("parent got week: " + week);
     
+    this.week = week;
   }
 
   onBackToWeekView(){
