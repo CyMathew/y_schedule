@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
-import filters.ManagerFilter;
 import util.JSONHelper;
-import util.ParsedRequest;
 
 /**
  * Servlet implementation class FrontController
@@ -38,7 +36,8 @@ public class FrontController extends HttpServlet {
 
 		RequestDispatcher rd;
 
-		//Store JSON object of parsed request in session
+		//Can only read from request once
+		//Store JSON object of parsed request in session for future use
 		JSONObject r = JSONHelper.parseRequest(request.getReader());
 		HttpSession session = request.getSession();
 		session.setAttribute("request", r);
