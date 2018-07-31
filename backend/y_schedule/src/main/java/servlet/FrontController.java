@@ -7,6 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.json.JSONObject;
+
+import util.JSONHelper;
 
 import util.JSONHelper;
 import util.ParsedRequest;
@@ -16,7 +22,7 @@ import util.ParsedRequest;
  */
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static Logger logger = Logger.getLogger(FrontController.class);
 	/**
 	 * Default constructor.
 	 */
@@ -33,32 +39,35 @@ public class FrontController extends HttpServlet {
 
 		RequestDispatcher rd;
 
+		//Can only read from request once
+		//Store JSON object of parsed request in session for future use
+		JSONObject r = JSONHelper.parseRequest(request.getReader());
+		HttpSession session = request.getSession();
+		session.setAttribute("request", r);
+		
+		//Get action from URL
 		String url = request.getRequestURI();
-
-		//System.out.println(url);
-
 		String[] tokens = url.split("/");
 		String action = tokens[tokens.length - 1];
-
 		action = action.substring(0, action.length() - 3).toLowerCase();
-		System.out.println("front controller: " + action);
+		logger.trace("front controller: " + action);
 		
-
-		//ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
-	
-		
-//		if(r.getUserId() == null) {
-//			System.out.println("no user id");
-//			response.sendError(404);
-//		}
-	
+		//redirects to proper servlets; may hit security filters 
 		switch (action) {
 		case "login":
 			rd = request.getRequestDispatcher("LoginServlet");
 			rd.forward(request, response);
 			break;
 		case "manager":
-			rd = request.getRequestDispatcher("ManagerServlet");
+			rd = request.getRequestDispatcher("manage/ManagerServlet");
+			rd.forward(request, response);
+			break;
+		case "register":
+			rd = request.getRequestDispatcher("manage/RegistrationServlet");
+			rd.forward(request, response);
+			break;
+		case "employee":
+			rd = request.getRequestDispatcher("employee/EmployeeServlet");
 			rd.forward(request, response);
 			break;
 		default:
@@ -66,7 +75,6 @@ public class FrontController extends HttpServlet {
 			response.sendError(404);
 		}
 
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

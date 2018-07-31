@@ -14,6 +14,7 @@ import services.EmployeeService;
 import services.ManagerService;
 import util.JSONHelper;
 import util.ParsedRequest;
+import util.SessionUtil;
 
 /**
  * Servlet implementation class managerServlet
@@ -36,7 +37,7 @@ public class ManagerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		final Logger logger = Logger.getLogger(LoginServlet.class);
 
-		ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
+		ParsedRequest r = SessionUtil.getParsedRequest(request);//JSONHelper.parseAngRequest(request.getReader());
 
 		logger.info("Manager userId: " + r.getUserId());
 		logger.info("ManagerServlet Action: " + r.getAction());

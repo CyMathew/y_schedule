@@ -7,7 +7,6 @@ import { CoordinatorHomeComponent } from './components/coordinator-home/coordina
 import { RegistrationComponent } from './components/registration/registration.component';
 import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
 
-
 export const approutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'home', component: EmployeeHomeComponent },
@@ -15,5 +14,4 @@ export const approutes: Routes = [
     { path: 'manage/timesheet', component: EditTimeSheetComponent },
     { path: 'manage', component: ManagerHomeComponent},
     { path: 'coordinate', component: CoordinatorHomeComponent},
-
 ];
