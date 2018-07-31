@@ -33,8 +33,9 @@ public class EmployeeService {
 		if (json != null) {
 			switch ((String) json.get("action")) {
 
-//			case "editAvailDetails":
-//				return editAvailDetails(args, userbean);
+			case "editAvailDetails":
+				
+				return editAvailDetails(json.getJSONArray("availDetails"), userbean);
 
 			case "getAvailDetails":
 				return getAvailableById(id);
@@ -55,9 +56,9 @@ public class EmployeeService {
 	 * availability for the employee
 	 */
 	public JSONObject editAvailDetails(JSONArray jsonarray, UserBean id) {
-		JSONObject jsonstore = new JSONObject();
-		JSONObject timestore = new JSONObject();
-		JSONArray timearray = new JSONArray();
+		//JSONObject jsonstore = new JSONObject();
+		//JSONObject timestore = new JSONObject();
+		//JSONArray timearray = new JSONArray();
 		String day = null;
 		String start = null;
 		String end = null;

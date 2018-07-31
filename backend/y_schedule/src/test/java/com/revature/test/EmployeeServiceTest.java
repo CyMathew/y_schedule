@@ -89,16 +89,16 @@ public class EmployeeServiceTest {
 	@Test
 	//@Ignore
 	public void editTimesTest() {
-		EmployeeDao mockDao = Mockito.mock(EmployeeDao.class);
+		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
-		UserBean UB = new UserBean();
+		UserBean UB             = new UserBean();
 		UB.setUser_id(30);
 		Mockito.when(mockDao.updateRequests("9:00", "5:00", "monday", UB)).thenReturn("success");
 		Mockito.when(mockDao.removeAllReguests(30)).thenReturn(true);
 		service.setEd(mockDao);
 		
 		JSONArray array = new JSONArray();
-		JSONObject obj = new JSONObject();
+		JSONObject obj  = new JSONObject();
 		JSONObject time = new JSONObject().put("day", "monday").put("startTime", "9:00").put("endTime", "5:00");
 		array.put(time);
 		obj.put("availDetails", array);
@@ -110,16 +110,16 @@ public class EmployeeServiceTest {
 	@Test
 	//@Ignore
 	public void editTimesTestfailure() {
-		EmployeeDao mockDao = Mockito.mock(EmployeeDao.class);
+		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
-		UserBean UB = new UserBean();
+		UserBean UB             = new UserBean();
 		UB.setUser_id(30);
 		Mockito.when(mockDao.updateRequests("9:00", "5:00", "monday", UB)).thenReturn("success");
 		Mockito.when(mockDao.removeAllReguests(30)).thenReturn(false);
 		service.setEd(mockDao);
 		
 		JSONArray array = new JSONArray();
-		JSONObject obj = new JSONObject();
+		JSONObject obj  = new JSONObject();
 		JSONObject time = new JSONObject().put("day", "monday").put("startTime", "9:00").put("endTime", "5:00");
 		array.put(time);
 		obj.put("availDetails", array);
@@ -131,16 +131,16 @@ public class EmployeeServiceTest {
 	@Test
 	//@Ignore
 	public void editTimesTestfailure2() {
-		EmployeeDao mockDao = Mockito.mock(EmployeeDao.class);
+		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
-		UserBean UB = new UserBean();
+		UserBean UB             = new UserBean();
 		UB.setUser_id(30);
 		Mockito.when(mockDao.updateRequests("9:00", "5:00", "monday", UB)).thenReturn("failure");
 		Mockito.when(mockDao.removeAllReguests(30)).thenReturn(true);
 		service.setEd(mockDao);
 		
 		JSONArray array = new JSONArray();
-		JSONObject obj = new JSONObject();
+		JSONObject obj  = new JSONObject();
 		JSONObject time = new JSONObject().put("day", "monday").put("startTime", "9:00").put("endTime", "5:00");
 		array.put(time);
 		obj.put("availDetails", array);

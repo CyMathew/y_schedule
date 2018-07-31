@@ -34,7 +34,7 @@ public class EmployeeServlet extends HttpServlet {
 		//SEnds the proper response JSON with the JSON request and the Cookie for the ID
 //		System.out.println(r.getUserId());
 //		int i = Integer.parseInt(tempo.getJSONObject("sessionData").getString("userid"));
-		JSONHelper.sendResponse(response, empser.parseRequest(tempo.getJSONObject("param"), 23));
+		JSONHelper.sendResponse(response, empser.parseRequest(tempo.getJSONObject("param"), r.getUserId()));
 	}
 
 
