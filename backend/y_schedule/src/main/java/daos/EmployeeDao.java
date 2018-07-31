@@ -1,5 +1,6 @@
 package daos;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import beans.EmployeeAvailabilityBean;
+import beans.ScheduleTimeBean;
 import beans.UserBean;
 import util.HibernateUtil;
 
@@ -82,8 +84,15 @@ public class EmployeeDao {
 		return list;
 	}
 
-	public void getEmployeeAvailableForRange(String weekday, String start, String end) {
+	public List getEmployeeAvailableForRange(Integer id, String weekday, String start, String end) {
 
+		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).add(Restrictions.like("day", weekday))
+				.add(Restrictions.ge("starttime", start)).add(Restrictions.le("endtime", end)).list();
+		Transaction tx = null;
+		
+		return list;
 		
 	}
 

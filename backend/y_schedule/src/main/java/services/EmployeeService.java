@@ -147,16 +147,15 @@ public class EmployeeService {
 		return jsonObj;
 	}
 	
-	public boolean getEmployeeAvailableForRange(Timestamp startTime, Timestamp endTime) {
+	public boolean getEmployeeAvailableForRange(Integer userId, Timestamp startTime, Timestamp endTime) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		String strStart = sdf.format(startTime);
 		String strEnd = sdf.format(endTime);
 		String weekday = startTime.toLocalDateTime().getDayOfWeek().name().toLowerCase();
 		
-		ed.getEmployeeAvailableForRange(weekday, strStart, strEnd);
-		
-		return false;
+		return ed.getEmployeeAvailableForRange(userId, weekday, strStart, strEnd).size() > 0;
+
 	}
 
 }
