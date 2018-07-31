@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import util.ParsedRequest;
 import util.SessionUtil;
 
@@ -18,19 +20,21 @@ import util.SessionUtil;
  * Servlet Filter implementation class EmployeeFilter
  */
 public class EmployeeFilter implements Filter {
+	
+	private static Logger logger = Logger.getLogger(EmployeeFilter.class);
 
     /**
      * Default constructor. 
      */
     public EmployeeFilter() {
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+
 	}
 
 	/**
@@ -45,10 +49,10 @@ public class EmployeeFilter implements Filter {
 		//TODO check that the user is in the right path
 		
 		if(session == null || r.getUserId() == null) {
-			System.out.println("no user session");
+			logger.warn("attempting access with no user session");
 			response.sendError(401);
-		}else if(r.getUserRole() != "manager"){
-			System.out.println("not a manager");
+		}else if(r.getUserRole().equals("employee")){
+			logger.warn("attempting access to employee; "  + r.getUserName() + " is not an employee");
 			response.sendError(403);
 		}else {
 			chain.doFilter(request, response);

@@ -84,7 +84,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>EmployeeServlet</servlet-name>
-    <url-pattern>/avail</url-pattern>
+    <url-pattern>/employee/EmployeeServlet</url-pattern>
   </servlet-mapping>
   <filter>
     <display-name>EmployeeFilter</display-name>
@@ -93,6 +93,8 @@
   </filter>
   <filter-mapping>
     <filter-name>EmployeeFilter</filter-name>
-    <url-pattern>/EmployeeFilter</url-pattern>
+    <url-pattern>/employee/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
 </web-app>

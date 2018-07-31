@@ -74,5 +74,13 @@ public class ParsedRequest {
 	public void setAction(String action) {
 		this.action = action;
 	}
+
+	@Override
+	public String toString() {
+		return "ParsedRequest [userId=" + userId + ", userRole=" + userRole + ", userName=" + userName + ", storeId="
+				+ storeId + ", action=" + action + ", parameters=" + parameters + "]";
+	}
+	
+	
 	
 }

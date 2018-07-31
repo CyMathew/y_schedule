@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import services.ManagerService;
 import util.ParsedRequest;
 import util.SessionUtil;
 
@@ -20,12 +23,14 @@ import util.SessionUtil;
  */
 public class ManagerFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public ManagerFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	private static Logger logger = Logger.getLogger(ManagerFilter.class);
+
+	/**
+	 * Default constructor.
+	 */
+	public ManagerFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -37,22 +42,25 @@ public class ManagerFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-		
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
-		
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+			throws IOException, ServletException {
+
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
+
 		HttpSession session = request.getSession(false);
 		ParsedRequest r = SessionUtil.getParsedRequest(request);
-		//TODO check that the user is in the right path
-		
-		if(session == null || r.getUserId() == null) {
-			System.out.println("no user session");
+		// TODO check that the user is in the right path
+
+		System.out.println(r);
+
+		if (session == null || r.getUserId() == null) {
+			logger.warn("attempting access with no user session");
 			response.sendError(401);
-		}else if(r.getUserRole() != "manager"){
-			System.out.println("not a manager");
+		} else if (!r.getUserRole().equals("manager")) {
+			logger.warn("attempting access to manager; " + r.getUserName() + " is not a manager");
 			response.sendError(403);
-		}else {
+		} else {
 			chain.doFilter(request, response);
 		}
 	}
