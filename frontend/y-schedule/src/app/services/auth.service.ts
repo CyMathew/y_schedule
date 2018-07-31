@@ -52,5 +52,11 @@ export class AuthService {
     return sub;
   }
 
-
+  logout(){
+    this.cookie.delete("userid");
+    this.cookie.delete("userrole");
+    this.cookie.delete("username");
+    this.cookie.delete("storeid");
+    this.router.navigate([""]);
+  }
 }
