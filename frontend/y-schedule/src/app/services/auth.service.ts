@@ -42,6 +42,7 @@ export class AuthService {
       },
       param: param
     }
+    console.log("body sent:", body);
     return this.http.post(this.url.get() + url, body);
   }
 

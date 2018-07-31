@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.JSONHelper;
+import util.ParsedRequest;
+
 /**
  * Servlet implementation class FrontController
  */
@@ -39,6 +42,15 @@ public class FrontController extends HttpServlet {
 
 		action = action.substring(0, action.length() - 3).toLowerCase();
 		System.out.println("front controller: " + action);
+		
+
+		//ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
+	
+		
+//		if(r.getUserId() == null) {
+//			System.out.println("no user id");
+//			response.sendError(404);
+//		}
 	
 		switch (action) {
 		case "login":
