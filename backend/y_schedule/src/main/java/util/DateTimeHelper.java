@@ -48,7 +48,7 @@ public class DateTimeHelper {
 		case 3:
 			return "wednesday";
 		case 4:
-			return "thrusday";
+			return "thursday";
 		case 5:
 			return "friday";
 		default:
