@@ -1,6 +1,6 @@
 <div class="side-bar" >
   <h3>Schedule an Employee</h3>
-  <form>
+  <form (ngSubmit)="trySchedule()">
     <!-- Filtering -->
     <div class="form-group">
       <label for="exampleFormControlSelect1">Department</label>
@@ -9,9 +9,9 @@
       </select>
     </div>
     <div style="overflow-y: scroll; max-height: 400px">
-      <div id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
-        <label *ngFor="let i of ['1','2','3','4','5']" class="btn btn-block btn-outline-primary btn-sm" style="padding: 0px; margin: 0px">
-          <input type="radio" name="options" id="option{{i}}" autocomplete="off"> Employee{{i}}
+      <div *ngIf="this.availEmployees!=null" id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
+        <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm" (click)="onEmployeeChange(e.userId)" style="padding: 0px; margin: 0px">
+          <input type="radio" name="employee" id="employeeOption{{i}}" autocomplete="off"  [value]="e.userId"> {{e.name}}
         </label>
       </div>
     </div>
@@ -24,13 +24,13 @@
     </div>
     <div class="form-row">
       <div class="col">
-        <input type="time" class="form-control" placeholder="Start" style="min-width: 60px;">
+        <input name="startTime" [(ngModel)]="startTime" type="time" class="form-control" placeholder="Start" style="min-width: 60px;">
       </div>
       <div class="col-1">
         to
       </div>
       <div class="col">
-        <input type="time" class="form-control" placeholder="End" style="min-width: 60px;">
+        <input name="endTime" [(ngModel)]="endTime" type="time" class="form-control" placeholder="End" style="min-width: 60px;">
       </div>
     </div>
     <br>
@@ -41,7 +41,7 @@
     <!-- Buttons -->
     <div class="form-row">
       <div class="col">
-        <button type="button" class="btn btn-primary btn-block">Schedule</button>
+        <button type="submit" class="btn btn-primary btn-block" >Schedule</button>
       </div>
       <div class="col">
         <button type="button" class="btn btn-warning btn-block" (click)="back()">Back</button>

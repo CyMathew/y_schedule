@@ -3,7 +3,7 @@
     </app-edit-ts-week>
 
     <div *ngIf="!showWeek" class="d-flex flex-row">
-        <app-edit-ts-sidebar (backToWeekView)="onBackToWeekView($event)"></app-edit-ts-sidebar>
+        <app-edit-ts-sidebar [scheduleData]="scheduleData" [currentDay]="currentDay" (backToWeekView)="onBackToWeekView($event)"></app-edit-ts-sidebar>
         <app-edit-ts-graph [scheduleData]="scheduleData" [currentDay]="currentDay" style="width: 100%"></app-edit-ts-graph>
     </div>
 </div>

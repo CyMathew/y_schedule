@@ -20,6 +20,7 @@ import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts
 import { EditTsSidebarComponent } from './components/manager/edit-ts-sidebar/edit-ts-sidebar.component';
 import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
 import { HighlightColumnDirective } from './directives/highlight-column.directive';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -50,7 +51,7 @@ import { HighlightColumnDirective } from './directives/highlight-column.directiv
     }),
     RouterModule.forRoot(approutes),
   ],
-  providers: [CookieService],
+  providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

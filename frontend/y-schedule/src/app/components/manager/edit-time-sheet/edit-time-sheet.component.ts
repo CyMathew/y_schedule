@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { DateTimeService } from '../../../services/date-time.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-time-sheet',
@@ -10,11 +11,12 @@ import { DateTimeService } from '../../../services/date-time.service';
 })
 export class EditTimeSheetComponent implements OnInit {
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private dtService: DateTimeService) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private date: DatePipe) { }
 
   showWeek: boolean = true;
   week: number;
   currentDay: number;
+  UTCDates: number[];
   scheduleData: Object = {employees:null};
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   fetchSchedule(){
-    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: this.week}).subscribe(
+    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
       data => this.receiveSchedule(data)
     );
   }
@@ -40,10 +42,6 @@ export class EditTimeSheetComponent implements OnInit {
     console.log("parent got: " + day);
     this.currentDay = day;
     this.showWeek = false;
-
-    this.authService.send("/y_schedule/manager.do", {action: "getAvailEmployees", day: this.dtService.getDayOfWeekName(this.currentDay)}).subscribe(
-      data => this.receiveAvailableEmployees(data)
-    );
   }
 
   onWeekSelected(week){
@@ -55,8 +53,6 @@ export class EditTimeSheetComponent implements OnInit {
     this.showWeek = true;
   }
 
-  receiveAvailableEmployees(data){
-    console.log("availEmployees", data);
-  }
+  
 
 }

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import beans.UserBean;
 import daos.ManagerDao;
 import daos.UserDao;
+import util.DateTimeHelper;
 
 public class ManagerService {
 	private static Logger logger = Logger.getLogger(ManagerService.class);
@@ -63,12 +64,21 @@ public class ManagerService {
 
 	public static JSONObject selectScheduledTimesByWeek(Integer storeId, JSONObject parameters) {
 		
+		Integer week = Integer.parseInt(parameters.getString("week"));
+		
+		return selectScheduledTimesByWeek(storeId, week);
+	}
+	
+	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer week) {
+		
 		JSONObject schedule = new JSONObject();
 		JSONArray employees = new JSONArray();
 		JSONObject employee;
 		JSONObject shift;
 		JSONObject shifts = null;
 		int start, end;
+		
+		schedule.put("dates", DateTimeHelper.getWeekDates(week));
 		
 		for(int i = 0; i < 5; i++) {
 			employee = new JSONObject();
@@ -93,12 +103,8 @@ public class ManagerService {
 		
 		schedule.put("employees", employees);
 		
-		return schedule;
-	}
-	
-	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer weekOffset) {
 		
-		return null;
+		return schedule;
 	}
 	
 	public static JSONObject setScheduleEmployee(JSONObject jsonObject) {

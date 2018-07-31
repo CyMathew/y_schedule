@@ -3,6 +3,12 @@ package util;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class DateTimeHelper {
 
@@ -56,5 +62,25 @@ public class DateTimeHelper {
 		
 		return hour + ":" + minutes;
 	}
+	
+	public static JSONArray getWeekDates(int weekOffset) {
+		JSONArray dates = new JSONArray();
+		LocalDateTime ldt = getWeekStartByOffset(weekOffset).toLocalDateTime();
+		
+		for(int i = 0; i < 7; i++) {
+			dates.put(formatDate(ldt));
+			ldt = ldt.plusDays(1);
+		}
+		
+		return dates;
+	}
 
+	public static String formatDate(LocalDateTime localDateTime) {
+		return localDateTime.getDayOfMonth()+"/"+localDateTime.getMonthValue()+"/"+localDateTime.getYear();
+	}
+
+	public static Timestamp getTimestamp(String date, String startTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
