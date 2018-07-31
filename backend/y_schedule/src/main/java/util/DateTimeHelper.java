@@ -1,11 +1,14 @@
 package util;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -79,8 +82,25 @@ public class DateTimeHelper {
 		return localDateTime.getDayOfMonth()+"/"+localDateTime.getMonthValue()+"/"+localDateTime.getYear();
 	}
 
-	public static Timestamp getTimestamp(String date, String startTime) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Timestamp getTimestamp(String date, String time) {
+//		String[] dateParts = date.split("/");
+//		int day = Integer.parseInt(dateParts[0]);
+//		int month = Integer.parseInt(dateParts[1]);
+//		int year = Integer.parseInt(dateParts[2]);
+//		
+//		String[] timeParts = time.split(":");
+//		int hour = Integer.parseInt(timeParts[0]);
+//		int minute = Integer.parseInt(timeParts[1]);
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Timestamp ts = null;
+		try {
+			ts = new Timestamp(simpleDateFormat.parse(date+" "+time).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return ts;
 	}
 }

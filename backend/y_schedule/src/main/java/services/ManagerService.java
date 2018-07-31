@@ -118,6 +118,14 @@ public class ManagerService {
 	
 	private static JSONObject setScheduleEmployee(Integer userId, 
 			String startTime, String endTime, String date) {
+		
+		Timestamp startTs = DateTimeHelper.getTimestamp(date, startTime);
+		Timestamp endTs = DateTimeHelper.getTimestamp(date, endTime);
+		
+		UserBean b = new UserDao().getUserById(userId);
+		
+		new ManagerDao().createScheduleTimeBean(0, startTs, endTs, b);
+		
 		JSONObject schedule = new JSONObject();
 		
 		
