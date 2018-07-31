@@ -10,16 +10,19 @@ public class ParsedRequest {
 	private String action;
 
 	private JSONObject parameters;
-
-	public ParsedRequest(JSONObject sessionData, JSONObject parameters) {
-		if (sessionData.getString("userid") != null)
-			this.userId = Integer.parseInt(sessionData.getString("userid"));
-		//if (sessionData.getString("storeid") != null)
-		//	this.storeId = Integer.parseInt(sessionData.getString("storeid"));
+	
+	public ParsedRequest(JSONObject request) {
 		
-		this.storeId = 2367;
-		this.userName = sessionData.getString("username");
-		this.userRole = sessionData.getString("userrole");		
+		JSONObject sessionData = request.getJSONObject("sessionData");
+    	JSONObject parameters = request.getJSONObject("param");
+		
+		if (sessionData.getString("userid").length() != 0) {
+			this.userId = Integer.parseInt(sessionData.getString("userid"));
+			this.userName = sessionData.getString("username");
+			this.userRole = sessionData.getString("userrole");	
+			this.storeId = 2367;
+		}
+
 		this.parameters = parameters;
 		this.action = parameters.getString("action");
 	}
@@ -71,6 +74,5 @@ public class ParsedRequest {
 	public void setAction(String action) {
 		this.action = action;
 	}
-	
 	
 }

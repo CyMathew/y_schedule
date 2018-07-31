@@ -7,6 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+
+import util.JSONHelper;
+import util.ParsedRequest;
 
 /**
  * Servlet implementation class FrontController
@@ -39,14 +45,19 @@ public class FrontController extends HttpServlet {
 
 		action = action.substring(0, action.length() - 3).toLowerCase();
 		System.out.println("front controller: " + action);
-	
+		
+		JSONObject r = JSONHelper.parseRequest(request.getReader());
+		System.out.println(r);
+		HttpSession session = request.getSession();
+		session.setAttribute("request", r);
+		
 		switch (action) {
 		case "login":
 			rd = request.getRequestDispatcher("LoginServlet");
 			rd.forward(request, response);
 			break;
 		case "manager":
-			rd = request.getRequestDispatcher("ManagerServlet");
+			rd = request.getRequestDispatcher("manage/ManagerServlet");
 			rd.forward(request, response);
 			break;
 		default:
