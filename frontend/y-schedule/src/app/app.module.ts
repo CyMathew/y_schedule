@@ -32,7 +32,7 @@ import { DatePipe } from '@angular/common';
     RegistrationComponent,
     ManagerHomeComponent,
     CoordinatorHomeComponent,
-    EmployeeWeekViewComponent
+    EmployeeWeekViewComponent,
     ManagerHomePanelComponent,
     UserSidebarComponent,
     EditTimeSheetComponent,

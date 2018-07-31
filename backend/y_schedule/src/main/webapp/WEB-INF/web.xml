@@ -44,7 +44,7 @@
     <filter-name>ManagerFilter</filter-name>
     <url-pattern>/manage/*</url-pattern>
     <dispatcher>FORWARD</dispatcher>
-  	<dispatcher>REQUEST</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   <servlet>
     <description></description>
@@ -76,7 +76,7 @@
     <servlet-name>RegistrationServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>EmployeeServlet</display-name>
     <servlet-name>EmployeeServlet</servlet-name>
@@ -86,4 +86,13 @@
     <servlet-name>EmployeeServlet</servlet-name>
     <url-pattern>/avail</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>EmployeeFilter</display-name>
+    <filter-name>EmployeeFilter</filter-name>
+    <filter-class>filters.EmployeeFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EmployeeFilter</filter-name>
+    <url-pattern>/EmployeeFilter</url-pattern>
+  </filter-mapping>
 </web-app>
