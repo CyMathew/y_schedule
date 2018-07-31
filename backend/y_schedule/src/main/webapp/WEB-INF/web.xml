@@ -76,5 +76,14 @@
     <servlet-name>RegistrationServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
-  
+    <servlet>
+    <description></description>
+    <display-name>EmployeeServlet</display-name>
+    <servlet-name>EmployeeServlet</servlet-name>
+    <servlet-class>servlet.EmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeServlet</servlet-name>
+    <url-pattern>/avail</url-pattern>
+  </servlet-mapping>
 </web-app>

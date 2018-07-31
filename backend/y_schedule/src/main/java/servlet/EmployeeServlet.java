@@ -25,13 +25,14 @@ public class EmployeeServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject tempo = SessionUtil.getOriginalRequest(request);
+
 		EmployeeService empser = new EmployeeService();
 		
 		//Get the request message
 		ParsedRequest r = SessionUtil.getParsedRequest(request);
+
 		//SEnds the proper response JSON with the JSON request and the Cookie for the ID
-		JSONHelper.sendResponse(response, empser.parseRequest(tempo, r.getUserId()));
+		JSONHelper.sendResponse(response, empser.parseRequest(r.getParameters(), r.getUserId()));
 	}
 
 
