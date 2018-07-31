@@ -1,10 +1,12 @@
 package services;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 //import static org.mockito.Matchers.intThat;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -143,6 +145,18 @@ public class EmployeeService {
 		jsonObj.put("availEmployees", availEmployees);
 		
 		return jsonObj;
+	}
+	
+	public boolean getEmployeeAvailableForRange(Timestamp startTime, Timestamp endTime) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		String strStart = sdf.format(startTime);
+		String strEnd = sdf.format(endTime);
+		String weekday = startTime.toLocalDateTime().getDayOfWeek().name().toLowerCase();
+		
+		ed.getEmployeeAvailableForRange(weekday, strStart, strEnd);
+		
+		return false;
 	}
 
 }

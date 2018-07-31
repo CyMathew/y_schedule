@@ -81,4 +81,11 @@ public class EmployeeDao {
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).list();
 		return list;
 	}
+
+	public void getEmployeeAvailableForRange(String weekday, String start, String end) {
+
+		
+	}
+
+
 }
