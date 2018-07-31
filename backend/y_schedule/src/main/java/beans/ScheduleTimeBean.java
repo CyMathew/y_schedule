@@ -56,6 +56,13 @@ public class ScheduleTimeBean {
 		this.endTime = end;
 		this.users = user;
 	}
+	
+	@Override
+	public String toString() {
+		return "ScheduleTimeBean [Schedule_id=" + Schedule_id + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", users=" + users + "]";
+	}
+
 	public ScheduleTimeBean() {
 		super();
 	}

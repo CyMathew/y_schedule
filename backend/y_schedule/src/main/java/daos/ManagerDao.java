@@ -42,18 +42,18 @@ public class ManagerDao {
 	}
 	public List<ScheduleTimeBean> getScheduleByStoreId(Integer id) {
 		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(UserBean.class);
+		List<ScheduleTimeBean> list = (crit.add(Restrictions.like("store_Id", id)).list());
+		Transaction tx = null;
+		return list;
+	}
+	public List<ScheduleTimeBean> getScheduleByEmployee(Integer id) {
+		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
 		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", id)).list();
 		Transaction tx = null;
 		
 		return list;
-	}
-	public List getScheduleByEmployee(Integer id) {
-		Session session = HibernateUtil.getSession();
-		
-		Query query = session.getNamedQuery("showEmployee");
-		query.setParameter("store_Id", id);
-		return query.list();
 	}
 	public ScheduleTimeBean setScheduleByUserId(Timestamp start, Timestamp end, Integer userId) {
 		ScheduleTimeBean bean = null;
