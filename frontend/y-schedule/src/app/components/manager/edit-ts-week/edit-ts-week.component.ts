@@ -33,8 +33,10 @@ export class EditTsWeekComponent implements OnInit {
   }
 
   selectDay(day) {
-    console.log("emit day: " + day);
-    this.daySelected.emit(day);
+    if(this.week == 1 || this.week == 2){
+      console.log("emit day: " + day);
+      this.daySelected.emit(day);
+    }
   }
 
   getWeek(n: number){
