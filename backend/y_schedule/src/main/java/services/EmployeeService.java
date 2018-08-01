@@ -19,6 +19,7 @@ import daos.ManagerDao;
 import daos.UserDao;
 import util.DateTimeHelper;
 
+
 public class EmployeeService {
 
 	private EmployeeDao ed = new EmployeeDao();
@@ -39,22 +40,17 @@ public class EmployeeService {
 			switch ((String) json.get("action")) {
 
 			case "editAvailDetails":
-				System.out.println(json);
-
 				return editAvailDetails(json.getJSONArray("availDetails"), userbean);
-
 			case "getAvailDetails":
 				return getAvailableById(id);
-
+			case "getWeekSchedule":
+				return selectScheduledTimesByWeek(id, json.getInt("weekOffset"));
 			default:
 				return reply.put("result", "failure");
 			}
 		}
 
-		else {
-			return reply.put("result", "failure");
-		}
-
+		return reply.put("result", "failure");
 	}
 
 	/**
@@ -181,15 +177,15 @@ public class EmployeeService {
 
 		schedule.put("dates", DateTimeHelper.getWeekDates(week));
 
-		JSONObject shifts = new JSONObject();
+		JSONArray shifts = new JSONArray();
 		
 		for (ScheduleTimeBean b : times) {
 			JSONObject shift = new JSONObject();
 			int day = DateTimeHelper.TimestampGetDay(b.getStart());
-			shift.put("day", day);
-			shift.put("start", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
-			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getEnd()));
-			shifts.put("" + day, shift);
+			shift.put("day", DateTimeHelper.getDayOfWeekName(day));
+			shift.put("startTime", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
+			shift.put("endTime", DateTimeHelper.TimestampToTimeFloat(b.getEnd()));
+			shifts.put(shift);
 		}
 		
 		employee = new JSONObject();
