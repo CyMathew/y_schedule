@@ -18,6 +18,8 @@
     <input type="time" id="endTime" name="endTime" [(ngModel)]="inputSlot.endTime">
     
     <button class="btn btn-primary">Update</button>
+    <a class="btn btn-danger" (click)="deleteTimeSlot()">Clear Day</a>
+    
   </form>
 
     <button id="approvalBtn" class="btn btn-success" (click)="requestApproval()">Request Approval</button>

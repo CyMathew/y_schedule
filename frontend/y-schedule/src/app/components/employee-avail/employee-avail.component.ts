@@ -60,12 +60,12 @@ export class EmployeeAvailComponent implements OnInit
     console.log(data);
     if(typeof data == "undefined")
     {
-      console.log('Creating new array');
+      console.log('AVAIL: Creating new array');
       this.events = [];
     }
     else
     {
-      console.log('FOund array');
+      console.log('AVAIL: Found array');
       this.events = data["weekDetails"];
     }
     
@@ -175,11 +175,13 @@ export class EmployeeAvailComponent implements OnInit
         action: 'editAvailDetails',
         availDetails: this.events
       };
-
+      console.log(payload);
       this.authService.send("/employee.do", payload)
         .subscribe(
           data => this.sendStatus(data),
-          Error => this.authService.checkSession(Error)
+          Error => { console.log('THIS IS AN ERROR FROM SENDING AVAIL');
+            // this.authService.checkSession(Error)
+        }
         );
     }
     else
@@ -192,5 +194,36 @@ export class EmployeeAvailComponent implements OnInit
   {
     console.log('Status: ', data);
   }
+
+  deleteTimeSlot()
+  {
+    this.resetWarnings();
+
+    if (this.inputSlot.day == "")
+    {
+      this.inputNotValid.dayInvalid = true;
+    }
+    else
+    {
+      let found = false;
+
+      for(let item in this.events)
+      {
+        if(this.events[item]["day"] == this.inputSlot.day)
+        {
+          // console.log('FOUND');
+          this.events.splice(+item, 1);
+          found = true;
+        }
+      }
+      if(!found)
+      {
+        console.log("There is nothing to clear on that day");
+      }
+    }
+  }
+
+
+
 
 }
