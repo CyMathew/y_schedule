@@ -44,12 +44,20 @@ export class AuthService {
       param: param
     }
     let sub = this.http.post(this.url.get() + url, body);
-    sub.subscribe(data => {}, Error => {
-      console.log(Error);
-      // this.router.navigate([""]);
-    })
 
     return sub;
+  }
+
+  logout(){
+    this.cookie.delete("userid");
+    this.cookie.delete("userrole");
+    this.cookie.delete("username");
+    this.cookie.delete("storeid");
+    this.router.navigate([""]);
+  }
+  
+  checkSession(error: Error){
+    this.router.navigate([""]);
   }
 
 

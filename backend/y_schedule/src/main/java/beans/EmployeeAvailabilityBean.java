@@ -29,9 +29,9 @@ import javax.persistence.Table;
 public class EmployeeAvailabilityBean {
 
 	@Column
-	private String starttime;
+	private float starttime;
 	@Column
-	private String endtime;
+	private float endtime;
 	@ManyToOne
 	private UserBean user;
 	@Column
@@ -46,7 +46,7 @@ public class EmployeeAvailabilityBean {
 	private int active = 1;
 
 	
-	public EmployeeAvailabilityBean(String starttime, String endtime, UserBean userid, String day) {
+	public EmployeeAvailabilityBean(float starttime, float endtime, UserBean userid, String day) {
 		this.starttime  = starttime;
 		this.endtime    = endtime;
 		this.user = userid;
@@ -57,19 +57,19 @@ public class EmployeeAvailabilityBean {
 		super();
 	}
 
-	public String getStart() {
+	public float getStart() {
 		return starttime;
 	}
 
-	public void setStart(String starttime) {
+	public void setStart(float starttime) {
 		this.starttime = starttime;
 	}
 
-	public String getEnd() {
+	public float getEnd() {
 		return endtime;
 	}
 
-	public void setEnd(String endtime) {
+	public void setEnd(float endtime) {
 		this.endtime = endtime;
 	}
 
@@ -96,6 +96,12 @@ public class EmployeeAvailabilityBean {
 
 	public void setActive(int active) {
 		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "EmployeeAvailabilityBean [starttime=" + starttime + ", endtime=" + endtime + ", user=" + user + ", day="
+				+ day + ", shift_id=" + shift_id + ", active=" + active + "]";
 	}
 	
 	
