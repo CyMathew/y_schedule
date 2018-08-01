@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import services.RegistrationService;
 import util.JSONHelper;
+import util.SessionUtil;
 
 /**
  * Servlet implementation class RegistrationServlet
@@ -34,7 +35,8 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Got the post request");
-		JSONObject temp = JSONHelper.parseRequest(request.getReader());
+		JSONObject temp = SessionUtil.getParsedRequest(request).getParameters();
+		
 		RegistrationService regiser = new RegistrationService();
 		HttpSession session = request.getSession();
 		JSONObject jsonreply = regiser.CreateNewEmployee(temp.getString("first_name"), temp.getString("last_name"), temp.getString("username"), temp.getString("password"),(Integer)session.getAttribute("storeid"));

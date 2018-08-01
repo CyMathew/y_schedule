@@ -52,7 +52,6 @@ export class EmployeeHomeComponent implements OnInit
 
   setEvents(data)
   {
-    console.log(data);
     this.events = data;
   }
 

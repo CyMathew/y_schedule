@@ -16,4 +16,8 @@ export class EditTsGraphComponent implements OnInit {
   ngOnInit() {
   }
 
+  currentDayNameAndDate(){
+    return this.dateTimeService.getDayOfWeekNameCapitalized(this.currentDay) + " " + this.scheduleData["dates"][""+this.currentDay];
+  }
+  
 }

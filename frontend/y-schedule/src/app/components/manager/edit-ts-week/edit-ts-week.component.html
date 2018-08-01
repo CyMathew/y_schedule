@@ -5,7 +5,8 @@
       <<</a>
   </div>
   <div class="col-5" style="text-align: center;">
-    <h3>Week Of: </h3>
+    <h3>Week Schedule</h3>
+    <h6>{{getWeekHeader()}}</h6>
   </div>
   <div class="col" style="text-align: left;">
     <a class="btn btn-outline-primary btn-sm" routerLink="/manage/timesheet" [queryParams]='{week: getWeek(1)}'>>></a>

@@ -10,21 +10,23 @@ public class ParsedRequest {
 	private String action;
 
 	private JSONObject parameters;
-	
+
 	public ParsedRequest(JSONObject request) {
-		
+
 		JSONObject sessionData = request.getJSONObject("sessionData");
-    	JSONObject parameters = request.getJSONObject("param");
-		
+		JSONObject parameters = request.getJSONObject("param");
+
 		if (sessionData.getString("userid").length() != 0) {
 			this.userId = Integer.parseInt(sessionData.getString("userid"));
 			this.userName = sessionData.getString("username");
-			this.userRole = sessionData.getString("userrole");	
+			this.userRole = sessionData.getString("userrole");
 			this.storeId = 2367;
 		}
 
 		this.parameters = parameters;
-		this.action = parameters.getString("action");
+
+		if (parameters.has("action"))
+			this.action = parameters.getString("action");
 	}
 
 	public Integer getUserId() {
@@ -80,7 +82,5 @@ public class ParsedRequest {
 		return "ParsedRequest [userId=" + userId + ", userRole=" + userRole + ", userName=" + userName + ", storeId="
 				+ storeId + ", action=" + action + ", parameters=" + parameters + "]";
 	}
-	
-	
-	
+
 }

@@ -22,7 +22,8 @@ export class EditTsWeekComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        this.updateWeek(parseInt(params["week"]))
+        this.updateWeek(parseInt(params["week"])), 
+        err => this.authService.checkSession(err)
       });
   }
 
@@ -33,6 +34,14 @@ export class EditTsWeekComponent implements OnInit {
 
   getWeek(n: number){
     return this.week + n;
+  }
+
+  getWeekHeader(){
+    if(this.scheduleData["dates"] == null)
+      return "...";
+    else{
+      return this.scheduleData["dates"]["0"] + " - " + this.scheduleData["dates"]["6"];
+    }
   }
 
   updateWeek(week: number){
