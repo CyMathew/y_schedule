@@ -51,9 +51,9 @@ public class EmployeeServiceTest {
 		JSONArray array = object.getJSONArray("weekDetails");
 		
 		assertEquals(9,      array.getJSONObject(0).get("startTime"));
-		assertEquals("10:00",     array.getJSONObject(0).get("endTime"));
+		assertEquals(10,     array.getJSONObject(0).get("endTime"));
 		assertEquals("monday",    array.getJSONObject(0).get("day"));
-		assertEquals("12:00",     array.getJSONObject(1).get("startTime"));
+		assertEquals(12,     array.getJSONObject(1).get("startTime"));
 		assertEquals(17,      array.getJSONObject(1).get("endTime"));
 		assertEquals("monday",    array.getJSONObject(1).get("day"));
 		
