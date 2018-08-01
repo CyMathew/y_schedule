@@ -17,7 +17,6 @@ import services.ManagerService;
 
 public class MangerServiceTest {
 
-	JSONObject tempo = new JSONObject();
 	UserBean bean = new UserBean();
 	ManagerDao md = new ManagerDao();
 	UserDao ud = new UserDao();
@@ -62,5 +61,7 @@ public class MangerServiceTest {
 		JSONAssert.assertNotEquals(ManagerService.selectScheduledTimesByWeek(2367, 4), ManagerService.selectScheduledTimesByWeek(2123367, 3),
 				JSONCompareMode.LENIENT);
 	}
+	
+
 
 }
