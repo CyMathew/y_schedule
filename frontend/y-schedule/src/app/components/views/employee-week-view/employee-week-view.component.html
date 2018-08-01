@@ -15,9 +15,7 @@
   </ng-container>
 
 
-  <ng-container *ngIf="eventsArray != null">
-    <ng-container *ngFor="let event of eventsArray; index as i">
-      <div class="timeslot" [ngStyle]="setEventStyle(event)">{{getTimeString(event.startTime)}} - {{getTimeString(event.endTime)}}</div>
-    </ng-container>
+  <ng-container *ngFor="let event of eventsArray; index as i">
+    <div class="timeslot" [ngStyle]="setEventStyle(event)">{{getHourString(event.startTime)}} - {{getHourString(event.endTime)}}</div>
   </ng-container>
 </div>

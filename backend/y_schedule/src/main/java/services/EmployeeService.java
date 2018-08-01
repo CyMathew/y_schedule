@@ -36,6 +36,7 @@ public class EmployeeService {
 			switch ((String) json.get("action")) {
 
 			case "editAvailDetails":
+				System.out.println(json);
 
 				return editAvailDetails(json.getJSONArray("availDetails"), userbean);
 
@@ -68,8 +69,8 @@ public class EmployeeService {
 		
 			for (int i = 0; i < jsonarray.length(); i++) {
 				day = jsonarray.getJSONObject(i).getString("day");
-				end = Float.parseFloat(jsonarray.getJSONObject(i).getString("endTime"));
-				start = Float.parseFloat(jsonarray.getJSONObject(i).getString("startTime"));
+				end = Float.parseFloat(jsonarray.getJSONObject(i).get("endTime").toString());
+				start = Float.parseFloat(jsonarray.getJSONObject(i).get("startTime").toString());
 				if ((ed.updateRequests(start, end, day, id)).equals("failure")) {
 					reply.put("result", "failure");
 					return reply;
