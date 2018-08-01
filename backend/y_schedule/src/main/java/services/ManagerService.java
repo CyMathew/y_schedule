@@ -76,7 +76,7 @@ public class ManagerService {
 		return selectScheduledTimesByWeek(storeId, week);
 	}
 
-	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer week) {
+	public static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer week) {
 
 		JSONObject schedule = new JSONObject();
 		JSONArray employees = new JSONArray();
