@@ -22,7 +22,8 @@ export class EditTsWeekComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        this.updateWeek(parseInt(params["week"]))
+        this.updateWeek(parseInt(params["week"])), 
+        err => this.authService.checkSession(err)
       });
   }
 

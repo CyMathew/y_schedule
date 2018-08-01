@@ -57,46 +57,50 @@ public class DateTimeHelper {
 	}
 
 	public static String timeString(int hour, int minute) {
-		
-		String minutes = ""+minute;
-		
+
+		String minutes = "" + minute;
+
 		if (minutes.length() == 1)
 			minutes = "0" + minutes;
-		
+
 		return hour + ":" + minutes;
 	}
-	
+
 	public static JSONArray getWeekDates(int weekOffset) {
 		JSONArray dates = new JSONArray();
 		LocalDateTime ldt = getWeekStartByOffset(weekOffset).toLocalDateTime();
-		
-		for(int i = 0; i < 7; i++) {
+
+		for (int i = 0; i < 7; i++) {
 			dates.put(formatDate(ldt));
 			ldt = ldt.plusDays(1);
 		}
-		
+
 		return dates;
 	}
 
 	public static String formatDate(LocalDateTime localDateTime) {
-		return localDateTime.getMonthValue()+"/"+localDateTime.getDayOfMonth()+"/"+localDateTime.getYear();
+		return localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "/" + localDateTime.getYear();
 	}
 
 	public static Timestamp getTimestamp(String date, String time) {
-		
+
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
 		Timestamp ts = null;
-		
+
 		try {
-			ts = new Timestamp(simpleDateFormat.parse(date+" "+time).getTime());
+			ts = new Timestamp(simpleDateFormat.parse(date + " " + time).getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ts;
 	}
-	
-	
+
+	public static float TimeToFloat(String time) {
+		String timeParts[] = time.split(":");
+		float t = Float.parseFloat(timeParts[0]) + Float.parseFloat(timeParts[1]) / 60f;
+		return t;
+	}
 
 }

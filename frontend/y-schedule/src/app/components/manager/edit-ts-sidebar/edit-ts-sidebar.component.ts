@@ -44,7 +44,8 @@ export class EditTsSidebarComponent implements OnInit {
     console.log("try Schedule:", this.selectedEmp, this.startTime, this.endTime, this.scheduleData["dates"]["" + this.currentDay]);
 
     this.authService.send("/y_schedule/manager.do", params).subscribe(
-      data => this.receiveScheduleResult(data)
+      data => this.receiveScheduleResult(data), 
+      err => this.authService.checkSession(err)
     );
   }
 

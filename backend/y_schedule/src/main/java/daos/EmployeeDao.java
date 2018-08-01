@@ -45,7 +45,7 @@ public class EmployeeDao {
 	/**
 	 * returns a string if the table was successfully updated with the new availability times
 	 * */
-	public String updateRequests(String start,String end, String day, UserBean id) {
+	public String updateRequests(float start, float end, String day, UserBean id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;		
 		EmployeeAvailabilityBean bean = new EmployeeAvailabilityBean(start, end, id, day);
@@ -84,14 +84,13 @@ public class EmployeeDao {
 		return list;
 	}
 
-	public List getEmployeeAvailableForRange(Integer id, String weekday, String start, String end) {
+	public List getEmployeeAvailableForRange(Integer id, String weekday, float start, float end) {
 
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).add(Restrictions.like("day", weekday))
-				.add(Restrictions.ge("starttime", start)).add(Restrictions.le("endtime", end)).list();
-		Transaction tx = null;
-		
+				.add(Restrictions.le("starttime", start)).add(Restrictions.ge("endtime", end)).list();
+
 		return list;
 		
 	}

@@ -30,7 +30,8 @@ export class EditTimeSheetComponent implements OnInit {
   fetchSchedule(){
     console.log("fetching week: " + this.week);
     this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
-      data => this.receiveSchedule(data)
+      data => this.receiveSchedule(data), 
+      err => this.authService.checkSession(err)
     );
   }
 

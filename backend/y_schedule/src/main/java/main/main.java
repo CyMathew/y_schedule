@@ -18,8 +18,8 @@ public class main {
 		java.util.Date start;
 		java.util.Date end;
 		try {
-			start = date.parse("2018.07.23.10.00.00");
-			end = date.parse("2018.07.23.12.00.00");
+			start = date.parse("2018.07.23.18.00.00");
+			end = date.parse("2018.07.23.19.00.00");
 			long startTime = start.getTime();
 			long endTime = end.getTime();
 			// System.out.println(md.getScheduleByEmployee(22,(new
@@ -29,10 +29,10 @@ public class main {
 
 			EmployeeService es = new EmployeeService();
 
-			System.out.println(es.getEmployeeAvailableForRange(21, new Timestamp(startTime), new Timestamp(endTime)));
+			System.out.println(es.getEmployeeAvailableForRange(45, new Timestamp(startTime), new Timestamp(endTime)));
 			
 			//System.out.println(es.getEmployeeAvailableForRange(21, new Timestamp(startTime), new Timestamp(endTime)));
-			
+			System.exit(0);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
