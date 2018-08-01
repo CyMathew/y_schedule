@@ -193,7 +193,4 @@ export class EmployeeAvailComponent implements OnInit
     console.log('Status: ', data);
   }
 
-
-
-
 }
