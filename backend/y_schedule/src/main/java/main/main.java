@@ -25,8 +25,11 @@ public class main {
 		System.out.println(test.getJSONArray("ids").get(1));*/
 		
 		CoordinatorService service = new CoordinatorService();
-		service.approveTimes(1);
-
+//		System.out.println(service.idsOfPeopleRequesting());
+//		System.out.println(service.timesPendingForApprovalById(61));
+		JSONObject command = new JSONObject();
+		command.put("action", "getAllRequests");
+		System.out.println(service.gateKeeper(command));
 		System.exit(0);
 	}
 

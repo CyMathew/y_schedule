@@ -94,6 +94,13 @@ public class EmployeeDao {
 		return list;
 		
 	}
+	
+	
+	/*=============================================================================================================
+	 * 
+	 * 							COORDINATOR METHODS FOR EMPLOYEE AVAILABILITY TABLE BELOW
+	 * 
+	 * =============================================================================================================*/
 
 	/**
 	 * Remove the old available shifts for an employee so the coordinator can approve the new one
@@ -121,21 +128,43 @@ public class EmployeeDao {
 		return true;
 	}
 	
-	public boolean approveNewAvail(Integer id) {
+	/**
+	 * Remove pending available times when the coordinator denies the new availability hours
+	 **/
+	public boolean denyRequests(Integer id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		Query query = null;
 		String hql = "FROM EmployeeAvailabilityBean WHERE active = 0 and user.user_id = :fart";
+		try {
+			tx = session.beginTransaction();
+			query = session.createQuery(hql);
+			query.setParameter("fart", id);
+			List<EmployeeAvailabilityBean> list = query.list();
+			for(EmployeeAvailabilityBean n : list) {
+				session.delete(n);
+			}
+			tx.commit();
+		}catch(HibernateException e) {
+			e.printStackTrace();
+			return false;
+			}finally {
+				session.close();
+			}
+		return true;
+	}
+	
+	public boolean approveNewAvail(Integer id) {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		Query query = null;
+		String hql = "UPDATE EmployeeAvailabilityBean SET active = 1 WHERE active = 0 and user.user_id = :fart";
 		if(removeAllReguestsCoor(id)) {
 			try {
 				tx = session.beginTransaction();
 				query = session.createQuery(hql);
 				query.setParameter("fart", id);
-				List<EmployeeAvailabilityBean> list = query.list();
-				for(EmployeeAvailabilityBean n : list) {
-					n.setActive(1);
-					session.save(n);
-				}
+				query.executeUpdate();
 				tx.commit();
 			}catch(HibernateException e) {
 				e.printStackTrace();
@@ -147,6 +176,14 @@ public class EmployeeDao {
 		else return false;
 		
 		return true;
+	}
+	
+	public List getPendingTimesCoor(Integer id) {
+		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("active", 0))
+				                                  .add(Restrictions.like("user.user_id", id)).list();
+		return list;
 	}
 
 }
