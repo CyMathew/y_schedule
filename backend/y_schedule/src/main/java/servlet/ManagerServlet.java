@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
+import services.EmployeeService;
 import services.ManagerService;
 import util.JSONHelper;
 import util.ParsedRequest;
+import util.SessionUtil;
 
 /**
  * Servlet implementation class managerServlet
@@ -35,7 +37,7 @@ public class ManagerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		final Logger logger = Logger.getLogger(LoginServlet.class);
 
-		ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
+		ParsedRequest r = SessionUtil.getParsedRequest(request);//JSONHelper.parseAngRequest(request.getReader());
 
 		logger.info("Manager userId: " + r.getUserId());
 		logger.info("ManagerServlet Action: " + r.getAction());
@@ -49,6 +51,13 @@ public class ManagerServlet extends HttpServlet {
 		case "viewSchedule":
 			jsonOut = ManagerService.selectScheduledTimesByWeek(r.getStoreId(), r.getParameters());
 			break;
+		case "getAvailEmployees":
+			jsonOut = EmployeeService.getAvailableEmployeesOnDay(r.getParameters());
+			break;
+		case "scheduleEmployee":
+			jsonOut = ManagerService.setScheduleEmployee(r.getParameters());
+		case "EmployeeAvailabilityByDay":
+			jsonOut = ManagerService.getEmployeeAvailabilityByDay(r.getParameters());
 		}
 		
 		JSONHelper.sendResponse(response, jsonOut);

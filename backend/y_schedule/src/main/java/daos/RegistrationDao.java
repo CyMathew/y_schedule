@@ -9,7 +9,7 @@ import util.HibernateUtil;
 
 public class RegistrationDao {
 	
-	public String createNewEmployee(String username, String lastname, String password, String firstname, Integer storeid) {
+	public UserBean createNewEmployee(String username, String lastname, String password, String firstname, Integer storeid) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		UserBean newemployee = new UserBean(firstname, lastname, password, username);
@@ -24,10 +24,10 @@ public class RegistrationDao {
 				tx.rollback();
 			}
 			e.printStackTrace();
-			return "failure";
+			return null;
 		}finally{
 			session.close();
 		}
-		return "success";
+		return newemployee;
 	}
 }

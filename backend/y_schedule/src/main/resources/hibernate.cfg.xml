@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.jboss.org/dtd/hibernate/hibernate-configuration-3.0.dtd">
 <!-- hibernate.cfg.xml -->
 <!-- The root tag -->
 <hibernate-configuration>
@@ -36,7 +36,7 @@
 		However, you can quickly reach the databse cap in AWS if you let each user have a 
 		large amount of connections. -->
 		<property name="hibernate.connection.pool_size">
-			3
+			6
 		</property>
 		
 		<!-- Shows SQL queries that hibernate is using behind the scenes in the console -->
@@ -65,7 +65,7 @@
 		<mapping class="beans.LoginBean"/>-->
 				<mapping class="beans.UserBean"/>
 				<mapping class="beans.EmployeeAvailabilityBean"/>
-		
+				<mapping class="beans.ScheduleTimeBean"/>
 
 	</session-factory>
 </hibernate-configuration>

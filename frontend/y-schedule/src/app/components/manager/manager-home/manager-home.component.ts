@@ -16,7 +16,10 @@ export class ManagerHomeComponent implements OnInit {
 
   ngOnInit() {
     let param = { action: "viewHome" };
-    this.authService.send("/y_schedule/manager.do", param).subscribe(data => this.fillManagerData(data));
+    this.authService.send("/manager.do", param).subscribe(
+      data => this.fillManagerData(data), 
+      err => this.authService.checkSession(err)
+    );
 
 
   }

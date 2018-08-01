@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import services.LoginService;
 import util.JSONHelper;
+import util.SessionUtil;
 
 /**
  * Servlet implementation class testservlet
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		final Logger logger = Logger.getLogger(LoginServlet.class);
 		
-		JSONObject jsonIn = JSONHelper.parseRequest(request.getReader());
+		JSONObject jsonIn = SessionUtil.getOriginalRequest(request);
 		
 		logger.info(jsonIn);
 		logger.info("Test ");

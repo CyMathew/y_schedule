@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import services.EmployeeService;
 import util.JSONHelper;
 import util.ParsedRequest;
+import util.SessionUtil;
 
 
 public class EmployeeServlet extends HttpServlet {
@@ -24,13 +25,17 @@ public class EmployeeServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JSONObject tempo = JSONHelper.parseRequest(request.getReader());
+
+    	System.err.println("I've hit the servlet");
 		EmployeeService empser = new EmployeeService();
-		
+
 		//Get the request message
-		ParsedRequest r = JSONHelper.parseAngRequest(request.getReader());
+		ParsedRequest r = SessionUtil.getParsedRequest(request);
+
+		System.err.println(r);
+
 		//SEnds the proper response JSON with the JSON request and the Cookie for the ID
-		JSONHelper.sendResponse(response, empser.parseRequest(tempo, r.getUserId()));
+		JSONHelper.sendResponse(response, empser.parseRequest(r.getParameters(), r.getUserId()));
 	}
 
 

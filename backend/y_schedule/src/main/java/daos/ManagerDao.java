@@ -4,12 +4,16 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import beans.ScheduleTimeBean;
 import util.HibernateUtil;
-
+import beans.UserBean;
 public class ManagerDao {
 	final static Logger logger = Logger.getLogger(UserDao.class);
 	public ScheduleTimeBean getScheduleByUserID(Integer userId) {
@@ -36,22 +40,16 @@ public class ManagerDao {
 		bean = (ScheduleTimeBean)query.uniqueResult();
 		return bean;
 	}
-	public List getScheduleByStoreId(Integer id, Timestamp startDate, Timestamp endDate ) {
+	public List<ScheduleTimeBean> getScheduleByStoreId(Integer id, Timestamp startTime, Timestamp endTime) {
 		Session session = HibernateUtil.getSession();
-		
-		Query query = session.getNamedQuery("showUserIdAndTime");
-		query.setParameter("store_Id", id);
-		query.setParameter("start", startDate);
-		query.setParameter("end", endDate);
-		return query.list();
+		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
+		List<ScheduleTimeBean> list = crit
+				.add(Restrictions.between("startTime", startTime, endTime)).list();
+		//.add(Restrictions.like("users.store_Id", id))
+		Transaction tx = null;
+		return list;
 	}
-	public List getScheduleByEmployee(Integer id) {
-		Session session = HibernateUtil.getSession();
-		
-		Query query = session.getNamedQuery("showEmployee");
-		query.setParameter("store_Id", id);
-		return query.list();
-	}
+	
 	public ScheduleTimeBean setScheduleByUserId(Timestamp start, Timestamp end, Integer userId) {
 		ScheduleTimeBean bean = null;
 		Session session = HibernateUtil.getSession();
@@ -68,4 +66,26 @@ public class ManagerDao {
 		query.executeUpdate();
 		return bean;
 	} 
+	public String createScheduleTimeBean(Integer schId, Timestamp start, Timestamp end, UserBean id) {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		ScheduleTimeBean bean = new ScheduleTimeBean(schId,start,end,id);
+		
+		try{
+			tx = session.beginTransaction();
+			session.save(bean);
+			tx.commit();
+			
+		}catch(HibernateException e){
+			if(tx!=null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+			return "failure";
+		}finally{
+			session.close();
+		}
+		return "success";
+	}
+	
 }

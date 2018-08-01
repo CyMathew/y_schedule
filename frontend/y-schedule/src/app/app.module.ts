@@ -13,16 +13,16 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { ManagerHomeComponent } from './components/manager/manager-home/manager-home.component';
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { CookieService } from 'ngx-cookie-service';
+import { EmployeeWeekViewComponent } from './components/views/employee-week-view/employee-week-view.component';
 import { ManagerHomePanelComponent } from './components/manager/manager-home-panel/manager-home-panel.component';
-import { Globals } from './globals';
 import { UserSidebarComponent } from './components/user-sidebar/user-sidebar.component';
 import { EditTsWeekComponent } from './components/manager/edit-ts-week/edit-ts-week.component';
 import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts-graph.component';
 import { EditTsSidebarComponent } from './components/manager/edit-ts-sidebar/edit-ts-sidebar.component';
 import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
 import { HighlightColumnDirective } from './directives/highlight-column.directive';
-
-
+import { DatePipe } from '@angular/common';
+import { EmployeeAvailComponent } from './components/employee-avail/employee-avail.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,7 @@ import { HighlightColumnDirective } from './directives/highlight-column.directiv
     RegistrationComponent,
     ManagerHomeComponent,
     CoordinatorHomeComponent,
+    EmployeeWeekViewComponent,
     ManagerHomePanelComponent,
     UserSidebarComponent,
     EditTimeSheetComponent,
@@ -40,6 +41,7 @@ import { HighlightColumnDirective } from './directives/highlight-column.directiv
     EditTsGraphComponent,
     EditTsSidebarComponent,
     HighlightColumnDirective,
+    EmployeeAvailComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import { HighlightColumnDirective } from './directives/highlight-column.directiv
     }),
     RouterModule.forRoot(approutes),
   ],
-  providers: [CookieService, Globals, URLSearchParams],
+  providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
