@@ -21,15 +21,22 @@ export class EditTsWeekComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams
-      .subscribe(params => {
-        this.updateWeek(parseInt(params["week"])), 
-        err => this.authService.checkSession(err)
-      });
+    .subscribe(params => {
+      this.updateWeek(parseInt(params["week"])), 
+      err => this.authService.checkSession(err)
+    });
+  }
+
+  ngAfterViewInit(){
+    console.log("view init");
+    this.updateWeek(this.week);
   }
 
   selectDay(day) {
-    console.log("emit day: " + day);
-    this.daySelected.emit(day);
+    if(this.week == 1 || this.week == 2){
+      console.log("emit day: " + day);
+      this.daySelected.emit(day);
+    }
   }
 
   getWeek(n: number){

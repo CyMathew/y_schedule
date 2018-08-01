@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -101,6 +102,21 @@ public class DateTimeHelper {
 		String timeParts[] = time.split(":");
 		float t = Float.parseFloat(timeParts[0]) + Float.parseFloat(timeParts[1]) / 60f;
 		return t;
+	}
+
+	public static Timestamp getWeekEnd(Timestamp date) {
+		return Timestamp.valueOf(date.toLocalDateTime().plusDays(6));
+	}
+
+	public static Integer TimestampGetDay(Timestamp ts) {
+		return ts.toLocalDateTime().getDayOfWeek().getValue() % 7;
+	}
+
+	public static float TimestampToTimeFloat(Timestamp ts) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		String timeStr = sdf.format(ts);
+
+		return TimeToFloat(timeStr);
 	}
 
 }

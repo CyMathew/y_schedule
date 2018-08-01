@@ -17,11 +17,13 @@ export class EmployeeAvailComponent implements OnInit
   
   events = [];
 
-  slot = {
+  inputSlot = {
     day: "",
     startTime: "",
     endTime: ""
   };
+
+  payload = {};
 
   days = [
     {value: 'sunday', viewValue: 'Sunday'},
@@ -46,7 +48,7 @@ export class EmployeeAvailComponent implements OnInit
 
   ngOnInit() 
   {
-    this.authService.send("/y_schedule/employee.do", {action: "getAvailDetails"})
+    this.authService.send("/employee.do", {action: "getAvailDetails"})
     .subscribe(
       data => { this.setEvents(data)},
       Error => { console.log('Error'); this.setEvents(undefined)}
@@ -58,13 +60,13 @@ export class EmployeeAvailComponent implements OnInit
     console.log(data);
     if(typeof data == "undefined")
     {
-      console.log('Creating new array');
+      console.log('AVAIL: Creating new array');
       this.events = [];
     }
     else
     {
-      console.log('FOund array');
-      this.events = data;
+      console.log('AVAIL: Found array');
+      this.events = data["weekDetails"];
     }
     
   }
@@ -73,11 +75,11 @@ export class EmployeeAvailComponent implements OnInit
   {
     this.resetWarnings();
 
-    let startTime = this.dateTimeService.getTimeAsInt(this.slot.startTime);
-    let endTime = this.dateTimeService.getTimeAsInt(this.slot.endTime);
+    let startTime = this.dateTimeService.getTimeAsInt(this.inputSlot.startTime);
+    let endTime = this.dateTimeService.getTimeAsInt(this.inputSlot.endTime);
 
 
-    if (this.slot.day == "")
+    if (this.inputSlot.day == "")
     {
       this.inputNotValid.dayInvalid = true;
     }
@@ -118,12 +120,18 @@ export class EmployeeAvailComponent implements OnInit
   {
     let found = false;
 
+    this.payload = {
+      day: this.inputSlot.day,
+      startTime: this.dateTimeService.getTimeAsInt(this.inputSlot.startTime),
+      endTime: this.dateTimeService.getTimeAsInt(this.inputSlot.endTime)
+    }
+
     for(let item in this.events)
     {
       if(this.isOverlapping(item))
       {
         // console.log('FOUND');
-        this.events[item] = Object.assign({}, this.slot);
+        this.events[item] = Object.assign({}, this.payload);
         found = true;
       }
     }
@@ -131,7 +139,7 @@ export class EmployeeAvailComponent implements OnInit
     if(!found)
     {
       // console.log('Day not found in events');
-      let tempSlot = Object.assign({}, this.slot);
+      let tempSlot = Object.assign({}, this.payload);
       this.events = [].concat(this.events, tempSlot);
     }
     // console.log(this.events); 
@@ -141,15 +149,13 @@ export class EmployeeAvailComponent implements OnInit
   isOverlapping(item): boolean
   {
     let tempDay = this.events[item]["day"];
-    let tempStartTime = this.events[item]["startTime"];
-    let tempEndTime = this.events[item]["endTime"];
-    let sTimePrevious = this.dateTimeService.getTimeAsInt(tempStartTime);
-    let eTimePrevious = this.dateTimeService.getTimeAsInt(tempEndTime);
+    let sTimePrevious = this.events[item]["startTime"];
+    let eTimePrevious = this.events[item]["endTime"];
 
-    let sTimeNow = this.dateTimeService.getTimeAsInt(this.slot.startTime);
-    let eTimeNow = this.dateTimeService.getTimeAsInt(this.slot.endTime);
+    let sTimeNow = this.payload["startTime"];
+    let eTimeNow = this.payload["endTime"];
 
-    if(tempDay == this.slot.day) 
+    if(tempDay == this.payload["day"]) 
     {
       if(((sTimeNow >= sTimePrevious) && (sTimeNow <= eTimePrevious)) ||
        ((eTimeNow >= sTimePrevious) && (eTimeNow <= eTimePrevious))
@@ -169,16 +175,51 @@ export class EmployeeAvailComponent implements OnInit
         action: 'editAvailDetails',
         availDetails: this.events
       };
-
-      this.authService.send("y_schedule/employee.do", payload)
+      console.log(payload);
+      this.authService.send("/employee.do", payload)
         .subscribe(
           data => this.sendStatus(data),
-          Error => this.authService.checkSession(Error)
+          Error => { console.log('THIS IS AN ERROR FROM SENDING AVAIL');
+            // this.authService.checkSession(Error)
+        }
         );
     }
     else
     {
       console.log('Events object is empty. Approval not sent');
+    }
+  }
+
+  sendStatus(data)
+  {
+    console.log('Status: ', data);
+  }
+
+  deleteTimeSlot()
+  {
+    this.resetWarnings();
+
+    if (this.inputSlot.day == "")
+    {
+      this.inputNotValid.dayInvalid = true;
+    }
+    else
+    {
+      let found = false;
+
+      for(let item in this.events)
+      {
+        if(this.events[item]["day"] == this.inputSlot.day)
+        {
+          // console.log('FOUND');
+          this.events.splice(+item, 1);
+          found = true;
+        }
+      }
+      if(!found)
+      {
+        console.log("There is nothing to clear on that day");
+      }
     }
   }
 
