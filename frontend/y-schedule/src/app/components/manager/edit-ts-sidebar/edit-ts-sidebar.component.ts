@@ -16,6 +16,7 @@ export class EditTsSidebarComponent implements OnInit {
   selectedEmp: number;
   startTime: string;
   endTime: string;
+  availableTimes: object = null;
 
   constructor(private authService: AuthService, private dtService: DateTimeService) { }
 
@@ -36,6 +37,11 @@ export class EditTsSidebarComponent implements OnInit {
 
   onEmployeeChange(empId: number) {
     this.selectedEmp = empId;
+    this.availableTimes = null;
+    this.authService.send("/y_schedule/manager.do", {action: "EmployeeAvailabilityByDay", userId: ""+empId, day: ""+this.currentDay}).subscribe(
+      data => this.receiveAvailResult(data), 
+      err => this.authService.checkSession(err)
+    );
   }
 
   trySchedule() {
@@ -51,5 +57,10 @@ export class EditTsSidebarComponent implements OnInit {
 
   receiveScheduleResult(data) {
     console.log("schedule result", data);
+  }
+
+  receiveAvailResult(data){
+    this.availableTimes = data;
+    console.log("available times", data);
   }
 }

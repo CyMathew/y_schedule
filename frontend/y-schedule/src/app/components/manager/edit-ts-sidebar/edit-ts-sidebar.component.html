@@ -34,8 +34,10 @@
       </div>
     </div>
     <br>
-    <div>
+    <div *ngIf="availableTimes != null">
       <p>Times Available:</p>
+
+      <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
     </div>
 
     <!-- Buttons -->

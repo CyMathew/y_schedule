@@ -104,7 +104,7 @@ public class ManagerService {
 			int day = DateTimeHelper.TimestampGetDay(b.getStart());
 			shift.put("day", day);
 			shift.put("start", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
-			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
+			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getEnd()));
 			shifts.put("" + day, shift);
 		}
 		
