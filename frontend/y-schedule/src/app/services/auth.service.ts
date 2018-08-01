@@ -15,14 +15,6 @@ export class AuthService {
   constructor(private http: HttpClient, private url: GetUrlService, private cookie: CookieService, private router: Router) { }
 
   login(username: string, password: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({ 
-        'Access-Control-Allow-Origin':'*',
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-  console.log("headers", httpOptions);
 
     let param = {
       action: "login",
@@ -66,8 +58,15 @@ export class AuthService {
     this.router.navigate([""]);
   }
   
-  checkSession(error: Error){
-    this.router.navigate([""]);
+  checkSession(error: ErrorEvent){
+    if(error.error == 401){
+      this.router.navigate([""]);
+    }
+    if(error.error == 403){
+      //nav home
+
+      this.router.navigate([""]);
+    }
   }
 
 

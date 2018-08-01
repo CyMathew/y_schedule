@@ -23,6 +23,9 @@ import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edi
 import { HighlightColumnDirective } from './directives/highlight-column.directive';
 import { DatePipe } from '@angular/common';
 import { EmployeeAvailComponent } from './components/employee-avail/employee-avail.component';
+import { MessageListComponent } from './components/messages/message-list/message-list.component';
+import { ConversationComponent } from './components/messages/conversation/conversation.component';
+import { MessagesMainComponent } from './components/messages/messages-main/messages-main.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { EmployeeAvailComponent } from './components/employee-avail/employee-ava
     EditTsSidebarComponent,
     HighlightColumnDirective,
     EmployeeAvailComponent,
+    MessageListComponent,
+    ConversationComponent,
+    MessagesMainComponent,
   ],
   imports: [
     BrowserModule,

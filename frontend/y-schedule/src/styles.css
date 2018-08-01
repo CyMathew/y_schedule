@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+router-outlet {
+    background-color: #555;
+}
+
+app-messages-main {
+    background-color: #555;
+}
+
+body {
+    background-color: #181818 !important;
+    color: #ffffff !important;
+}
+
+.message-section {
+	background: #273038;
+	border-radius: 3px;
+	box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.2);
+	color: #FFFFFF;
+	padding: 10px;
+	overflow: hidden;
+}
