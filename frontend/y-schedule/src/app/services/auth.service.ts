@@ -46,7 +46,7 @@ export class AuthService {
     let sub = this.http.post(this.url.get() + url, body);
     sub.subscribe(data => {}, Error => {
       console.log(Error);
-      this.router.navigate([""]);
+      // this.router.navigate([""]);
     })
 
     return sub;
