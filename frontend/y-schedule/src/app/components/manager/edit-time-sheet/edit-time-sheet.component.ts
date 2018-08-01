@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { DateTimeService } from '../../../services/date-time.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-time-sheet',
@@ -9,12 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditTimeSheetComponent implements OnInit {
 
-  constructor(private authService: AuthService, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private date: DatePipe) { }
 
   showWeek: boolean = true;
   week: number;
   currentDay: number;
-  scheduleData: Object = {employees:null};
+  UTCDates: number[];
+  scheduleData: Object = {employees:null, dates:null};
 
   ngOnInit() {
     this.route.queryParams
@@ -25,8 +28,10 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   fetchSchedule(){
-    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: this.week}).subscribe(
-      data => this.receiveSchedule(data)
+    console.log("fetching week: " + this.week);
+    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
+      data => this.receiveSchedule(data), 
+      err => this.authService.checkSession(err)
     );
   }
 
@@ -36,13 +41,20 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   onDaySelected(day){
-    console.log("parent got: " + day);
+    //console.log("parent got: " + day);
     this.currentDay = day;
     this.showWeek = false;
+  }
+
+  onWeekSelected(week){
+    
+    this.week = week;
   }
 
   onBackToWeekView(){
     this.showWeek = true;
   }
+
+  
 
 }

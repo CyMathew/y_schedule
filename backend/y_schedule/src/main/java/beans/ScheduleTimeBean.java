@@ -15,22 +15,22 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@NamedNativeQueries({
-	@NamedNativeQuery(
-				name="showUserIdAndTime",
-				query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
-						+ "FROM user_table INNER JOIN ScheduleTime "
-						+ "ON user_table.user_id = ScheduleTime.user_id"
-						+ "WHERE store_Id = :id AND start = :startDate AND end =endDate"
-			),
-	@NamedNativeQuery(
-			name="showEmployee",
-			query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
-					+ "FROM user_table INNER JOIN ScheduleTime "
-					+ "ON user_table.user_id = ScheduleTime.user_id"
-					+ "WHERE user_id = :id "
-			)
-})
+//@NamedNativeQueries({
+//	@NamedNativeQuery(
+//				name="showUserIdAndTime",
+//				query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
+//						+ "FROM user_table INNER JOIN ScheduleTime "
+//						+ "ON user_table.user_id = ScheduleTime.user_id"
+//						+ "WHERE store_Id = :id AND start = :startDate AND end =endDate"
+//			),
+//	@NamedNativeQuery(
+//			name="showEmployee",
+//			query="SELECT user_table.user_id, user_table.store_Id, ScheduleTime.start, ScheduleTime.end"
+//					+ "FROM user_table INNER JOIN ScheduleTime "
+//					+ "ON user_table.user_id = ScheduleTime.user_id"
+//					+ "WHERE user_id = :id "
+//			)
+//})
 
 
 @Entity
@@ -43,29 +43,28 @@ public class ScheduleTimeBean {
 	@GeneratedValue(generator="ScheduleTimeBeanSEQ", strategy=GenerationType.SEQUENCE)
 	private Integer Schedule_id;
 	@Column
-	private String Day;
+	private Timestamp startTime;
 	@Column
-	private Timestamp start;
-	@Column
-	private Timestamp end;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private UserBean user;
+	private Timestamp endTime;
+	@ManyToOne
+	private UserBean users;
+	
 	public ScheduleTimeBean(Integer schedule_id, Timestamp start, Timestamp end, UserBean user) {
 		super();
 		this.Schedule_id = schedule_id;
-		this.start = start;
-		this.end = end;
-		this.user = user;
+		this.startTime = start;
+		this.endTime = end;
+		this.users = user;
 	}
+	
+	@Override
+	public String toString() {
+		return "ScheduleTimeBean [Schedule_id=" + Schedule_id + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", users=" + users + "]";
+	}
+
 	public ScheduleTimeBean() {
 		super();
-	}
-	public String getDay() {
-		return Day;
-	}
-	public void setDay(String day) {
-		Day = day;
 	}
 	public Integer getSchedule_id() {
 		return Schedule_id;
@@ -74,22 +73,22 @@ public class ScheduleTimeBean {
 		this.Schedule_id = schedule_id;
 	}
 	public Timestamp getStart() {
-		return start;
+		return startTime;
 	}
 	public void setStart(Timestamp start) {
-		this.start = start;
+		this.startTime = start;
 	}
 	public Timestamp getEnd() {
-		return end;
+		return endTime;
 	}
 	public void setEnd(Timestamp end) {
-		this.end = end;
+		this.endTime = end;
 	}
 	public UserBean getUser() {
-		return user;
+		return users;
 	}
 	public void setUser(UserBean user) {
-		this.user = user;
+		this.users = user;
 	}
 	
 	

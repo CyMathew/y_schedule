@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,29 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './employee-home.component.html',
   styleUrls: ['./employee-home.component.css']
 })
-export class EmployeeHomeComponent implements OnInit {
+export class EmployeeHomeComponent implements OnInit 
+{
+    storeHours = {
+      startHour: 6,
+      endHour: 21
+    }
 
-  constructor() { }
+    events: any;
 
-  ngOnInit() {
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() 
+  {
+    this.authService.send("/y_schedule/employee.do", {action: "getAvailDetails"}).subscribe(
+      data => { this.setEvents(data)},
+      Error => console.log('Error')
+    );
+  }
+
+  setEvents(data)
+  {
+    this.events = data;
   }
 
 }

@@ -1,5 +1,6 @@
 package daos;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import beans.EmployeeAvailabilityBean;
+import beans.ScheduleTimeBean;
 import beans.UserBean;
 import util.HibernateUtil;
 
@@ -43,7 +45,7 @@ public class EmployeeDao {
 	/**
 	 * returns a string if the table was successfully updated with the new availability times
 	 * */
-	public String updateRequests(String start,String end, String day, UserBean id) {
+	public String updateRequests(float start, float end, String day, UserBean id) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;		
 		EmployeeAvailabilityBean bean = new EmployeeAvailabilityBean(start, end, id, day);
@@ -68,7 +70,7 @@ public class EmployeeDao {
 	/**
 	 * Returns a list of the times to the services that needs to be parsed into the proper JSON
 	 */
-	public List getStartTimesByDay(String day){
+	public List<EmployeeAvailabilityBean> getStartTimesByDay(String day){
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("day", day)).list();
@@ -81,4 +83,17 @@ public class EmployeeDao {
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).list();
 		return list;
 	}
+
+	public List getEmployeeAvailableForRange(Integer id, String weekday, float start, float end) {
+
+		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).add(Restrictions.like("day", weekday))
+				.add(Restrictions.le("starttime", start)).add(Restrictions.ge("endtime", end)).list();
+
+		return list;
+		
+	}
+
+
 }

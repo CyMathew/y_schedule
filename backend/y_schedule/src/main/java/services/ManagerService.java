@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import beans.UserBean;
 import daos.ManagerDao;
 import daos.UserDao;
+import util.DateTimeHelper;
 
 public class ManagerService {
 	private static Logger logger = Logger.getLogger(ManagerService.class);
@@ -38,30 +39,37 @@ public class ManagerService {
 	 * @param storeId
 	 * @return
 	 */
-	private static JSONObject selectScheduledTimesByWeek(Timestamp startDate, Timestamp endDate, Integer storeId) {
-		List bean = new ManagerDao().getScheduleByStoreId(storeId,startDate, endDate);
-		JSONObject tempo = new JSONObject();
-		tempo.put("userid", bean.get(0));
-		tempo.put("storeId", bean.get(1));
-		tempo.put("start", bean.get(2));
-		tempo.put("end", bean.get(3));
-		logger.info("JSON Object Created: " + bean);
-		return tempo;
-	}
+//	private static JSONObject selectScheduledTimesByWeek(Timestamp startDate, Timestamp endDate, Integer storeId) {
+//		List bean = new ManagerDao().getScheduleByStoreId(storeId,startDate, endDate);
+//		JSONObject tempo = new JSONObject();
+//		tempo.put("userid", bean.get(0));
+//		tempo.put("storeId", bean.get(1));
+//		tempo.put("start", bean.get(2));
+//		tempo.put("end", bean.get(3));
+//		logger.info("JSON Object Created: " + bean);
+//		return tempo;
+//	}
 	
-	private static JSONObject scheduleEmployee(Integer id) {
-		List bean = new ManagerDao().getScheduleByEmployee(id);
-		JSONObject tempo = new JSONObject();
-		tempo.put("userid", bean.get(0));
-		tempo.put("storeId", bean.get(1));
-		tempo.put("start", bean.get(2));
-		tempo.put("end", bean.get(3));
-		logger.info("JSON Object Created: " + bean);
-		return tempo;
-
-	}
+//	private static JSONObject scheduleEmployee(Integer id) {
+//		List bean = new ManagerDao().getScheduleByEmployee(id);
+//		JSONObject tempo = new JSONObject();
+//		tempo.put("userid", bean.get(0));
+//		tempo.put("storeId", bean.get(1));
+//		tempo.put("start", bean.get(2));
+//		tempo.put("end", bean.get(3));
+//		logger.info("JSON Object Created: " + bean);
+//		return tempo;
+//
+//	}
 
 	public static JSONObject selectScheduledTimesByWeek(Integer storeId, JSONObject parameters) {
+		
+		Integer week = Integer.parseInt(parameters.getString("week"));
+		
+		return selectScheduledTimesByWeek(storeId, week);
+	}
+	
+	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer week) {
 		
 		JSONObject schedule = new JSONObject();
 		JSONArray employees = new JSONArray();
@@ -69,6 +77,8 @@ public class ManagerService {
 		JSONObject shift;
 		JSONObject shifts = null;
 		int start, end;
+		
+		schedule.put("dates", DateTimeHelper.getWeekDates(week));
 		
 		for(int i = 0; i < 5; i++) {
 			employee = new JSONObject();
@@ -96,11 +106,6 @@ public class ManagerService {
 		return schedule;
 	}
 	
-	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer weekOffset) {
-		
-		return null;
-	}
-	
 	public static JSONObject setScheduleEmployee(JSONObject jsonObject) {
 		Integer userId = Integer.parseInt(jsonObject.getString("userId"));
 		String startTime = jsonObject.getString("startTime");
@@ -112,6 +117,14 @@ public class ManagerService {
 	
 	private static JSONObject setScheduleEmployee(Integer userId, 
 			String startTime, String endTime, String date) {
+		
+		Timestamp startTs = DateTimeHelper.getTimestamp(date, startTime);
+		Timestamp endTs = DateTimeHelper.getTimestamp(date, endTime);
+		
+		UserBean b = new UserDao().getUserById(userId);
+		
+		new ManagerDao().createScheduleTimeBean(0, startTs, endTs, b);
+		
 		JSONObject schedule = new JSONObject();
 		
 		

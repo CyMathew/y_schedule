@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GetUrlService } from './get-url.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private url: GetUrlService, private cookie: CookieService) { }
+  constructor(private http: HttpClient, private url: GetUrlService, private cookie: CookieService, private router: Router) { }
 
   login(username: string, password: string) {
     let param = {
@@ -42,7 +43,21 @@ export class AuthService {
       },
       param: param
     }
-    return this.http.post(this.url.get() + url, body);
+    let sub = this.http.post(this.url.get() + url, body);
+
+    return sub;
+  }
+
+  logout(){
+    this.cookie.delete("userid");
+    this.cookie.delete("userrole");
+    this.cookie.delete("username");
+    this.cookie.delete("storeid");
+    this.router.navigate([""]);
+  }
+  
+  checkSession(error: Error){
+    this.router.navigate([""]);
   }
 
 
