@@ -44,7 +44,7 @@ export class AuthService {
       param: param
     }
     let sub = this.http.post(this.url.get() + url, body);
-   
+
     return sub;
   }
 
