@@ -55,6 +55,8 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/button")).click();
 			assertNotNull(driver.findElement(By.tagName("app-user-sidebar")));
 			driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")).click();
+			driver.findElement(By.linkText("timesheet")).click();
+			driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")).click();
 			driver.findElement(By.linkText("Logout")).click();
 
 
