@@ -14,7 +14,7 @@ import beans.MessageBean;
 import beans.MessageListBean;
 import util.HibernateUtil;
 
-public class ManagerListDao {
+public class MessageListDao {
 
 	public ArrayList<MessageListBean> getMessageListsByUserID(Integer id){
 		ArrayList<MessageListBean> messages = new ArrayList<MessageListBean>();
