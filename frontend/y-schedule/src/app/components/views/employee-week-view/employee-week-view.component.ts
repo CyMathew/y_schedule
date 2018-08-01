@@ -77,10 +77,10 @@ export class EmployeeWeekViewComponent implements OnInit
     //Start hour + 2 here is used as an offset to align it properly in CSS Grid lines
     let dayOfWeek = this.datetimeService.getDayInt(event["day"]) + 2;
     console.log('Day: ' + event["day"] + " makes " + dayOfWeek );
-    let startHour = this.datetimeService.getTimeAsInt(event["startTime"]) - this.startHour + 2;
-    // let startHour = event["startTime"] - this.startHour + 2;
-    let endHour = this.datetimeService.getTimeAsInt(event["endTime"]) - this.startHour + 2;
-    // let endHour = event["endTime"] - this.startHour + 2;
+    // let startHour = this.datetimeService.getTimeAsInt(event["startTime"]) - this.startHour + 2;
+    let startHour = event["startTime"] - this.startHour + 2;
+    // let endHour = this.datetimeService.getTimeAsInt(event["endTime"]) - this.startHour + 2;
+    let endHour = event["endTime"] - this.startHour + 2;
 
     return {
       'grid-column': dayOfWeek + "/" + dayOfWeek,

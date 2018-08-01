@@ -17,11 +17,13 @@ export class EmployeeAvailComponent implements OnInit
   
   events = [];
 
-  slot = {
+  inputSlot = {
     day: "",
     startTime: "",
     endTime: ""
   };
+
+  payload = {};
 
   days = [
     {value: 'sunday', viewValue: 'Sunday'},
@@ -64,7 +66,7 @@ export class EmployeeAvailComponent implements OnInit
     else
     {
       console.log('FOund array');
-      this.events = data;
+      this.events = data["weekDetails"];
     }
     
   }
@@ -73,11 +75,11 @@ export class EmployeeAvailComponent implements OnInit
   {
     this.resetWarnings();
 
-    let startTime = this.dateTimeService.getTimeAsInt(this.slot.startTime);
-    let endTime = this.dateTimeService.getTimeAsInt(this.slot.endTime);
+    let startTime = this.dateTimeService.getTimeAsInt(this.inputSlot.startTime);
+    let endTime = this.dateTimeService.getTimeAsInt(this.inputSlot.endTime);
 
 
-    if (this.slot.day == "")
+    if (this.inputSlot.day == "")
     {
       this.inputNotValid.dayInvalid = true;
     }
@@ -118,12 +120,18 @@ export class EmployeeAvailComponent implements OnInit
   {
     let found = false;
 
+    this.payload = {
+      day: this.inputSlot.day,
+      startTime: this.dateTimeService.getTimeAsInt(this.inputSlot.startTime),
+      endTime: this.dateTimeService.getTimeAsInt(this.inputSlot.endTime)
+    }
+
     for(let item in this.events)
     {
       if(this.isOverlapping(item))
       {
         // console.log('FOUND');
-        this.events[item] = Object.assign({}, this.slot);
+        this.events[item] = Object.assign({}, this.payload);
         found = true;
       }
     }
@@ -131,7 +139,7 @@ export class EmployeeAvailComponent implements OnInit
     if(!found)
     {
       // console.log('Day not found in events');
-      let tempSlot = Object.assign({}, this.slot);
+      let tempSlot = Object.assign({}, this.payload);
       this.events = [].concat(this.events, tempSlot);
     }
     // console.log(this.events); 
@@ -141,15 +149,13 @@ export class EmployeeAvailComponent implements OnInit
   isOverlapping(item): boolean
   {
     let tempDay = this.events[item]["day"];
-    let tempStartTime = this.events[item]["startTime"];
-    let tempEndTime = this.events[item]["endTime"];
-    let sTimePrevious = this.dateTimeService.getTimeAsInt(tempStartTime);
-    let eTimePrevious = this.dateTimeService.getTimeAsInt(tempEndTime);
+    let sTimePrevious = this.events[item]["startTime"];
+    let eTimePrevious = this.events[item]["endTime"];
 
-    let sTimeNow = this.dateTimeService.getTimeAsInt(this.slot.startTime);
-    let eTimeNow = this.dateTimeService.getTimeAsInt(this.slot.endTime);
+    let sTimeNow = this.payload["startTime"];
+    let eTimeNow = this.payload["endTime"];
 
-    if(tempDay == this.slot.day) 
+    if(tempDay == this.payload["day"]) 
     {
       if(((sTimeNow >= sTimePrevious) && (sTimeNow <= eTimePrevious)) ||
        ((eTimeNow >= sTimePrevious) && (eTimeNow <= eTimePrevious))
@@ -180,6 +186,11 @@ export class EmployeeAvailComponent implements OnInit
     {
       console.log('Events object is empty. Approval not sent');
     }
+  }
+
+  sendStatus(data)
+  {
+    console.log('Status: ', data);
   }
 
 
