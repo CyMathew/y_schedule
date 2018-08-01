@@ -22,6 +22,10 @@ public class MessageListBean {
 	@Column
 	private Integer user2;
 	
+	public MessageListBean() {
+		super();
+	}
+	
 	public MessageListBean(Integer user1, Integer user2) {
 		this.user1 = user1;
 		this.user2 = user2;

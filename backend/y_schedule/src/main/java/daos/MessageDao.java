@@ -27,10 +27,10 @@ public class MessageDao {
 		return messages;
 	}
 	
-	public String createNewMessage(Integer uID, String message, Timestamp time) {
+	public String createNewMessage(Integer uID, String message, Timestamp time, MessageListBean messageListID) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		MessageBean newMessage = new MessageBean(uID,message,time);
+		MessageBean newMessage = new MessageBean(uID,message,time, messageListID);
 		try {
 			tx = session.beginTransaction();
 			session.save(newMessage);
@@ -39,6 +39,7 @@ public class MessageDao {
 			if(tx!=null) {
 				tx.rollback();
 			}
+			e.printStackTrace();
 			return "failure";
 		}finally {
 			session.close();

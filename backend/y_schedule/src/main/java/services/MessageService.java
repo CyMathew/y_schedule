@@ -3,11 +3,16 @@ package services;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import beans.MessageBean;
+import beans.MessageListBean;
 import daos.MessageDao;
+import util.HibernateUtil;
 
 public class MessageService {
 	private MessageDao mld = new MessageDao();
@@ -37,7 +42,22 @@ public class MessageService {
 	}
 	
 	public JSONArray addMessage(JSONObject json, Integer id) {
-		mld.createNewMessage(id, (String)json.get("message"), (Timestamp)json.get("timestamp"));
+		MessageListBean mlb= null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			mlb =(MessageListBean)session.createQuery("FROM MessageList WHERE message_list_id = "+ id).uniqueResult();
+		}catch(HibernateException e){
+			if(tx!=null){
+				tx.rollback();
+			}
+			e.printStackTrace();
+		}finally{
+			session.close(); //persons is now in the detached state.
+}
+		
+		mld.createNewMessage(Integer.parseInt((String)json.get("user")),(String)json.get("message"), (Timestamp)json.get("timestamp"),mlb);
 		return buildJsonList(json,id);
 	}
 }

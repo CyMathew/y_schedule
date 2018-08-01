@@ -21,34 +21,46 @@ public class MessageBean {
 	@GeneratedValue(generator="MessageBeanSEQ", strategy=GenerationType.SEQUENCE)
 	private Integer message_id;
 	@Column
-	private Integer uID;
+	private Integer userID;
 	@Column
 	private String message;
 	@Column
 	private Timestamp sentTime;
 	@ManyToOne
-	private MessageListBean message_list_id;
+	private MessageListBean messageListID;
 	
-	public MessageBean(Integer uID, String message, Timestamp sentTime) {
-		this.uID = uID;
+	public MessageBean() {
+		super();
+	}
+	public MessageBean(Integer userID, String message, Timestamp sentTime, MessageListBean messageListID) {
+		this.userID = userID;
 		this.message = message;
 		this.sentTime = sentTime;
+		this.messageListID = messageListID;
 	}
 
 	public Integer getMessage_id() {
 		return message_id;
 	}
 
+	public MessageListBean getMessageListID() {
+		return messageListID;
+	}
+
+	public void setMessageListID(MessageListBean messageListID) {
+		this.messageListID = messageListID;
+	}
+
 	public void setMessage_id(Integer message_id) {
 		this.message_id = message_id;
 	}
 
-	public Integer getuID() {
-		return uID;
+	public Integer getuserID() {
+		return userID;
 	}
 	
-	public void setuID(Integer uID) {
-		this.uID = uID;
+	public void setuserID(Integer userID) {
+		this.userID = userID;
 	}
 	
 	public String getMessage() {

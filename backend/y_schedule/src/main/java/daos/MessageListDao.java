@@ -43,6 +43,7 @@ public class MessageListDao {
 			if(tx!=null) {
 				tx.rollback();
 			}
+			e.printStackTrace();
 			return "failure";
 		}finally {
 			session.close();
