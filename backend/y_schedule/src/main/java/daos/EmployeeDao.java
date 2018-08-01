@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -78,7 +79,8 @@ public class EmployeeDao {
 	public List getStartTimesById(Integer id) {
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
-		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id)).list();
+		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("active", 1))
+				                                  .add(Restrictions.like("user.user_id", id)).list();
 		return list;
 	}
 
