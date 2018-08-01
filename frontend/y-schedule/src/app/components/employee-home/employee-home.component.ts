@@ -20,7 +20,7 @@ export class EmployeeHomeComponent implements OnInit
 
   ngOnInit() 
   {
-    this.authService.send("/y_schedule/employee.do", {action: "getAvailDetails"}).subscribe(
+    this.authService.send("/employee.do", {action: "getAvailDetails"}).subscribe(
       data => { this.setEvents(data)},
       Error => console.log('Error')
     );

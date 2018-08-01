@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit
   userTaken = false;
   passNoMatch = false;
   
-  url = "/y_schedule/register.do";
+  url = "/register.do";
 
   constructor(private router: Router, private authService: AuthService) {
     // this.first_name="Hello";
