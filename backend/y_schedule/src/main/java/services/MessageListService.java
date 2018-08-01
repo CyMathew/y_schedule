@@ -21,7 +21,7 @@ public class MessageListService {
 			
 			case "getMessageListsByID": buildJsonList(json,id);
 				break;
-			case "createMessageList":
+			case "createMessageList": createMessageList(json, id);
 			}
 		}
 		return messageList;
@@ -30,13 +30,21 @@ public class MessageListService {
 	public JSONArray buildJsonList(JSONObject json, Integer id) {
 		list = mld.getMessageListsByUserID(id);
 		for(MessageListBean m: list) {
-			messageList.put(new JSONObject().put("message_list_id", (m.getMessage_list_id())).put("user1",(m.getUser1())).put("user2",  (m.getUser2())));
+			if(m.getUser1()==id)
+			{
+				messageList.put(new JSONObject().put("messageListID", (m.getMessage_list_id())).put("user",(m.getUser2())));
+			}
+			else {
+
+				messageList.put(new JSONObject().put("messageListID", (m.getMessage_list_id())).put("user",(m.getUser1())));
+			}
 		}
 		return messageList;
 	}
 	
-	public JSONArray addMessageList(JSONObject json, Integer id) {
+	public JSONArray createMessageList(JSONObject json, Integer id) {
 		mld.createNewMessageList(Integer.parseInt((String)json.get("uID1")), Integer.parseInt((String)json.get("uID2")));
+		
 		return buildJsonList(json,id);
 	}
 }

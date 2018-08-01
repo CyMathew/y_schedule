@@ -13,7 +13,7 @@ public class MessageService {
 	private MessageDao mld = new MessageDao();
 	private ArrayList<MessageBean>	list = new ArrayList<MessageBean>();
 	private JSONObject reply = new JSONObject();
-	private JSONArray messageList = new JSONArray();
+	private JSONArray message = new JSONArray();
 	
 	public JSONArray parseRequest(JSONObject json, Integer id) {
 		list = mld.getMessagesByListID(id);
@@ -22,21 +22,21 @@ public class MessageService {
 			
 			case "getMessagesByID": buildJsonList(json,id);
 				break;
-			case "createMessages":
+			case "createMessage": addMessage(json, id);
 			}
 		}
-		return messageList;
+		return message;
 	}
 	
 	public JSONArray buildJsonList(JSONObject json, Integer id) {
 		list = mld.getMessagesByListID(id);
 		for(MessageBean m: list) {
-			messageList.put(new JSONObject().put("message_id", (m.getMessage_id())).put("message",(m.getMessage())).put("timestamp",  (m.getSentTime())));
+			message.put(new JSONObject().put("userID", (m.getuID())).put("message",(m.getMessage())).put("timestamp",  (m.getSentTime())));
 		}
-		return messageList;
+		return message;
 	}
 	
-	public JSONArray addMessages(JSONObject json, Integer id) {
+	public JSONArray addMessage(JSONObject json, Integer id) {
 		mld.createNewMessage(id, (String)json.get("message"), (Timestamp)json.get("timestamp"));
 		return buildJsonList(json,id);
 	}
