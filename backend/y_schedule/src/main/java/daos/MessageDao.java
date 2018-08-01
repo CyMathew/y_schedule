@@ -15,7 +15,7 @@ import beans.MessageListBean;
 import util.HibernateUtil;
 
 public class MessageDao {
-	public ArrayList<MessageBean> getMessageListsByUserID(Integer id){
+	public ArrayList<MessageBean> getMessagesByListID(Integer id){
 		ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(MessageListBean.class);
