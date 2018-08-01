@@ -31,10 +31,7 @@ export class EmployeeWeekViewComponent implements OnInit
     for(let i = this.startHour; i <= this.endHour; i++)
     {
       this.storeHoursArray.push(this.getHourString(i));
-    }
-
-    console.log(this.startHour, this.endHour);
-   
+    }   
   }
   
   ngOnChanges(changes: SimpleChanges)
@@ -76,7 +73,7 @@ export class EmployeeWeekViewComponent implements OnInit
 
     //Start hour + 2 here is used as an offset to align it properly in CSS Grid lines
     let dayOfWeek = this.datetimeService.getDayInt(event["day"]) + 2;
-    console.log('Day: ' + event["day"] + " makes " + dayOfWeek );
+    // console.log('Day: ' + event["day"] + " makes " + dayOfWeek );
     // let startHour = this.datetimeService.getTimeAsInt(event["startTime"]) - this.startHour + 2;
     let startHour = event["startTime"] - this.startHour + 2;
     // let endHour = this.datetimeService.getTimeAsInt(event["endTime"]) - this.startHour + 2;
