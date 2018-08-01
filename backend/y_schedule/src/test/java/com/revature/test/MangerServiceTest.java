@@ -45,5 +45,7 @@ public class MangerServiceTest {
 				ms.selectEmpInfo(10), JSONCompareMode.LENIENT);
 	}
 	
+	
+	
 
 }

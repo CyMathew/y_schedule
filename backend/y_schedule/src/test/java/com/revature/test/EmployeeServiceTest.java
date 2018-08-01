@@ -20,6 +20,7 @@ import services.EmployeeService;
 public class EmployeeServiceTest {
 	
 	@Test
+	@Ignore
 	public void getTimesTest() {
 		EmployeeDao mockDao = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
@@ -87,7 +88,7 @@ public class EmployeeServiceTest {
 
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void editTimesTest() {
 		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
@@ -129,7 +130,7 @@ public class EmployeeServiceTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void editTimesTestfailure2() {
 		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
