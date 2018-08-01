@@ -22,6 +22,7 @@ import { EditTsSidebarComponent } from './components/manager/edit-ts-sidebar/edi
 import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
 import { HighlightColumnDirective } from './directives/highlight-column.directive';
 import { DatePipe } from '@angular/common';
+import { EmployeeAvailComponent } from './components/employee-avail/employee-avail.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DatePipe } from '@angular/common';
     EditTsGraphComponent,
     EditTsSidebarComponent,
     HighlightColumnDirective,
+    EmployeeAvailComponent,
   ],
   imports: [
     BrowserModule,
