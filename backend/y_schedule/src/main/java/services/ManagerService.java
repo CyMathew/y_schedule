@@ -9,8 +9,10 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import beans.EmployeeAvailabilityBean;
 import beans.ScheduleTimeBean;
 import beans.UserBean;
+import daos.EmployeeDao;
 import daos.ManagerDao;
 import daos.UserDao;
 import util.DateTimeHelper;
@@ -140,6 +142,33 @@ public class ManagerService {
 		JSONObject schedule = new JSONObject();
 
 		return schedule;
+	}
+	
+	public static JSONObject getEmployeeAvailabilityByDay(JSONObject jsonObject) {
+		Integer id = Integer.parseInt(jsonObject.getString("userId"));
+		Integer day = Integer.parseInt(jsonObject.getString("day"));
+		
+		return getEmployeeAvailabilityByDay(id, day);
+		
+	}
+	
+	private static JSONObject getEmployeeAvailabilityByDay(Integer id, Integer day) {
+		
+		JSONObject obj = new JSONObject();
+		JSONArray times = new JSONArray();
+		
+		List<EmployeeAvailabilityBean> ls = new EmployeeDao().getAvailableTimesByDay(id, DateTimeHelper.getDayOfWeekName(day));
+		
+		for(EmployeeAvailabilityBean b : ls) {
+			JSONObject time = new JSONObject();
+			time.put("start", b.getStart());
+			time.put("end", b.getEnd());
+			times.put(time);
+		}
+		
+		obj.put("times", times);
+		
+		return obj;
 	}
 
 }
