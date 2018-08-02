@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     //     password: this.password
     //   };
 
-    //   let url: string = this.url.get() + "/login.do";
+    //   let url: string = this.url.get() + "/y_schedule/login.do";
     //   this.http.post(url, param).subscribe(data => this.doLogin(data), Error => this.doLogin(Error));
     // }
     this.authService.login(this.username, this.password).subscribe(

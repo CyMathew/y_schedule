@@ -13,7 +13,7 @@ export class DateTimeService {
       case 1: return "monday";
       case 2: return "tuesday";
       case 3: return "wednesday";
-      case 4: return "thursday";
+      case 4: return "thrusday";
       case 5: return "friday";
       default: return "saturday";
       }
@@ -25,25 +25,10 @@ export class DateTimeService {
       case 1: return "Monday";
       case 2: return "Tuesday";
       case 3: return "Wednesday";
-      case 4: return "Thursday";
+      case 4: return "Thrusday";
       case 5: return "Friday";
       default: return "Saturday";
       }
-  }
-
-  getDayInt(dayOfWeek: string)
-  {
-    switch(dayOfWeek)
-    {
-      case "sunday": return 0;
-      case "monday": return 1;
-      case "tuesday": return 2;
-      case "wednesday": return 3;
-      case "thursday": return 4;
-      // case "thrusday": return 4;
-      case "friday": return 5;
-      case "saturday": return 6;
-    }
   }
 
   getTimeString(time: number): string {
@@ -56,14 +41,5 @@ export class DateTimeService {
       ending = "pm"
 
     return hour + ":" + minute + " " + ending;
-  }
-
-  getTimeAsInt(time: string)
-  {
-    let timeArray = time.split(":");
-    let hour = parseInt(timeArray[0]);
-    let minute = parseInt(timeArray[1])/60;
-
-    return hour;
   }
 }

@@ -1,6 +1,5 @@
 package daos;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -11,7 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import beans.EmployeeAvailabilityBean;
-import beans.ScheduleTimeBean;
 import beans.UserBean;
 import util.HibernateUtil;
 
