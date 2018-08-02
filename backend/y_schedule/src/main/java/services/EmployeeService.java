@@ -54,8 +54,8 @@ public class EmployeeService {
 	}
 
 	/**
-	 * This deletes all old records from the database and updates it with the new
-	 * availability for the employee
+	 * This just adds new times pending for approval and inserts them into the
+	 * availability table. 
 	 */
 	public JSONObject editAvailDetails(JSONArray jsonarray, UserBean id) {
 		// JSONObject jsonstore = new JSONObject();
@@ -65,7 +65,7 @@ public class EmployeeService {
 		float start;
 		float end;
 
-		if (ed.removeAllReguests(id.getUser_id())) {
+		
 			for (int i = 0; i < jsonarray.length(); i++) {
 				day = jsonarray.getJSONObject(i).getString("day");
 				end = Float.parseFloat(jsonarray.getJSONObject(i).get("endTime").toString());
@@ -74,10 +74,6 @@ public class EmployeeService {
 					reply.put("result", "failure");
 					return reply;
 				}
-			}
-		} else {
-			reply.put("result", "failure");
-			return reply;
 		}
 		reply.put("result", "success");
 		return reply;

@@ -7,37 +7,30 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.json.JSONObject;
+
+import daos.CoodinatorDao;
+import daos.EmployeeDao;
 import daos.ManagerDao;
+import services.CoordinatorService;
 import services.EmployeeService;
 
 public class main {
 
 	public static void main(String[] args) {
-		ManagerDao md = new ManagerDao();
-		DateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-		java.util.Date start;
-		java.util.Date end;
-		try {
-			start = date.parse("2018.07.23.18.00.00");
-			end = date.parse("2018.07.23.19.00.00");
-			long startTime = start.getTime();
-			long endTime = end.getTime();
-			// System.out.println(md.getScheduleByEmployee(22,(new
-			// Timestamp(startTime)),(new Timestamp(endTime))));
-			// System.out.println(new Timestamp(startTime));
-			// System.out.println(new Timestamp(endTime));
-
-			EmployeeService es = new EmployeeService();
-
-			System.out.println(es.getEmployeeAvailableForRange(45, new Timestamp(startTime), new Timestamp(endTime)));
-			
-			//System.out.println(es.getEmployeeAvailableForRange(21, new Timestamp(startTime), new Timestamp(endTime)));
-			System.exit(0);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		/*CoordinatorService service = new CoordinatorService();
+		JSONObject test = null;
+		test = service.idsOfPeopleRequesting();
+		System.out.println(test.getJSONArray("ids").get(0));
+		System.out.println(test.getJSONArray("ids").get(1));*/
+		
+		CoordinatorService service = new CoordinatorService();
+//		System.out.println(service.idsOfPeopleRequesting());
+//		System.out.println(service.timesPendingForApprovalById(61));
+		JSONObject command = new JSONObject();
+		command.put("action", "getAllRequests");
+		System.out.println(service.gateKeeper(command));
+		System.exit(0);
 	}
 
 }

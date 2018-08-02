@@ -195,6 +195,7 @@ export class EmployeeAvailComponent implements OnInit
     console.log('Status: ', data);
   }
 
+
   deleteTimeSlot()
   {
     this.resetWarnings();
@@ -222,7 +223,6 @@ export class EmployeeAvailComponent implements OnInit
       }
     }
   }
-
 
 
 
