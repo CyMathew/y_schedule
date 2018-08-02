@@ -50,6 +50,7 @@ public class EmployeeDao {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		EmployeeAvailabilityBean bean = new EmployeeAvailabilityBean(start, end, id, day);
+
 		bean.setActive(0);
 		try{
 			tx = session.beginTransaction();
