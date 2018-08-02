@@ -1,5 +1,7 @@
 package daos;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -89,5 +91,20 @@ public class UserDao {
 		bean = (UserBean)query.uniqueResult();
 
 		return bean;
+	}
+
+
+	public List<UserBean> getUsersByStoreId(Integer storeId) {
+		List<UserBean> beans = null;
+		Session session = HibernateUtil.getSession();
+		
+		Query query;
+		String hql;
+		hql = "FROM UserBean WHERE store_id = :nsid";
+		query = session.createQuery(hql);
+		query.setParameter("nsid", storeId);
+		beans = query.list();
+		
+		return beans;
 	}
 }

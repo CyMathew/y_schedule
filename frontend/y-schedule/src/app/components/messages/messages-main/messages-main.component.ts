@@ -28,6 +28,10 @@ export class MessagesMainComponent implements OnInit {
     this.fetchConversation();
   }
 
+  ngOnChange(){
+    this.fetchConversation();
+  }
+
   fetchConversation() {
 
     let params = {
@@ -38,6 +42,8 @@ export class MessagesMainComponent implements OnInit {
       Error => this.authService.checkSession(Error)
     )
   }
+
+  
 
   receiveConversations(data) {
     console.log("receive conversations", data);

@@ -18,11 +18,11 @@ import beans.UserBean;
 import util.HibernateUtil;
 
 public class MessageDao {
-	public ArrayList<MessageBean> getMessagesByListID(Integer id){
+	public ArrayList<MessageBean> getMessagesByListID(Integer mlb){
 		ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
 		Session session = HibernateUtil.getSession();
-		Criteria crit = session.createCriteria(MessageListBean.class);
-		List<MessageBean> list1 = crit.add(Restrictions.like("Message.message_list_id", id)).list();
+		Criteria crit = session.createCriteria(MessageBean.class);
+		List<MessageBean> list1 = crit.add(Restrictions.like("messageListID.message_list_id", mlb)).list();
 		for(MessageBean m: list1) {
 			messages.add(m);
 		}

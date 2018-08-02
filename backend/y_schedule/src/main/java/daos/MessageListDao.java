@@ -43,7 +43,7 @@ public class MessageListDao {
 		return messages;
 	}
 	
-	public String createNewMessageList(UserBean uID, UserBean uID2) {
+	public MessageListBean createNewMessageList(UserBean uID, UserBean uID2) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		MessageListBean newMessageList = new MessageListBean(uID,uID2);
@@ -56,12 +56,12 @@ public class MessageListDao {
 				tx.rollback();
 			}
 			e.printStackTrace();
-			return "failure";
+			return null;
 		}finally {
 			session.close();
 		}
 		
-		return "success";
+		return newMessageList;
 	}
 	
 	public MessageListBean getMessageListById(Integer id) {
@@ -70,7 +70,7 @@ public class MessageListDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			mlb = (MessageListBean) session.createQuery("FROM MessageList WHERE message_list_id = " + id)
+			mlb = (MessageListBean) session.createQuery("FROM MessageListBean WHERE message_list_id = " + id)
 					.uniqueResult();
 		} catch (HibernateException e) {
 			if (tx != null) {

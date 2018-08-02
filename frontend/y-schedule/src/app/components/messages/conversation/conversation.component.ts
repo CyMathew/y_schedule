@@ -12,14 +12,14 @@ export class ConversationComponent implements OnInit {
   @Output() convoSelected = new EventEmitter<number>();
   @Output() backToMainView = new EventEmitter<number>();
 
-  conversation: object;
-
+  conversation: object = { messages: null, otherName: null };
+  otherId: number;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     let params = {
       "action": "getMessagesByID",
       "messageListId": "" + this.conversationId
@@ -33,11 +33,13 @@ export class ConversationComponent implements OnInit {
   receiveMessages(data) {
     console.log("receive messages", data);
     this.conversation = data;
+    this.otherId = data["otherId"];
   }
 
-  back(){
+  back() {
     this.backToMainView.emit(1);
     this.conversation = null;
+
   }
 
 }

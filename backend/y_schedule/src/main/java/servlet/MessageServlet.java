@@ -26,16 +26,6 @@ public class MessageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// MessageListService MLS = new MessageListService();
-		//
-		// ParsedRequest r = SessionUtil.getParsedRequest(request);
-		//
-		// JSONObject json = new JSONObject();
-		// json.put("Messages",
-		// MLS.parseRequest(r.getParameters(),Integer.parseInt(r.getParameters().getString("message_list_id"))));
-		//
-		// JSONHelper.sendResponse(response, json);
-
 		ParsedRequest r = SessionUtil.getParsedRequest(request);
 
 		JSONObject jsonOut = null;
@@ -48,11 +38,13 @@ public class MessageServlet extends HttpServlet {
 			jsonOut = MessageService2.createMessageList(r.getUserId(), r.getParameters());
 			break;
 		case "getMessagesByID":
-			jsonOut = MessageService2.getMessagesByID(r.getUserId(), r.getParameters());
+			jsonOut = MessageService2.getMessagesByListId(r.getUserId(), r.getParameters());
 			break;
 		case "createMessage":
 			jsonOut = MessageService2.createMessage(r.getUserId(), r.getParameters());
 			break;
+		case "getCoworkers":
+			jsonOut = MessageService2.getCoworkers(r.getUserId(), r.getStoreId());
 		}
 		
 		JSONHelper.sendResponse(response, jsonOut);

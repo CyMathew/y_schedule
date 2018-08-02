@@ -21,4 +21,9 @@ public class UserService {
 		logger.info("Case Does not Exist" + bean);
 		return "failure";
 	}
+
+	public static String getUserName(UserBean user) {
+		
+		return user.getUser_fname() + " " + user.getUser_lname();
+	}
 }

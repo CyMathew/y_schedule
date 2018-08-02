@@ -21,28 +21,30 @@ public class MessageService {
 	private JSONArray message = new JSONArray();
 
 	public JSONArray parseRequest(JSONObject json, Integer id) {
-		list = mld.getMessagesByListID(id);
-		if (json != null) {
-			switch ((String) json.get("action")) {
-
-			case "getMessagesByID":
-				buildJsonList(json, id);
-				break;
-			case "createMessage":
-				//addMessage(json, id);
-				break;
-			}
-		}
-		return message;
+//		list = mld.getMessagesByListID(id);
+//		if (json != null) {
+//			switch ((String) json.get("action")) {
+//
+//			case "getMessagesByID":
+//				buildJsonList(json, id);
+//				break;
+//			case "createMessage":
+//				//addMessage(json, id);
+//				break;
+//			}
+//		}
+//		return message;
+		return null;
 	}
 
 	public JSONArray buildJsonList(JSONObject json, Integer id) {
-		list = mld.getMessagesByListID(id);
-		for (MessageBean m : list) {
-			message.put(new JSONObject().put("userID", (m.getuserID())).put("message", (m.getMessage()))
-					.put("timestamp", (m.getSentTime())));
-		}
-		return message;
+//		list = mld.getMessagesByListID(id);
+//		for (MessageBean m : list) {
+//			message.put(new JSONObject().put("userID", (m.getuserID())).put("message", (m.getMessage()))
+//					.put("timestamp", (m.getSentTime())));
+//		}
+//		return message;
+		return null;
 	}
 
 //	public JSONArray addMessage(JSONObject json, Integer id) {

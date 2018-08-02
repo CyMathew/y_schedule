@@ -16,6 +16,7 @@ export class MessageListComponent implements OnInit {
   }
 
   selectConversation(convo: number){
+    console.log("emit convoSelected", convo)
     this.convoSelected.emit(convo);
   }
 
