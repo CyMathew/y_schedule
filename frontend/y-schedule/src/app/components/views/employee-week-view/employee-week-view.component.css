@@ -17,7 +17,7 @@
     height: 100%;
 }
 
-span 
+span, p
 { 
     display: flex;
     align-items: center;

@@ -66,4 +66,18 @@ export class DateTimeService {
 
     return hour;
   }
+
+  /* 
+  Gets only the hour part from a time. Needs to be replaced eventually
+   */
+
+  getHourString(time: number): string
+  {
+    if(time > 12)
+        return (time-12 + " PM")
+    else if(time == 12)
+      return (time + " PM");
+    else
+      return (time + ' AM');
+  }
 }

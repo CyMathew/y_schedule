@@ -1,0 +1,12 @@
+<div class="day-view" [ngStyle]="setViewStyle()"> 
+
+  <span class="hour"></span>
+  <ng-container *ngFor="let hourString of storeHoursArray">
+    <span class="hour">{{hourString}}</span> <!--//[ngStyle]="setHourStyle(i)"-->
+  </ng-container>
+
+  <ng-container *ngFor="let employee of empArray; index as i">
+    <p class="user">{{employee.empName}}</p>
+    <div class="timeslot" [ngStyle]="setEventStyle(employee, i)">{{employee.empName}}<br/>{{formatHour(employee.startTime)}} - {{formatHour(employee.endTime)}}</div>
+  </ng-container>
+</div>
