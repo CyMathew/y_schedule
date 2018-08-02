@@ -30,7 +30,7 @@ export class AuthService {
       password: password
     };
 
-    let url: string = this.url.get() + "/y_schedule/login.do";
+    let url: string = this.url.get() + "/login.do";
 
     return this.http.post(url, param);
 

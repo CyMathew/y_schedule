@@ -109,9 +109,9 @@ public class DateTimeHelper {
 	}
 
 	public static Integer TimestampGetDay(Timestamp ts) {
-		return ts.toLocalDateTime().getDayOfWeek().getValue()%7;
+		return ts.toLocalDateTime().getDayOfWeek().getValue() % 7;
 	}
-	
+
 	public static float TimestampToTimeFloat(Timestamp ts) {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		String timeStr = sdf.format(ts);

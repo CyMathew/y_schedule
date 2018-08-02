@@ -44,6 +44,10 @@ export class EmployeeWeekViewComponent implements OnInit
       this.eventsArray = eventsChanges;
       console.log("In WEEK VIEW", this.eventsArray);
     }
+    else
+    {
+      this.eventsArray = [];
+    }
   }
 
   setHourStyle(i: number)

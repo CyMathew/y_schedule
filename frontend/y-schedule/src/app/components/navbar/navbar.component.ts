@@ -14,10 +14,18 @@ export class NavbarComponent implements OnInit {
 
   role: String;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.resetCookie();
+  }
 
   ngDoCheck(){
     this.role = this.cookie.get('userrole');
+  }
+
+  resetCookie()
+  {
+    this.role = this.cookie.get('userrole');
+    console.log('role is ', typeof this.role);
   }
 
 }

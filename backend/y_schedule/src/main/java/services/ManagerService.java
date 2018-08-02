@@ -9,8 +9,10 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import beans.EmployeeAvailabilityBean;
 import beans.ScheduleTimeBean;
 import beans.UserBean;
+import daos.EmployeeDao;
 import daos.ManagerDao;
 import daos.UserDao;
 import util.DateTimeHelper;
@@ -74,7 +76,7 @@ public class ManagerService {
 		return selectScheduledTimesByWeek(storeId, week);
 	}
 
-	private static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer week) {
+	public static JSONObject selectScheduledTimesByWeek(Integer storeId, Integer week) {
 
 		JSONObject schedule = new JSONObject();
 		JSONArray employees = new JSONArray();
@@ -102,7 +104,7 @@ public class ManagerService {
 			int day = DateTimeHelper.TimestampGetDay(b.getStart());
 			shift.put("day", day);
 			shift.put("start", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
-			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
+			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getEnd()));
 			shifts.put("" + day, shift);
 		}
 		
@@ -140,6 +142,33 @@ public class ManagerService {
 		JSONObject schedule = new JSONObject();
 
 		return schedule;
+	}
+	
+	public static JSONObject getEmployeeAvailabilityByDay(JSONObject jsonObject) {
+		Integer id = Integer.parseInt(jsonObject.getString("userId"));
+		Integer day = Integer.parseInt(jsonObject.getString("day"));
+		
+		return getEmployeeAvailabilityByDay(id, day);
+		
+	}
+	
+	private static JSONObject getEmployeeAvailabilityByDay(Integer id, Integer day) {
+		
+		JSONObject obj = new JSONObject();
+		JSONArray times = new JSONArray();
+		
+		List<EmployeeAvailabilityBean> ls = new EmployeeDao().getAvailableTimesByDay(id, DateTimeHelper.getDayOfWeekName(day));
+		
+		for(EmployeeAvailabilityBean b : ls) {
+			JSONObject time = new JSONObject();
+			time.put("start", b.getStart());
+			time.put("end", b.getEnd());
+			times.put(time);
+		}
+		
+		obj.put("times", times);
+		
+		return obj;
 	}
 
 }

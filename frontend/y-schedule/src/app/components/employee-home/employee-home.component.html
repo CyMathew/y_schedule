@@ -1,1 +1,8 @@
-<p>Nothing here folks!</p>
+<div id="content">
+    <h2>Week Schedule</h2>
+    <button (click)="getPrevious()">&lt;</button>
+    <span *ngIf='displayDates.beingDate == ""' id="dates">10/17 - 10/24</span>
+    <span *ngIf='displayDates.beingDate != ""' id="dates">{{displayDates.beginDate}} - {{displayDates.endDate}}</span>
+    <button (click)="getNext()">&gt;</button>
+    <employee-week-view *ngIf="events != null" [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>
+</div>

@@ -48,7 +48,7 @@ export class EmployeeAvailComponent implements OnInit
 
   ngOnInit() 
   {
-    this.authService.send("/y_schedule/employee.do", {action: "getAvailDetails"})
+    this.authService.send("/employee.do", {action: "getAvailDetails"})
     .subscribe(
       data => { this.setEvents(data)},
       Error => { console.log('Error'); this.setEvents(undefined)}
@@ -175,10 +175,8 @@ export class EmployeeAvailComponent implements OnInit
         action: 'editAvailDetails',
         availDetails: this.events
       };
-
       console.log(payload);
-
-      this.authService.send("/y_schedule/employee.do", payload)
+      this.authService.send("/employee.do", payload)
         .subscribe(
           data => this.sendStatus(data),
           Error => { console.log('THIS IS AN ERROR FROM SENDING AVAIL');
@@ -225,6 +223,7 @@ export class EmployeeAvailComponent implements OnInit
       }
     }
   }
+
 
 
 }
