@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import beans.MessageBean;
 import beans.MessageListBean;
+import beans.UserBean;
 import util.HibernateUtil;
 
 public class MessageDao {
@@ -27,12 +28,12 @@ public class MessageDao {
 		return messages;
 	}
 	
-	public String createNewMessage(Integer uID, String message, Timestamp time, MessageListBean messageListID) {
+	public String createNewMessage(UserBean userID, String message, Timestamp time, MessageListBean messageListID) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
-		MessageBean newMessage = new MessageBean(uID,message,time, messageListID);
 		try {
 			tx = session.beginTransaction();
+			MessageBean newMessage = new MessageBean(userID,message,time, messageListID);
 			session.save(newMessage);
 			tx.commit();
 		}catch(HibernateException e){

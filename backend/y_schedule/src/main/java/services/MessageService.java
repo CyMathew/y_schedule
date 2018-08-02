@@ -57,7 +57,7 @@ public class MessageService {
 			session.close(); //persons is now in the detached state.
 }
 		
-		mld.createNewMessage(Integer.parseInt((String)json.get("user")),(String)json.get("message"), (Timestamp)json.get("timestamp"),mlb);
+		//mld.createNewMessage(Integer.parseInt((String)json.get("user")),(String)json.get("message"), (Timestamp)json.get("timestamp"),mlb);
 		return buildJsonList(json,id);
 	}
 }

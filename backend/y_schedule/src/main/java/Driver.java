@@ -9,7 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import beans.MessageListBean;
+import beans.UserBean;
 import daos.MessageDao;
+import daos.UserDao;
 import util.HibernateUtil;
 
 public class Driver {
@@ -31,7 +33,7 @@ public class Driver {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			mlb =(MessageListBean)session.createQuery("FROM MessageListBean WHERE message_list_id = 1").uniqueResult();
+			mlb =(MessageListBean)session.createQuery("FROM MessageListBean WHERE message_list_id = 2").uniqueResult();
 		}catch(HibernateException e){
 			if(tx!=null){
 				tx.rollback();
@@ -39,9 +41,11 @@ public class Driver {
 			e.printStackTrace();
 		}finally{
 			session.close(); //persons is now in the detached state.
-}
+}		UserDao ud = new UserDao();
+		UserBean bean = new UserBean();
+		bean = ud.getUserById(12);
 		MessageDao MD = new MessageDao();
-		System.out.println(MD.createNewMessage(1, "If you see this say 'Kavralisious'", new Timestamp(time),mlb));
+		System.out.println(MD.createNewMessage(bean, "TEST TEST TEST TEST", new Timestamp(time),mlb));
 		System.exit(0);
 	}
 
