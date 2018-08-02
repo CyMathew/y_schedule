@@ -36,7 +36,7 @@ public class MessageService {
 	public JSONArray buildJsonList(JSONObject json, Integer id) {
 		list = mld.getMessagesByListID(id);
 		for(MessageBean m: list) {
-			message.put(new JSONObject().put("userID", (m.getuID())).put("message",(m.getMessage())).put("timestamp",  (m.getSentTime())));
+			message.put(new JSONObject().put("userID", (m.getuserID())).put("message",(m.getMessage())).put("timestamp",  (m.getSentTime())));
 		}
 		return message;
 	}

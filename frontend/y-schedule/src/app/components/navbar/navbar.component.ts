@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit {
   resetCookie()
   {
     this.role = this.cookie.get('userrole');
-    console.log('role is ', typeof this.role);
   }
 
 }
