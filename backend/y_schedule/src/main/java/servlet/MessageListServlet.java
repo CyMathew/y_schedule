@@ -22,14 +22,14 @@ public class MessageListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MessageListService MLS = new MessageListService();
-		
-		ParsedRequest r = SessionUtil.getParsedRequest(request);
-		
-		JSONObject json = new JSONObject();
-		json.put("messageList", MLS.parseRequest(r.getParameters(), r.getUserId()));
-		
-		JSONHelper.sendResponse(response, json);
+//		MessageListService MLS = new MessageListService();
+//		
+//		ParsedRequest r = SessionUtil.getParsedRequest(request);
+//		
+//		JSONObject json = new JSONObject();
+//		json.put("messageList", MLS.parseRequest(r.getParameters(), r.getUserId()));
+//		
+//		JSONHelper.sendResponse(response, json);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

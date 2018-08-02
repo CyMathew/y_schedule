@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import beans.MessageListBean;
+import beans.UserBean;
 import daos.MessageListDao;
 
 public class MessageListService {
@@ -14,7 +15,7 @@ public class MessageListService {
 	private JSONObject reply = new JSONObject();
 	private JSONArray messageList = new JSONArray();
 
-	public JSONArray parseRequest(JSONObject json, Integer id) {
+	public JSONArray parseRequest(JSONObject json, UserBean id) {
 		list = mld.getMessageListsByUserID(id);
 		
 		if (json != null) {			
@@ -30,7 +31,7 @@ public class MessageListService {
 		return messageList;
 	}
 
-	public JSONArray buildJsonList(JSONObject json, Integer id) {
+	public JSONArray buildJsonList(JSONObject json, UserBean id) {
 		
 		list = mld.getMessageListsByUserID(id);
 		
@@ -47,11 +48,12 @@ public class MessageListService {
 		return messageList;
 	}
 
-	public JSONArray createMessageList(JSONObject json, Integer id) {
+	public JSONArray createMessageList(JSONObject json, UserBean id) {
+		return messageList;
 		
-		mld.createNewMessageList(Integer.parseInt((String) json.get("uID1")),
-				Integer.parseInt((String) json.get("uID2")));
-
-		return buildJsonList(json, id);
+//		mld.createNewMessageList(Integer.parseInt((String) json.get("uID1")),
+//				Integer.parseInt((String) json.get("uID2")));
+//
+//		return buildJsonList(json, id);
 	}
 }
