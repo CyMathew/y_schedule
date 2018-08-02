@@ -59,11 +59,14 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
+			
+			
 		
 			driver.findElement(By.linkText("Register Employee")).click();
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
 			driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("USERNAME");
+			driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("PASSWORD");
 			
 
 			driver.findElement(By.linkText("Logout")).click();
