@@ -97,15 +97,6 @@
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CoordinatorServlet</display-name>
-    <servlet-name>CoordinatorServlet</servlet-name>
-    <servlet-class>servlet.CoordinatorServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CoordinatorServlet</servlet-name>
-    <url-pattern>/CoordinatorServlet</url-pattern>
   <filter>
     <display-name>UserFilter</display-name>
     <filter-name>UserFilter</filter-name>
