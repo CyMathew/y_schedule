@@ -14,8 +14,6 @@ export class EditTsWeekComponent implements OnInit {
   @Output() daySelected = new EventEmitter<number>();
   @Output() weekSelected = new EventEmitter<number>();
 
-  
-
   week: number;
 
   constructor(private dateTime: DateTimeService, private route: ActivatedRoute, private authService: AuthService) { }

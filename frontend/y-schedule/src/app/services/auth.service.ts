@@ -64,10 +64,26 @@ export class AuthService {
     }
     if(error.error == 403){
       //nav home
-
       this.router.navigate([""]);
     }
   }
 
+  navigateToRoleHome() {
+    let role = "" + this.cookie.get("userrole");
+
+    switch (role) {
+      case "manager":
+        this.router.navigate(["manage"]);
+        break;
+      case "coordinator":
+        this.router.navigate(["coordinate"]);
+        break;
+      case "employee":
+        this.router.navigate(["home"]);
+        break;
+      default:
+        break;
+    }
+  }
 
 }
