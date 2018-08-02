@@ -4,7 +4,7 @@
   <br>
 
   <div *ngFor="let convo of messageData['messageList']">
-    <div class="message-section" (click)="select(convo['userId'])">
+    <div class="message-section" (click)="selectConversation(convo['userId'])">
       <h6>{{convo['user']}}</h6>
       <p>{{convo['message']}}</p>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-message-list',
@@ -8,10 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MessageListComponent implements OnInit {
 
   @Input('messageData') messageData: Object;
-  
+  @Output() convoSelected = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  selectConversation(convo: number){
+    this.convoSelected.emit(convo);
   }
 
 }

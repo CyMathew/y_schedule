@@ -25,7 +25,6 @@ public class MessageService2 {
 		JSONArray messageList = new JSONArray();
 
 		
-		
 		for (MessageListBean m : list) {
 			System.out.println(m);
 			JSONObject mess = new JSONObject();

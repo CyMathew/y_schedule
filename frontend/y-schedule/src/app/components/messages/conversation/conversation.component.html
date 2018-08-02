@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <br>
+    <h3>Conversations</h3>
+    <br>
+  
+    <div *ngFor="let convo of conversation['messages']">
+      <div class="message-section">
+        <p>{{convo['message']}}</p>
+      </div>
+      <br>
+    </div>
+  
+    <div class="message-section">
+      <form class="form-inline">
+        <div class="mb-2">
+          Select a User
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <button class="btn btn-succes mx-sm-1 mb-2">Add Conversation</button>
+      </form>
+    </div>
+  </div>

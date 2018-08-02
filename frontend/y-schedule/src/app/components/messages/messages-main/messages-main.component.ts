@@ -10,16 +10,19 @@ export class MessagesMainComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
+  showConvo: boolean = false;
+  conversationId: number;
   messageData: object = {
-    messageList:
-      [
-        // { messageListID: 1, userId: 1, user: "user", message: '' },
-        // { messageListID: 2, userId: 2, user: "person", message: 'blarg blarg blarg blarg blarg blarg blarg blarg ' },
-        // { messageListID: 3, userId: 3, user: "gai", message: '' },
-        // { messageListID: 4, userId: 4, user: "other", message: '' },
-      ]
-
+    messageList: []
+    // [
+    //   { messageListID: 1, userId: 1, user: "user", message: '' },
+    //   { messageListID: 2, userId: 2, user: "person", message: 'blarg blarg blarg blarg blarg blarg blarg blarg ' },
+    //   { messageListID: 3, userId: 3, user: "gai", message: '' },
+    //   { messageListID: 4, userId: 4, user: "other", message: '' },
+    // ]
   };
+
+  
 
   ngOnInit() {
     this.fetchConversation();
@@ -37,12 +40,18 @@ export class MessagesMainComponent implements OnInit {
   }
 
   receiveConversations(data) {
-    console.log(data);
+    console.log("receive conversations", data);
     this.messageData = data;
   }
 
-  selectConversation(messageListId: number){
-    this.convoSelected.emit(day);
+  onConvoSelected(convo: number) {
+    this.showConvo = true;
+    this.conversationId = convo;
   }
+
+  onBack(){
+    this.showConvo = false;
+  }
+
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-conversation',
@@ -7,17 +8,36 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 })
 export class ConversationComponent implements OnInit {
 
-  
+  @Input('conversationId') conversationId: Object;
+  @Output() convoSelected = new EventEmitter<number>();
+  @Output() backToMainView = new EventEmitter<number>();
 
-  constructor() { }
+  conversation: object;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges){
-
+    let params = {
+      "action": "getMessagesByID",
+      "messageListId": "" + this.conversationId
+    }
+    this.authService.send("/message.do", params).subscribe(
+      data => this.receiveMessages(data),
+      Error => this.authService.checkSession(Error)
+    )
   }
 
-  
+  receiveMessages(data) {
+    console.log("receive messages", data);
+    this.conversation = data;
+  }
+
+  back(){
+    this.backToMainView.emit(1);
+    this.conversation = null;
+  }
 
 }

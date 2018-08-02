@@ -1,2 +1,2 @@
-<app-message-list [messageData]="messageData"></app-message-list>
-<app-conversation></app-conversation>
+<app-message-list *ngIf="!showConvo" [messageData]="messageData" (onConvoSelected)="onConvoSelected($event)"></app-message-list>
+<app-conversation *ngIf="showConvo" [conversationId]="conversationId" (backToMainView)="onBack($event)"></app-conversation>
