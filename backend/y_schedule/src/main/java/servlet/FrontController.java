@@ -74,7 +74,7 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("user/MessageServlet");
 			rd.forward(request, response);
 			break;
-		case "messageList":
+		case "messagelist":
 			rd = request.getRequestDispatcher("user/MessageListServlet");
 			rd.forward(request, response);
 			break;

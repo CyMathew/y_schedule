@@ -22,7 +22,7 @@ export class MessagesMainComponent implements OnInit {
   };
 
   ngOnInit() {
-
+    this.fetchConversation();
   }
 
   fetchConversation() {
@@ -30,7 +30,6 @@ export class MessagesMainComponent implements OnInit {
     let params = {
       "action": "getMessageListsByID",
     }
-
     this.authService.send("/messageList.do", params).subscribe(
       data => this.receiveConversations(data),
       Error => this.authService.checkSession(Error)
@@ -39,6 +38,7 @@ export class MessagesMainComponent implements OnInit {
 
   receiveConversations(data) {
     console.log(data);
+    this.messageData = data;
   }
 
 }

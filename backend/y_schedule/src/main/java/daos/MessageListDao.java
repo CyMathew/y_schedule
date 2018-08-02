@@ -20,8 +20,8 @@ public class MessageListDao {
 		ArrayList<MessageListBean> messages = new ArrayList<MessageListBean>();
 		Session session = HibernateUtil.getSession();
 		Criteria crit = session.createCriteria(MessageListBean.class);
-		List<MessageListBean> list1 = crit.add(Restrictions.like("MessageList.user1", id)).list();
-		List<MessageListBean> list2 = crit.add(Restrictions.like("MessageList.user2", id)).list();
+		List<MessageListBean> list1 = crit.add(Restrictions.like("user1", id)).list();
+		List<MessageListBean> list2 = crit.add(Restrictions.like("user2", id)).list();
 		for(MessageListBean m: list1) {
 			messages.add(m);
 		}
@@ -50,5 +50,24 @@ public class MessageListDao {
 		}
 		
 		return "success";
+	}
+	
+	public MessageListBean getMessageListById(Integer id) {
+		MessageListBean mlb = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			mlb = (MessageListBean) session.createQuery("FROM MessageList WHERE message_list_id = " + id)
+					.uniqueResult();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close(); // persons is now in the detached state.
+		}
+		return mlb;
 	}
 }

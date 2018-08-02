@@ -27,7 +27,7 @@ public class MessageListServlet extends HttpServlet {
 		ParsedRequest r = SessionUtil.getParsedRequest(request);
 		
 		JSONObject json = new JSONObject();
-		json.put("MessageLists", MLS.parseRequest(r.getParameters(), r.getUserId()));
+		json.put("messageList", MLS.parseRequest(r.getParameters(), r.getUserId()));
 		
 		JSONHelper.sendResponse(response, json);
 	}
