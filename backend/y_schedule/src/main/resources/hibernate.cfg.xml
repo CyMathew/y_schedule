@@ -66,6 +66,8 @@
 				<mapping class="beans.UserBean"/>
 				<mapping class="beans.EmployeeAvailabilityBean"/>
 				<mapping class="beans.ScheduleTimeBean"/>
+				<mapping class="beans.MessageListBean"/>
+				<mapping class="beans.MessageBean"/>
 
 	</session-factory>
 </hibernate-configuration>

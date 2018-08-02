@@ -2,6 +2,7 @@ package services;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 //import static org.mockito.Matchers.intThat;
 
@@ -11,8 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import beans.EmployeeAvailabilityBean;
+import beans.ScheduleTimeBean;
 import beans.UserBean;
 import daos.EmployeeDao;
+import daos.ManagerDao;
 import daos.UserDao;
 import util.DateTimeHelper;
 
@@ -158,6 +161,41 @@ public class EmployeeService {
 		System.out.println(ls);
 		return (ls.size() > 0);
 		
+	}
+	
+	public JSONObject selectScheduledTimesByWeek(Integer empId, Integer week) {
+
+		JSONObject schedule = new JSONObject();
+		JSONObject employee;
+		
+		UserBean user = new UserDao().getUserById(empId);
+		
+		Timestamp start = DateTimeHelper.getWeekStartByOffset(week);
+		Timestamp end = DateTimeHelper.getWeekEnd(start);
+
+		List<ScheduleTimeBean> times = new EmployeeDao().getScheduleByEmployee(empId, start, end);
+
+		schedule.put("dates", DateTimeHelper.getWeekDates(week));
+
+		JSONObject shifts = new JSONObject();
+		
+		for (ScheduleTimeBean b : times) {
+			JSONObject shift = new JSONObject();
+			int day = DateTimeHelper.TimestampGetDay(b.getStart());
+			shift.put("day", day);
+			shift.put("start", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
+			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getEnd()));
+			shifts.put("" + day, shift);
+		}
+		
+		employee = new JSONObject();
+		employee.put("hours", ""+0);
+		employee.put("shifts", shifts);
+		employee.put("name", user.getUser_fname()+ " " + user.getUser_lname());
+
+		schedule.put("employee", employee);
+
+		return schedule;
 	}
 
 }

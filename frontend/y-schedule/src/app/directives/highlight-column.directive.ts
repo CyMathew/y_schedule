@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
   selector: '[appHighlightColumn]'
@@ -6,5 +6,7 @@ import { Directive } from '@angular/core';
 export class HighlightColumnDirective {
 
   constructor() { }
+
+  @Input('column') column: string;
 
 }

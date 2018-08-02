@@ -9,8 +9,10 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import beans.EmployeeAvailabilityBean;
 import beans.ScheduleTimeBean;
 import beans.UserBean;
+import daos.EmployeeDao;
 import daos.ManagerDao;
 import daos.UserDao;
 import util.DateTimeHelper;
@@ -102,15 +104,15 @@ public class ManagerService {
 			int day = DateTimeHelper.TimestampGetDay(b.getStart());
 			shift.put("day", day);
 			shift.put("start", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
-			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getStart()));
+			shift.put("end", DateTimeHelper.TimestampToTimeFloat(b.getEnd()));
 			shifts.put("" + day, shift);
 		}
-		
-		for(UserBean user : employeeMap.keySet()) {
+
+		for (UserBean user : employeeMap.keySet()) {
 			employee = new JSONObject();
-			employee.put("hours", ""+0);
+			employee.put("hours", "" + 0);
 			employee.put("shifts", employeeMap.get(user));
-			employee.put("name", user.getUser_fname()+ " " + user.getUser_lname());
+			employee.put("name", user.getUser_fname() + " " + user.getUser_lname());
 			employees.put(employee);
 		}
 
@@ -120,6 +122,10 @@ public class ManagerService {
 	}
 
 	public static JSONObject setScheduleEmployee(JSONObject jsonObject) {
+
+		if (jsonObject.getString("userId").length() == 0)
+			return new JSONObject().put("result", "failure");
+
 		Integer userId = Integer.parseInt(jsonObject.getString("userId"));
 		String startTime = jsonObject.getString("startTime");
 		String endTime = jsonObject.getString("endTime");
@@ -138,8 +144,37 @@ public class ManagerService {
 		new ManagerDao().createScheduleTimeBean(0, startTs, endTs, b);
 
 		JSONObject schedule = new JSONObject();
+		schedule.put("result", "success");
 
 		return schedule;
+	}
+
+	public static JSONObject getEmployeeAvailabilityByDay(JSONObject jsonObject) {
+		Integer id = Integer.parseInt(jsonObject.getString("userId"));
+		Integer day = Integer.parseInt(jsonObject.getString("day"));
+
+		return getEmployeeAvailabilityByDay(id, day);
+
+	}
+
+	private static JSONObject getEmployeeAvailabilityByDay(Integer id, Integer day) {
+
+		JSONObject obj = new JSONObject();
+		JSONArray times = new JSONArray();
+
+		List<EmployeeAvailabilityBean> ls = new EmployeeDao().getAvailableTimesByDay(id,
+				DateTimeHelper.getDayOfWeekName(day));
+
+		for (EmployeeAvailabilityBean b : ls) {
+			JSONObject time = new JSONObject();
+			time.put("start", b.getStart());
+			time.put("end", b.getEnd());
+			times.put(time);
+		}
+
+		obj.put("times", times);
+
+		return obj;
 	}
 
 }

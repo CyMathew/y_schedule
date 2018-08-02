@@ -49,15 +49,7 @@ public class ManagerDao {
 		Transaction tx = null;
 		return list;
 	}
-	public List<ScheduleTimeBean> getScheduleByEmployee(Integer id, Timestamp startTime, Timestamp endTime) {
-		Session session = HibernateUtil.getSession();
-		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
-		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", id))
-				.add(Restrictions.between("startTime", startTime, endTime)).list();
-		Transaction tx = null;
-		
-		return list;
-	}
+	
 	public ScheduleTimeBean setScheduleByUserId(Timestamp start, Timestamp end, Integer userId) {
 		ScheduleTimeBean bean = null;
 		Session session = HibernateUtil.getSession();
