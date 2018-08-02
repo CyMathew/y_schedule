@@ -18,10 +18,10 @@ public class MessageListBean {
 	@SequenceGenerator(initialValue= 1 , allocationSize = 1, sequenceName="MessageListBeanSEQ", name="MessageListBeanSEQ")
 	@GeneratedValue(generator="MessageListBeanSEQ", strategy=GenerationType.SEQUENCE)
 	private Integer message_list_id;
-	@Column
-	private Integer user1;
-	@Column
-	private Integer user2;
+	@ManyToOne
+	private UserBean user1;
+	@ManyToOne
+	private UserBean user2;
 	
 	@Override
 	public String toString() {
@@ -32,7 +32,7 @@ public class MessageListBean {
 		super();
 	}
 	
-	public MessageListBean(Integer user1, Integer user2) {
+	public MessageListBean(UserBean user1, UserBean user2) {
 		this.user1 = user1;
 		this.user2 = user2;
 	}
@@ -45,19 +45,19 @@ public class MessageListBean {
 		this.message_list_id = message_list_id;
 	}
 	
-	public Integer getUser1() {
+	public UserBean getUser1() {
 		return user1;
 	}
 	
-	public void setUser1(Integer user1) {
+	public void setUser1(UserBean user1) {
 		this.user1 = user1;
 	}
 	
-	public Integer getUser2() {
+	public UserBean getUser2() {
 		return user2;
 	}
 	
-	public void setUser2(Integer user2) {
+	public void setUser2(UserBean user2) {
 		this.user2 = user2;
 	}
 }

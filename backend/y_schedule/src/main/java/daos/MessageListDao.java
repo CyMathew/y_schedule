@@ -18,7 +18,7 @@ import util.HibernateUtil;
 
 public class MessageListDao {
 
-	public ArrayList<MessageListBean> getMessageListsByUserID(Integer id){
+	public ArrayList<MessageListBean> getMessageListsByUserID(UserBean id){
 //		ArrayList<MessageListBean> messages = new ArrayList<MessageListBean>();
 		Session session = HibernateUtil.getSession();
 		ArrayList<MessageListBean> messages;
@@ -43,7 +43,7 @@ public class MessageListDao {
 		return messages;
 	}
 	
-	public String createNewMessageList(Integer uID, Integer uID2) {
+	public String createNewMessageList(UserBean uID, UserBean uID2) {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = null;
 		MessageListBean newMessageList = new MessageListBean(uID,uID2);

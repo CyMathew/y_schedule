@@ -16,7 +16,7 @@ import daos.UserDao;
 
 public class MessageService2 {
 
-	public static JSONObject getMessageListsByID(Integer userId) {
+	public static JSONObject getMessageListsByID(UserBean userId) {
 		MessageListDao mld = new MessageListDao();
 		
 		System.out.println("getMessageListsByID - userId: " + userId);
@@ -49,9 +49,12 @@ public class MessageService2 {
 
 	public static JSONObject createMessageList(Integer userId, Integer otherUser) {
 		MessageListDao mld = new MessageListDao();
-		mld.createNewMessageList(userId, otherUser);
+		UserBean userbean = new UserDao().getUserById(userId);
+		UserBean userbeanOther = new UserDao().getUserById(otherUser);
+		
+		mld.createNewMessageList(userbean, userbeanOther);
 
-		return getMessageListsByID(userId);
+		return getMessageListsByID(userbean);
 	}
 
 	public static JSONObject getMessagesByID(Integer userId, JSONObject parameters) {
@@ -94,6 +97,12 @@ public class MessageService2 {
 		new MessageDao().createNewMessage(user, message, now, mlb);
 
 		return getMessagesByID(userId, messageListId);
+	}
+
+	public static JSONObject getMessageListsByID(Integer userId) {
+		UserBean b = new UserDao().getUserById(userId);
+		
+		return getMessageListsByID(b);
 	}
 
 }
