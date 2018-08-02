@@ -1,5 +1,6 @@
 package daos;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import beans.EmployeeAvailabilityBean;
+import beans.ScheduleTimeBean;
 import beans.UserBean;
 import util.HibernateUtil;
 
@@ -101,6 +103,16 @@ public class EmployeeDao {
 
 		return list;
 
+	}
+	
+	public List<ScheduleTimeBean> getScheduleByEmployee(Integer id, Timestamp startTime, Timestamp endTime) {
+		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
+		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", id))
+				.add(Restrictions.between("startTime", startTime, endTime)).list();
+		Transaction tx = null;
+		
+		return list;
 	}
 
 }

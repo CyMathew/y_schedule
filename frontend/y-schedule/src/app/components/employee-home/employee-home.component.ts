@@ -13,38 +13,31 @@ export class EmployeeHomeComponent implements OnInit
       endHour: 21
     }
 
+    displayDates = {
+      beginDate: "",
+      endDate: ""
+    };
+    
+    weekNeeded = 0;
     events: any;
 
-  //   events = {
-  //     "weekDetails":
-  //     [{
-  //       day: 'sunday',
-  //       startTime: '8:00',
-  //       endTime: '11:00'
-  //     },
-  //     {
-  //       day: 'wednesday',
-  //       startTime: '10:00',
-  //       endTime: '12:00'
-  //     },
-  //     {
-  //       day: 'wednesday',
-  //       startTime: '15:00',
-  //       endTime: '19:00'
-  //     },
-  //     {
-  //       day: 'thursday',
-  //       startTime: '9:00',
-  //       endTime: '16:00'
-  //     }
-  //   ]
-  // };
+
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() 
   {
-    this.authService.send("/y_schedule/employee.do", {action: "getAvailDetails"}).subscribe(
+    this.requestWeek(+this.weekNeeded);
+  }
+
+  requestWeek(weekOffset: number)
+  {
+    let payload = {
+      action: "getWeekSchedule",
+      weekOffset: weekOffset
+    };
+
+    this.authService.send("/employee.do", payload).subscribe(
       data => { this.setEvents(data)},
       Error => console.log('Error')
     );
@@ -52,12 +45,20 @@ export class EmployeeHomeComponent implements OnInit
 
   setEvents(data)
   {
-    this.events = data;
+    this.displayDates.beginDate = data["dates"][0];
+    this.displayDates.endDate = data["dates"][6];
+    // console.log(data["employee"]["shifts"]);
+    this.events = data["employee"]["shifts"];
   }
 
-  // ngAfterViewInit() 
-  // {
-    
-  // }
+  getPrevious()
+  {
+    this.requestWeek(--this.weekNeeded);
+  }
+
+  getNext()
+  {
+    this.requestWeek(++this.weekNeeded);
+  }
 
 }

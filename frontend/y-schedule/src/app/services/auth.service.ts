@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetUrlService } from './get-url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -14,13 +15,22 @@ export class AuthService {
   constructor(private http: HttpClient, private url: GetUrlService, private cookie: CookieService, private router: Router) { }
 
   login(username: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin':'*',
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+  console.log("headers", httpOptions);
+
     let param = {
       action: "login",
       username: username,
       password: password
     };
 
-    let url: string = this.url.get() + "/y_schedule/login.do";
+    let url: string = this.url.get() + "/login.do";
 
     return this.http.post(url, param);
 
@@ -44,7 +54,7 @@ export class AuthService {
       param: param
     }
     let sub = this.http.post(this.url.get() + url, body);
-   
+
     return sub;
   }
 
