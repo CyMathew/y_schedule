@@ -98,6 +98,7 @@ public class MessageService2 {
 		for (MessageBean m : list) {
 			JSONObject json = new JSONObject();
 			json.put("userID", (m.getuserID()));
+			json.put("isOther", (m.getuserID().getUser_id() == userId));
 			json.put("message", (m.getMessage()));
 			json.put("timestamp", (m.getSentTime()));
 			messages.put(json);

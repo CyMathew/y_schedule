@@ -22,3 +22,13 @@ body {
 	padding: 10px;
 	overflow: hidden;
 }
+
+.message-self {
+	background: #133C7F;
+	margin-left: 50px;
+}
+
+.message-other {
+	background: #273038;
+	margin-right: 50px;
+}

@@ -28,6 +28,7 @@ import { ConversationComponent } from './components/messages/conversation/conver
 import { MessagesMainComponent } from './components/messages/messages-main/messages-main.component';
 import { StartConversationComponent } from './components/messages/start-conversation/start-conversation.component';
 import { MessageBoxComponent } from './components/messages/message-box/message-box.component';
+import { MessageColorDirective } from './directives/message-color.directive';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MessageBoxComponent } from './components/messages/message-box/message-b
     MessagesMainComponent,
     StartConversationComponent,
     MessageBoxComponent,
+    MessageColorDirective,
   ],
   imports: [
     BrowserModule,
