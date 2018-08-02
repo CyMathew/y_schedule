@@ -20,8 +20,8 @@ public class MessageBean {
 	@SequenceGenerator(initialValue= 1 , allocationSize = 1, sequenceName="MessageBeanSEQ", name="MessageBeanSEQ")
 	@GeneratedValue(generator="MessageBeanSEQ", strategy=GenerationType.SEQUENCE)
 	private Integer message_id;
-	@Column
-	private Integer userID;
+	@ManyToOne
+	private UserBean userID;
 	@Column
 	private String message;
 	@Column
@@ -32,13 +32,22 @@ public class MessageBean {
 	public MessageBean() {
 		super();
 	}
-	public MessageBean(Integer userID, String message, Timestamp sentTime, MessageListBean messageListID) {
+	public MessageBean(UserBean userID, String message, Timestamp sentTime, MessageListBean messageListID) {
 		this.userID = userID;
 		this.message = message;
 		this.sentTime = sentTime;
 		this.messageListID = messageListID;
 	}
 
+	public MessageBean(Integer message_id, UserBean userID, String message, Timestamp sentTime,
+			MessageListBean messageListID) {
+		super();
+		this.message_id = message_id;
+		this.userID = userID;
+		this.message = message;
+		this.sentTime = sentTime;
+		this.messageListID = messageListID;
+	}
 	public Integer getMessage_id() {
 		return message_id;
 	}
@@ -55,11 +64,11 @@ public class MessageBean {
 		this.message_id = message_id;
 	}
 
-	public Integer getuserID() {
+	public UserBean getuserID() {
 		return userID;
 	}
 	
-	public void setuserID(Integer userID) {
+	public void setuserID(UserBean userID) {
 		this.userID = userID;
 	}
 	

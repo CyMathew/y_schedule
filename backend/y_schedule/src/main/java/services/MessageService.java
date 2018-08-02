@@ -29,7 +29,8 @@ public class MessageService {
 				buildJsonList(json, id);
 				break;
 			case "createMessage":
-				addMessage(json, id);
+				//addMessage(json, id);
+				break;
 			}
 		}
 		return message;
@@ -65,4 +66,5 @@ public class MessageService {
 //				(Timestamp) json.get("timestamp"), mlb);
 //		return buildJsonList(json, id);
 //	}
+
 }
