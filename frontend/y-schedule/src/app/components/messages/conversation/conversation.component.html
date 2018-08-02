@@ -6,7 +6,7 @@
     <br>
   
     <div *ngFor="let convo of conversation['messages']">
-      <div class="message-section">
+      <div [appMessageColor]="convo['isOther']" class="message-section" >
         <p>{{convo['message']}}</p>
       </div>
       <br>
