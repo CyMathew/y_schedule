@@ -43,7 +43,7 @@ public class Driver {
 			session.close(); //persons is now in the detached state.
 }		UserDao ud = new UserDao();
 		UserBean bean = new UserBean();
-		bean = ud.getUserById(12);
+		bean = ud.getUserById(1);
 		MessageDao MD = new MessageDao();
 		System.out.println(MD.createNewMessage(bean, "TEST TEST TEST TEST", new Timestamp(time),mlb));
 		System.exit(0);

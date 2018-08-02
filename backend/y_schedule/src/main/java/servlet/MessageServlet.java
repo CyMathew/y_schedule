@@ -53,8 +53,9 @@ public class MessageServlet extends HttpServlet {
 		case "createMessage":
 			jsonOut = MessageService2.createMessage(r.getUserId(), r.getParameters());
 			break;
-
 		}
+		
+		JSONHelper.sendResponse(response, jsonOut);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

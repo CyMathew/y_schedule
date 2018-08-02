@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,6 +23,11 @@ public class MessageListBean {
 	@Column
 	private Integer user2;
 	
+	@Override
+	public String toString() {
+		return "MessageListBean [message_list_id=" + message_list_id + ", user1=" + user1 + ", user2=" + user2 + "]";
+	}
+
 	public MessageListBean() {
 		super();
 	}

@@ -13,10 +13,10 @@ export class MessagesMainComponent implements OnInit {
   messageData: object = {
     messageList:
       [
-        { messageListID: 1, userId: 1, user: "user", message: '' },
-        { messageListID: 2, userId: 2, user: "person", message: 'blarg blarg blarg blarg blarg blarg blarg blarg ' },
-        { messageListID: 3, userId: 3, user: "gai", message: '' },
-        { messageListID: 4, userId: 4, user: "other", message: '' },
+        // { messageListID: 1, userId: 1, user: "user", message: '' },
+        // { messageListID: 2, userId: 2, user: "person", message: 'blarg blarg blarg blarg blarg blarg blarg blarg ' },
+        // { messageListID: 3, userId: 3, user: "gai", message: '' },
+        // { messageListID: 4, userId: 4, user: "other", message: '' },
       ]
 
   };
@@ -30,7 +30,7 @@ export class MessagesMainComponent implements OnInit {
     let params = {
       "action": "getMessageListsByID",
     }
-    this.authService.send("/messageList.do", params).subscribe(
+    this.authService.send("/message.do", params).subscribe(
       data => this.receiveConversations(data),
       Error => this.authService.checkSession(Error)
     )
@@ -39,6 +39,10 @@ export class MessagesMainComponent implements OnInit {
   receiveConversations(data) {
     console.log(data);
     this.messageData = data;
+  }
+
+  selectConversation(messageListId: number){
+    this.convoSelected.emit(day);
   }
 
 }

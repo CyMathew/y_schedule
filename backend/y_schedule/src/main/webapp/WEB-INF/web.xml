@@ -110,22 +110,12 @@
   </filter-mapping>
   <servlet>
     <description></description>
-    <display-name>MessageListServlet</display-name>
-    <servlet-name>MessageListServlet</servlet-name>
-    <servlet-class>servlet.MessageListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MessageListServlet</servlet-name>
-    <url-pattern>/user/MessageListServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>MessageServlet</display-name>
     <servlet-name>MessageServlet</servlet-name>
     <servlet-class>servlet.MessageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MessageListServlet</servlet-name>
+    <servlet-name>MessageServlet</servlet-name>
     <url-pattern>/user/MessageServlet</url-pattern>
   </servlet-mapping>
 </web-app>
