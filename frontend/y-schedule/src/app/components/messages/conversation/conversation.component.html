@@ -12,5 +12,5 @@
       <br>
     </div>
   
-    <app-message-box [otherId]="otherId" [conversationId]="conversationId"></app-message-box>
+    <app-message-box [otherId]="otherId" [conversationId]="conversationId" (messageUpdate)="receiveMessages($event)"></app-message-box>
   </div>

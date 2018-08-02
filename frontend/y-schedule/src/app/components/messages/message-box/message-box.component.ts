@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class MessageBoxComponent implements OnInit {
 
   @Input('otherId') otherId: number;
   @Input('conversationId') conversationId: number;
+  @Output() messageUpdate = new EventEmitter<object>();
   
   messageText: string;
   constructor(private authService: AuthService) { }
@@ -36,7 +37,8 @@ export class MessageBoxComponent implements OnInit {
   }
 
   receiveMessages(data){
-    console.log("receiveMessages", data)
+    //console.log("receiveMessagesBox", data)
+    this.messageUpdate.emit(data);
   }
 
 }

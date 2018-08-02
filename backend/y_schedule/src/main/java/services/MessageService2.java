@@ -3,6 +3,7 @@ package services;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -16,7 +17,7 @@ import daos.MessageListDao;
 import daos.UserDao;
 
 public class MessageService2 {
-	
+
 	public static JSONObject getMessageListsByID(Integer userId) {
 		UserBean b = new UserDao().getUserById(userId);
 
@@ -37,7 +38,7 @@ public class MessageService2 {
 			mess.put("messageListID", (m.getMessage_list_id()));
 
 			UserBean otherUser;
-			
+
 			if (m.getUser1().getUser_id() == userBean.getUser_id())
 				otherUser = m.getUser2();
 			else
@@ -45,10 +46,21 @@ public class MessageService2 {
 
 			mess.put("userId", otherUser.getUser_id());
 			mess.put("userName", UserService.getUserName(otherUser));
+			mess.put("latestMessage", MessageListGetLatest(m));
 			messageList.put(mess);
 		}
 
 		return new JSONObject().put("messageList", messageList);
+	}
+
+	public static String MessageListGetLatest(MessageListBean m) {
+
+		MessageBean b = new MessageDao().getLastestMessage(m);
+
+		if (b == null)
+			return "";
+
+		return b.getMessage();
 	}
 
 	public static JSONObject createMessageList(Integer userId, JSONObject parameters) {
@@ -61,7 +73,10 @@ public class MessageService2 {
 		UserBean userbean = new UserDao().getUserById(userId);
 		UserBean userbeanOther = new UserDao().getUserById(otherUser);
 
-		MessageListBean b = mld.createNewMessageList(userbean, userbeanOther);
+		MessageListBean b = mld.getMessageListByUsers(userbean, userbeanOther);
+
+		if (b == null)
+			b = mld.createNewMessageList(userbean, userbeanOther);
 
 		return new JSONObject().put("messageListId", b.getMessage_list_id());
 	}
@@ -74,7 +89,7 @@ public class MessageService2 {
 	}
 
 	public static JSONObject getMessagesByListId(Integer userId, Integer messageListId) {
-		ArrayList<MessageBean> list = new ArrayList<MessageBean>();
+		List<MessageBean> list = new ArrayList<MessageBean>();
 		MessageDao mld = new MessageDao();
 		JSONArray messages = new JSONArray();
 
@@ -87,25 +102,25 @@ public class MessageService2 {
 			json.put("timestamp", (m.getSentTime()));
 			messages.put(json);
 		}
-		
+
 		UserBean otherUser = conversationGetOther(userId, messageListId);
-		
+
 		JSONObject jsonOut = new JSONObject();
 		jsonOut.put("messages", messages);
 		jsonOut.put("otherName", UserService.getUserName(otherUser));
 		jsonOut.put("otherId", otherUser.getUser_id());
-		
+
 		return jsonOut;
 	}
 
 	private static UserBean conversationGetOther(Integer userId, Integer messageListId) {
-		
+
 		System.err.println("userId: " + userId);
 		System.err.println("messageListId: " + messageListId);
-		
+
 		MessageListBean mlb = new MessageListDao().getMessageListById(messageListId);
-		
-		if(mlb.getUser1().getUser_id() == userId)
+
+		if (mlb.getUser1().getUser_id() == userId)
 			return mlb.getUser2();
 		else
 			return mlb.getUser1();

@@ -23,14 +23,13 @@ export class EditTimeSheetComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.week = parseInt(params["week"]);
-        this.showWeek = true;
         this.fetchSchedule();
       });
   }
 
   fetchSchedule(){
     console.log("fetching week: " + this.week);
-    this.authService.send("/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
+    this.authService.send("/y_schedule/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
       data => this.receiveSchedule(data), 
       err => this.authService.checkSession(err)
     );

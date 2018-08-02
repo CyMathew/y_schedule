@@ -19,7 +19,7 @@ import util.HibernateUtil;
 public class MessageListDao {
 
 	public ArrayList<MessageListBean> getMessageListsByUserID(UserBean id){
-//		ArrayList<MessageListBean> messages = new ArrayList<MessageListBean>();
+
 		Session session = HibernateUtil.getSession();
 		ArrayList<MessageListBean> messages;
 		
@@ -31,15 +31,6 @@ public class MessageListDao {
 		query.setParameter("nuid2", id);
 		messages = (ArrayList<MessageListBean>)query.list();
 
-//		Criteria crit = session.createCriteria(MessageListBean.class);
-//		List<MessageListBean> list1 = crit.add(Restrictions.like("user1", id)).list();
-//		List<MessageListBean> list2 = crit.add(Restrictions.like("user2", id)).list();
-//		for(MessageListBean m: list1) {
-//			messages.add(m);
-//		}
-//		for(MessageListBean m: list2) {
-//			messages.add(m);
-//		}
 		return messages;
 	}
 	
@@ -70,8 +61,10 @@ public class MessageListDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			mlb = (MessageListBean) session.createQuery("FROM MessageListBean WHERE message_list_id = " + id)
-					.uniqueResult();
+			Query query = session.createQuery("FROM MessageListBean WHERE message_list_id = :nid");
+			query.setParameter("nid", id);
+			mlb = (MessageListBean) query.uniqueResult();
+			
 		} catch (HibernateException e) {
 			if (tx != null) {
 				tx.rollback();
@@ -82,4 +75,28 @@ public class MessageListDao {
 		}
 		return mlb;
 	}
+
+	public MessageListBean getMessageListByUsers(UserBean userId1, UserBean userId2) {
+		MessageListBean mlb = null;
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Query query = session.createQuery("FROM MessageListBean WHERE (user1 = :nid1 AND user2 = :nid2) OR (user2 = :nid1 AND user1 = :nid2)");
+			query.setParameter("nid1", userId1);
+			query.setParameter("nid2", userId2);
+			mlb = (MessageListBean) query.uniqueResult();
+			
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close(); // persons is now in the detached state.
+		}
+		return mlb;
+	}
+
+	
 }

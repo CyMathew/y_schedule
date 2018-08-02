@@ -13,6 +13,7 @@ export class MessageListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   selectConversation(convo: number){

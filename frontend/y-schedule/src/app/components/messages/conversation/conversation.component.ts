@@ -17,9 +17,12 @@ export class ConversationComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
+    this.fetchMessages();
+    setInterval(()=> {
+      this.fetchMessages(); },10000); 
+    }
+  
+  fetchMessages(){
     let params = {
       "action": "getMessagesByID",
       "messageListId": "" + this.conversationId

@@ -6,7 +6,7 @@
   <div *ngFor="let convo of messageData['messageList']">
     <div class="message-section" (click)="selectConversation(convo['messageListID'])">
       <h6>{{convo['userName']}}</h6>
-      <p>{{convo['message']}}</p>
+      <p>{{convo['latestMessage']}}</p>
     </div>
   </div>
 </div>
