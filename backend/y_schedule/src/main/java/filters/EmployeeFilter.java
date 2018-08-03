@@ -51,7 +51,7 @@ public class EmployeeFilter implements Filter {
 		if(session == null || r.getUserId() == null) {
 			logger.warn("attempting access with no user session");
 			response.sendError(401);
-		}else if(r.getUserRole().equals("employee")){
+		}else if(!r.getUserRole().equals("employee")){
 			logger.warn("attempting access to employee; "  + r.getUserName() + " is not an employee");
 			response.sendError(403);
 		}else {
