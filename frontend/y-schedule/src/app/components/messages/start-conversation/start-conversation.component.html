@@ -1,0 +1,32 @@
+<!--
+<div class="container-fluid">
+  <div class="message-section" *ngIf="this.coworkerData['coworkers'] != null">
+    <form  [formGroup]="coworkerForm" (ngSubmit)="tryAddConvo()">
+        <select class="form-control" id="co_option" formControlName="coworkerControl">
+          <option [ngValue]="emp.userId" *ngFor="let emp of coworkerData['coworkers']">
+            {{emp.name}}
+            </option>
+        </select>
+    </form>
+  </div>
+</div>
+-->
+
+<div class="container-fluid">
+    <div *ngIf="coworkerData['coworkers'] != null">
+      <form class="form-inline" [formGroup]="coworkerForm" (ngSubmit)="tryAddConvo()">
+        <div class="mb-2">
+          Select a User
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+  
+          <select class="form-control" id="co_option" formControlName="coworkerId">
+            <option [value]="emp['userId']" *ngFor="let emp of coworkerData['coworkers']">
+              {{emp["name"]}}
+          </select>
+  
+        </div>
+        <button class="btn btn-success mx-sm-1 mb-2">Add Conversation</button>
+      </form>
+    </div>
+  </div>

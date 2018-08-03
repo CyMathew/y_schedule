@@ -14,6 +14,9 @@ import org.json.JSONObject;
 
 import util.JSONHelper;
 
+import util.JSONHelper;
+import util.ParsedRequest;
+
 /**
  * Servlet implementation class FrontController
  */
@@ -67,8 +70,16 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("employee/EmployeeServlet");
 			rd.forward(request, response);
 			break;
+		case "message":
+			rd = request.getRequestDispatcher("user/MessageServlet");
+			rd.forward(request, response);
+			break;
+		case "messagelist":
+			rd = request.getRequestDispatcher("user/MessageListServlet");
+			rd.forward(request, response);
+			break;
 		default:
-			System.out.println("hullo?");
+			logger.error("hullo? Invalid action");
 			response.sendError(404);
 		}
 

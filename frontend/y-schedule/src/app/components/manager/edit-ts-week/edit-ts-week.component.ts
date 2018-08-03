@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DateTimeService } from '../../../services/date-time.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -21,18 +21,34 @@ export class EditTsWeekComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams
-      .subscribe(params => {
-        this.updateWeek(parseInt(params["week"]))
-      });
+    .subscribe(params => {
+      this.updateWeek(parseInt(params["week"])), 
+      err => this.authService.checkSession(err)
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    console.log("view init");
+    this.updateWeek(this.week);
   }
 
   selectDay(day) {
-    console.log("emit day: " + day);
-    this.daySelected.emit(day);
+    if(this.week == 1 || this.week == 2){
+      console.log("emit day: " + day);
+      this.daySelected.emit(day);
+    }
   }
 
   getWeek(n: number){
     return this.week + n;
+  }
+
+  getWeekHeader(){
+    if(this.scheduleData["dates"] == null)
+      return "...";
+    else{
+      return this.scheduleData["dates"]["0"] + " - " + this.scheduleData["dates"]["6"];
+    }
   }
 
   updateWeek(week: number){

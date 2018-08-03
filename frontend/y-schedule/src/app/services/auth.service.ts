@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GetUrlService } from './get-url.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -14,13 +15,14 @@ export class AuthService {
   constructor(private http: HttpClient, private url: GetUrlService, private cookie: CookieService, private router: Router) { }
 
   login(username: string, password: string) {
+
     let param = {
       action: "login",
       username: username,
       password: password
     };
 
-    let url: string = this.url.get() + "/y_schedule/login.do";
+    let url: string = this.url.get() + "/login.do";
 
     return this.http.post(url, param);
 
@@ -44,10 +46,6 @@ export class AuthService {
       param: param
     }
     let sub = this.http.post(this.url.get() + url, body);
-    sub.subscribe(data => {}, Error => {
-      console.log(Error);
-      this.router.navigate([""]);
-    })
 
     return sub;
   }
@@ -59,4 +57,33 @@ export class AuthService {
     this.cookie.delete("storeid");
     this.router.navigate([""]);
   }
+  
+  checkSession(error: ErrorEvent){
+    if(error.error == 401){
+      this.router.navigate([""]);
+    }
+    if(error.error == 403){
+      //nav home
+      this.router.navigate([""]);
+    }
+  }
+
+  navigateToRoleHome() {
+    let role = "" + this.cookie.get("userrole");
+
+    switch (role) {
+      case "manager":
+        this.router.navigate(["manage"]);
+        break;
+      case "coordinator":
+        this.router.navigate(["coordinate"]);
+        break;
+      case "employee":
+        this.router.navigate(["home"]);
+        break;
+      default:
+        break;
+    }
+  }
+
 }

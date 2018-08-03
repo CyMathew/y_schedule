@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { RouterModule} from '@angular/router';
 
@@ -22,6 +22,13 @@ import { EditTsSidebarComponent } from './components/manager/edit-ts-sidebar/edi
 import { EditTimeSheetComponent } from './components/manager/edit-time-sheet/edit-time-sheet.component';
 import { HighlightColumnDirective } from './directives/highlight-column.directive';
 import { DatePipe } from '@angular/common';
+import { EmployeeAvailComponent } from './components/employee-avail/employee-avail.component';
+import { MessageListComponent } from './components/messages/message-list/message-list.component';
+import { ConversationComponent } from './components/messages/conversation/conversation.component';
+import { MessagesMainComponent } from './components/messages/messages-main/messages-main.component';
+import { StartConversationComponent } from './components/messages/start-conversation/start-conversation.component';
+import { MessageBoxComponent } from './components/messages/message-box/message-box.component';
+import { MessageColorDirective } from './directives/message-color.directive';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,13 @@ import { DatePipe } from '@angular/common';
     EditTsGraphComponent,
     EditTsSidebarComponent,
     HighlightColumnDirective,
+    EmployeeAvailComponent,
+    MessageListComponent,
+    ConversationComponent,
+    MessagesMainComponent,
+    StartConversationComponent,
+    MessageBoxComponent,
+    MessageColorDirective,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +64,7 @@ import { DatePipe } from '@angular/common';
       headerName: 'My-Xsrf-header'
     }),
     RouterModule.forRoot(approutes),
+    ReactiveFormsModule,
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

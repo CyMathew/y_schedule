@@ -36,7 +36,7 @@
 		However, you can quickly reach the databse cap in AWS if you let each user have a 
 		large amount of connections. -->
 		<property name="hibernate.connection.pool_size">
-			3
+			6
 		</property>
 		
 		<!-- Shows SQL queries that hibernate is using behind the scenes in the console -->
@@ -66,6 +66,8 @@
 				<mapping class="beans.UserBean"/>
 				<mapping class="beans.EmployeeAvailabilityBean"/>
 				<mapping class="beans.ScheduleTimeBean"/>
+				<mapping class="beans.MessageListBean"/>
+				<mapping class="beans.MessageBean"/>
 
 	</session-factory>
 </hibernate-configuration>

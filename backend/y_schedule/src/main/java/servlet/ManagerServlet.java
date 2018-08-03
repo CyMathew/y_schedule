@@ -56,6 +56,10 @@ public class ManagerServlet extends HttpServlet {
 			break;
 		case "scheduleEmployee":
 			jsonOut = ManagerService.setScheduleEmployee(r.getParameters());
+			break;
+		case "EmployeeAvailabilityByDay":
+			jsonOut = ManagerService.getEmployeeAvailabilityByDay(r.getParameters());
+			break;
 		}
 		
 		JSONHelper.sendResponse(response, jsonOut);

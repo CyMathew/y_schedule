@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.Date;
 
 import org.json.JSONArray;
@@ -32,7 +33,7 @@ public class DateTimeHelper {
 
 	public static Timestamp getWeekStartByOffset(int offset) {
 		LocalDateTime temp = LocalDateTime.now();
-		temp.minusDays(7 * offset);
+		temp = temp.plusDays(7 * offset);
 
 		return getWeekStart(temp);
 	}
@@ -57,50 +58,65 @@ public class DateTimeHelper {
 	}
 
 	public static String timeString(int hour, int minute) {
-		
-		String minutes = ""+minute;
-		
+
+		String minutes = "" + minute;
+
 		if (minutes.length() == 1)
 			minutes = "0" + minutes;
-		
+
 		return hour + ":" + minutes;
 	}
-	
+
 	public static JSONArray getWeekDates(int weekOffset) {
 		JSONArray dates = new JSONArray();
 		LocalDateTime ldt = getWeekStartByOffset(weekOffset).toLocalDateTime();
-		
-		for(int i = 0; i < 7; i++) {
+
+		for (int i = 0; i < 7; i++) {
 			dates.put(formatDate(ldt));
 			ldt = ldt.plusDays(1);
 		}
-		
+
 		return dates;
 	}
 
 	public static String formatDate(LocalDateTime localDateTime) {
-		return localDateTime.getDayOfMonth()+"/"+localDateTime.getMonthValue()+"/"+localDateTime.getYear();
+		return localDateTime.getMonthValue() + "/" + localDateTime.getDayOfMonth() + "/" + localDateTime.getYear();
 	}
 
 	public static Timestamp getTimestamp(String date, String time) {
-//		String[] dateParts = date.split("/");
-//		int day = Integer.parseInt(dateParts[0]);
-//		int month = Integer.parseInt(dateParts[1]);
-//		int year = Integer.parseInt(dateParts[2]);
-//		
-//		String[] timeParts = time.split(":");
-//		int hour = Integer.parseInt(timeParts[0]);
-//		int minute = Integer.parseInt(timeParts[1]);
-		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
 		Timestamp ts = null;
+
 		try {
-			ts = new Timestamp(simpleDateFormat.parse(date+" "+time).getTime());
+			ts = new Timestamp(simpleDateFormat.parse(date + " " + time).getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ts;
 	}
+
+	public static float TimeToFloat(String time) {
+		String timeParts[] = time.split(":");
+		float t = Float.parseFloat(timeParts[0]) + Float.parseFloat(timeParts[1]) / 60f;
+		return t;
+	}
+
+	public static Timestamp getWeekEnd(Timestamp date) {
+		return Timestamp.valueOf(date.toLocalDateTime().plusDays(6));
+	}
+
+	public static Integer TimestampGetDay(Timestamp ts) {
+		return ts.toLocalDateTime().getDayOfWeek().getValue() % 7;
+	}
+
+	public static float TimestampToTimeFloat(Timestamp ts) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		String timeStr = sdf.format(ts);
+
+		return TimeToFloat(timeStr);
+	}
+
 }
