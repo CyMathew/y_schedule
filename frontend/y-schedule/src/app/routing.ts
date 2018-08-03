@@ -1,8 +1,8 @@
 
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { EmployeeHomeComponent } from './components/employee-home/employee-home.component';
-import { EmployeeAvailComponent } from './components/employee-avail/employee-avail.component';
+import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
+import { EmployeeAvailComponent } from './components/employee/employee-avail/employee-avail.component';
 import { ManagerHomeComponent } from './components/manager/manager-home/manager-home.component';
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { RegistrationComponent } from './components/registration/registration.component';

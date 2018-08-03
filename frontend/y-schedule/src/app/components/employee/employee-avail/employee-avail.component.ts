@@ -1,6 +1,6 @@
-import { DateTimeService } from './../../services/date-time.service';
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { DateTimeService } from 'src/app/services/date-time.service';
 
 
 @Component({
