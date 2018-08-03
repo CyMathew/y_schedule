@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { RouterModule} from '@angular/router';
 
@@ -24,6 +24,12 @@ import { HighlightColumnDirective } from './directives/highlight-column.directiv
 import { DatePipe } from '@angular/common';
 import { EmployeeAvailComponent } from './components/employee-avail/employee-avail.component';
 import { ManagerDayViewComponent } from './components/views/manager-day-view/manager-day-view.component';
+import { MessageListComponent } from './components/messages/message-list/message-list.component';
+import { ConversationComponent } from './components/messages/conversation/conversation.component';
+import { MessagesMainComponent } from './components/messages/messages-main/messages-main.component';
+import { StartConversationComponent } from './components/messages/start-conversation/start-conversation.component';
+import { MessageBoxComponent } from './components/messages/message-box/message-box.component';
+import { MessageColorDirective } from './directives/message-color.directive';
 
 @NgModule({
   declarations: [
@@ -44,6 +50,12 @@ import { ManagerDayViewComponent } from './components/views/manager-day-view/man
     HighlightColumnDirective,
     EmployeeAvailComponent,
     ManagerDayViewComponent,
+    MessageListComponent,
+    ConversationComponent,
+    MessagesMainComponent,
+    StartConversationComponent,
+    MessageBoxComponent,
+    MessageColorDirective,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +66,7 @@ import { ManagerDayViewComponent } from './components/views/manager-day-view/man
       headerName: 'My-Xsrf-header'
     }),
     RouterModule.forRoot(approutes),
+    ReactiveFormsModule,
   ],
   providers: [CookieService, DatePipe],
   bootstrap: [AppComponent]

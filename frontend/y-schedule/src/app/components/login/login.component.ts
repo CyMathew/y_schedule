@@ -19,11 +19,13 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  ngOnInit() {}
+  ngOnInit() { 
+    this.authService.navigateToRoleHome()
+  }
 
 
   ngAfterViewInit() {
-    console.log(this.url.get());    
+    console.log(this.url.get());
   }
 
   public tryLogin() {
@@ -47,24 +49,13 @@ export class LoginComponent implements OnInit {
   public doLogin(data: Object) {
     console.log(data);
     if (data["result"] == "success") {
-      
+
       this.authService.setSession(data, this.username);
+      this.authService.navigateToRoleHome();
 
-      switch (data["role"]) {
-        case "manager":
-          this.router.navigate(["manage"]);
-          break;
-        case "coordinator":
-          this.router.navigate(["coordinate"]);
-          break;
-        default:
-          this.router.navigate(["home"]);
-          break;
-      }
-    } else {
-      //TODO fail message
-    }
-
+    } 
   }
+
+  
 
 }

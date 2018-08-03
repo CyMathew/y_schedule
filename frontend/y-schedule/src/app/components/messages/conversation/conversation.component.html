@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    
+    <br>
+    <button class="btn btn-warning" (click)="back()">back</button>
+    <h3>Conversation with {{conversation['otherName']}}</h3>
+    <br>
+  
+    <div *ngFor="let convo of conversation['messages']">
+      <div [appMessageColor]="convo['isOther']" class="message-section" >
+        <p>{{convo['message']}}</p>
+      </div>
+      <br>
+    </div>
+  
+    <app-message-box [otherId]="otherId" [conversationId]="conversationId" (messageUpdate)="receiveMessages($event)"></app-message-box>
+  </div>

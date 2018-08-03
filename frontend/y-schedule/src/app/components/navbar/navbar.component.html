@@ -1,14 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">ySchedule</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" *ngIf="role=='employee'" href="/home">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" *ngIf="role=='manager'" href="/manage">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" *ngIf="role=='coordinator'" href="/coordinate">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="authService.navigateToRoleHome()">Home <span class="sr-only">(current)</span></a>
       </li>
       <!--Employee Links-->
       <li *ngIf="role=='employee'" class="nav-item">
@@ -22,7 +20,10 @@
         <a class="nav-link" routerLink="/manage/timesheet" [queryParams]="{week: 0}">timesheet</a>
       </li>
 
-      <!--Logout-->
+      <!--all logged in-->
+      <li class="nav-item nav-right">
+        <a class="nav-link" *ngIf='role != ""' href="/messages">Messages</a>
+      </li>
       <li class="nav-item nav-right">
         <a class="nav-link" *ngIf='role != ""' (click)="authService.logout()">Logout</a>
       </li>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DateTimeService } from '../../../services/date-time.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
@@ -27,7 +27,7 @@ export class EditTsWeekComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(){
+  ngOnChanges(changes: SimpleChanges){
     console.log("view init");
     this.updateWeek(this.week);
   }

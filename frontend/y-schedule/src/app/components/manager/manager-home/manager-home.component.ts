@@ -21,7 +21,6 @@ export class ManagerHomeComponent implements OnInit {
       err => this.authService.checkSession(err)
     );
 
-
   }
 
   private fillManagerData(data) {
