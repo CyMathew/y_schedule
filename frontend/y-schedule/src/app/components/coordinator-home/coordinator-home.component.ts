@@ -10,7 +10,7 @@ export class CoordinatorHomeComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  userData: Object;
+  userData = [];
 
   ngOnInit() {
     let param = { action: "getAllRequests" };
@@ -22,6 +22,6 @@ export class CoordinatorHomeComponent implements OnInit {
 
   private fillCoordinatorData(data) {
     console.log("coordinator data:", data);
-    this.userData = data;
+    this.userData = data["requestList"];
   }
 }
