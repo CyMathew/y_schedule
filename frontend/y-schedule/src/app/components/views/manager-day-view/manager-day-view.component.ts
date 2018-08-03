@@ -1,6 +1,5 @@
 import { DateTimeService } from './../../../services/date-time.service';
 import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
-import { store } from '../../../../../node_modules/@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'manager-day-view',
@@ -68,9 +67,7 @@ export class ManagerDayViewComponent implements OnInit
 
     //Start hour + 2 here is used as an offset to align it properly in CSS Grid lines
     // let dayOfWeek = this.datetimeService.getDayInt(event["day"]) + 2;
-    console.log('Index is ' + index);
     let empRow = index +2;
-    console.log('Index is ' + empRow);
     let startHour = employee["startTime"] - this.storeHours.startHour + 2;
     let endHour = employee["endTime"] - this.storeHours.startHour + 2;
 

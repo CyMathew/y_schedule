@@ -10,9 +10,10 @@ import { DateTimeService } from '../../../services/date-time.service';
 export class EditTsSidebarComponent implements OnInit {
 
   @Output() backToWeekView = new EventEmitter<number>();
+  @Output() sendScheduleEmp = new EventEmitter<boolean>(); 
   @Input('currentDay') currentDay: number;
   @Input('scheduleData') scheduleData: object;
-  availEmployees: object;
+  availEmployees = [];
   selectedEmp: number;
   startTime: string;
   endTime: string;
@@ -46,17 +47,40 @@ export class EditTsSidebarComponent implements OnInit {
 
   trySchedule() {
 
-    let params = { action: "scheduleEmployee", userId: "" + this.selectedEmp, date: this.scheduleData["dates"]["" + this.currentDay], startTime: this.startTime, endTime: this.endTime }
-    console.log("try Schedule:", this.selectedEmp, this.startTime, this.endTime, this.scheduleData["dates"]["" + this.currentDay]);
+    let params = { 
+      action: "scheduleEmployee", 
+      userId: "" + this.selectedEmp, 
+      date: this.scheduleData["dates"]["" + this.currentDay], 
+      startTime: this.startTime, 
+      endTime: this.endTime };
 
-    this.authService.send("/manager.do", params).subscribe(
+    // console.log("try Schedule:", this.selectedEmp, this.startTime, this.endTime, this.scheduleData["dates"]["" + this.currentDay]);
+
+    this.authService.send("/manager.do", params)
+    .subscribe(
       data => this.receiveScheduleResult(data), 
       err => this.authService.checkSession(err)
     );
   }
 
   receiveScheduleResult(data) {
-    console.log("schedule result", data);
+
+    // for(let employee of this.availEmployees)
+    // {
+    //   if(employee["userId"] == this.selectedEmp)
+    //   {
+    //     let emp = {
+    //       empName: employee["name"],
+    //       startTime: this.startTime,
+    //       endTime: this.endTime
+    //     }
+    //     this.sendScheduleEmp.emit(emp);
+    //   }   
+    // }
+    // console.log('Added: ', this.selectedEmp);
+    // console.log("schedule result", data);
+
+    this.sendScheduleEmp.emit(true);
   }
 
   receiveAvailResult(data){

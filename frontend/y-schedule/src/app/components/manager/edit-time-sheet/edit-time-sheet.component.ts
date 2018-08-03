@@ -19,6 +19,8 @@ export class EditTimeSheetComponent implements OnInit {
   UTCDates: number[];
   scheduleData: Object = {employees:null, dates:null};
 
+  selectedEmp: object;
+
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
@@ -53,6 +55,11 @@ export class EditTimeSheetComponent implements OnInit {
 
   onBackToWeekView(){
     this.showWeek = true;
+  }
+
+  sendScheduleEmp(event)
+  {
+    this.selectedEmp = event;
   }
 
   
