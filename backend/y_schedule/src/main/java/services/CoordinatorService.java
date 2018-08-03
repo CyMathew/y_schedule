@@ -22,6 +22,9 @@ public class CoordinatorService {
 	private UserBean useBean      = new UserBean();
 	
 	public JSONObject gateKeeper(JSONObject requestJSON) {
+		
+		System.err.println(requestJSON);
+		
 		switch ((String)requestJSON.get("action")) {
 			case "getAllRequests": return idsOfPeopleRequesting();
 			

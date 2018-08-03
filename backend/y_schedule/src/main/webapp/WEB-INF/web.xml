@@ -98,6 +98,17 @@
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   <filter>
+    <display-name>CoordinatorFilter</display-name>
+    <filter-name>CoordinatorFilter</filter-name>
+    <filter-class>filters.CoordinatorFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CoordinatorFilter</filter-name>
+    <url-pattern>/coordinator/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+  <filter>
     <display-name>UserFilter</display-name>
     <filter-name>UserFilter</filter-name>
     <filter-class>filters.UserFilter</filter-class>
@@ -117,5 +128,15 @@
   <servlet-mapping>
     <servlet-name>MessageServlet</servlet-name>
     <url-pattern>/user/MessageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CoordinatorServlet</display-name>
+    <servlet-name>CoordinatorServlet</servlet-name>
+    <servlet-class>servlet.CoordinatorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CoordinatorServlet</servlet-name>
+    <url-pattern>/coordinator/CoordinatorServlet</url-pattern>
   </servlet-mapping>
 </web-app>

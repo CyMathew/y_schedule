@@ -27,7 +27,7 @@ public class CoordinatorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CoordinatorService coordinatorservice = new CoordinatorService();
-		JSONObject jsonrequest = SessionUtil.getOriginalRequest(request);
+		JSONObject jsonrequest = SessionUtil.getParsedRequest(request).getParameters();
 		JSONHelper.sendResponse(response, coordinatorservice.gateKeeper(jsonrequest));
 	}
 
