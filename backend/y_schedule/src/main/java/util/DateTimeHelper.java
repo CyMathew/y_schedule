@@ -116,7 +116,7 @@ public class DateTimeHelper {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		String timeStr = sdf.format(ts);
 
-		return TimeToFloat(timeStr);
+		return (float)Math.floor(TimeToFloat(timeStr));
 	}
 
 }
