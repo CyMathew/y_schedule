@@ -1,16 +1,13 @@
 package com.revature.testing;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -54,7 +51,12 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[2]/input")).sendKeys("manager");
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/button")).click();
 			assertNotNull(driver.findElement(By.tagName("app-user-sidebar")));
-			//driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")).click();
+			
+			if (driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")) != null) {
+				driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")).click();
+			}
+			
+			
 			driver.findElement(By.linkText("timesheet")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
@@ -66,22 +68,58 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/tbody/tr[2]/td[1]")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/div/app-edit-ts-sidebar/div/form/div[6]/div[2]/button")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/tbody/tr[2]/td[7]")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/div/app-edit-ts-sidebar/div/form/div[6]/div[2]/button")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/tbody/tr[2]/td[7]")).click();
-			
+		
 			driver.findElement(By.linkText("Register Employee")).click();
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
 			driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("USERNAME");
 			driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("PASSWORD");
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/input")).click();
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/button")).click();
+			
+			
 			
 			driver.findElement(By.linkText("Logout")).click();
 			
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[1]/input")).sendKeys("gai");
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[2]/input")).sendKeys("g");
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/button")).click();
+			driver.findElement(By.xpath("//*[@id=\"navbarNavDropdown\"]/ul/li[2]/a")).click();
+			
+			Select daySelect = new Select(driver.findElement(By.xpath("//*[@id=\"daySelect\"]")));
+			daySelect.selectByVisibleText("Sunday");
+			daySelect.selectByVisibleText("Monday");
+			daySelect.selectByVisibleText("Tuesday");
+			daySelect.selectByVisibleText("Wednesday");
+			daySelect.selectByVisibleText("Thursday");
+			daySelect.selectByVisibleText("Friday");
+			daySelect.selectByVisibleText("Saturday");
+			
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			
+			daySelect.selectByVisibleText("Sunday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			daySelect.selectByVisibleText("Monday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			daySelect.selectByVisibleText("Tuesday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			daySelect.selectByVisibleText("Wednesday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			daySelect.selectByVisibleText("Thursday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			daySelect.selectByVisibleText("Friday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			daySelect.selectByVisibleText("Saturday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+
+
+
 
 		}
 		
