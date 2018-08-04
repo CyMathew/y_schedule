@@ -67,7 +67,20 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/tbody/tr[2]/td[1]")).click();
+			driver.findElement(By.linkText("Register Employee")).click();
+			driver.findElement(By.linkText("timesheet")).click();
+			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
+			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
+			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/thead/tr/th[3]")).click();
+			
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[1]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[2]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[3]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[4]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[5]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[6]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[7]")).click();
+			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[8]")).click();
 		
 			driver.findElement(By.linkText("Register Employee")).click();
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
@@ -118,7 +131,75 @@ public class MecuryDriver {
 			daySelect.selectByVisibleText("Saturday");
 			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
 
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
+			
+			daySelect.selectByVisibleText("Sunday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
+			
+			daySelect.selectByVisibleText("Monday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
+			
+			daySelect.selectByVisibleText("Tuesday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
+			
+			daySelect.selectByVisibleText("Wednesday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
+			
+			daySelect.selectByVisibleText("Thursday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
+			
+			daySelect.selectByVisibleText("Friday");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("9");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("12");
+			driver.findElement(By.xpath("//*[@id=\"startTime\"]")).sendKeys("AM");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("4");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("10");
+			driver.findElement(By.xpath("//*[@id=\"endTime\"]")).sendKeys("PM");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/div/form/button")).click();
 
+			driver.findElement(By.linkText("Logout")).click();
 
 
 		}
