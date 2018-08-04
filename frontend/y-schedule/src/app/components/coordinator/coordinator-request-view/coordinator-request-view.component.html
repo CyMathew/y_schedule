@@ -1,0 +1,8 @@
+<div id="content">
+  <h2>{{empName}}'s Weekly Availability</h2>
+  <employee-week-view *ngIf="events != null" [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>
+  <div id="button-group">
+    <button class="btn btn-danger" (click)="sendRequestStatus('Denied')">Disapprove</button>
+    <button class="btn btn-success" (click)="sendRequestStatus('Approve')">Approve</button>
+  </div>
+</div>

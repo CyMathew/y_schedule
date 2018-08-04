@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { EmployeeHomeComponent } from './components/employee-home/employee-home.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ManagerHomeComponent } from './components/manager/manager-home/manager-home.component';
-import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
+import { CoordinatorHomeComponent } from './components/coordinator/coordinator-home/coordinator-home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { EmployeeWeekViewComponent } from './components/views/employee-week-view/employee-week-view.component';
 import { ManagerHomePanelComponent } from './components/manager/manager-home-panel/manager-home-panel.component';
@@ -29,6 +29,7 @@ import { MessagesMainComponent } from './components/messages/messages-main/messa
 import { StartConversationComponent } from './components/messages/start-conversation/start-conversation.component';
 import { MessageBoxComponent } from './components/messages/message-box/message-box.component';
 import { MessageColorDirective } from './directives/message-color.directive';
+import { CoordinatorRequestViewComponent } from './components/coordinator/coordinator-request-view/coordinator-request-view.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MessageColorDirective } from './directives/message-color.directive';
     StartConversationComponent,
     MessageBoxComponent,
     MessageColorDirective,
+    CoordinatorRequestViewComponent,
   ],
   imports: [
     BrowserModule,
