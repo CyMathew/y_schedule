@@ -2,3 +2,23 @@
     min-width: 300px;
 }
 
+.employee-select {
+    background-color: #273038;
+}
+
+.employee-select-outer{
+    width: 100%;
+    height: 200px;
+}
+
+.scrollbar {
+    overflow-y: scroll;
+    margin-bottom: 25px;
+}
+.force-overflow {
+    min-height: 200px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }

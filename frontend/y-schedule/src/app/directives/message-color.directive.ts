@@ -18,10 +18,6 @@ export class MessageColorDirective {
     return this._elementClass.join(' ');
   }
 
-  @HostListener('load') onMouseEnter() {
-
-  }
-
   ngOnInit() {
     console.log("onload", this.appMessageColor);
     if (this.appMessageColor)

@@ -14,7 +14,6 @@ import { ManagerHomeComponent } from './components/manager/manager-home/manager-
 import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
 import { CookieService } from 'ngx-cookie-service';
 import { EmployeeWeekViewComponent } from './components/views/employee-week-view/employee-week-view.component';
-import { ManagerHomePanelComponent } from './components/manager/manager-home-panel/manager-home-panel.component';
 import { UserSidebarComponent } from './components/user-sidebar/user-sidebar.component';
 import { EditTsWeekComponent } from './components/manager/edit-ts-week/edit-ts-week.component';
 import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts-graph.component';
@@ -30,6 +29,8 @@ import { MessagesMainComponent } from './components/messages/messages-main/messa
 import { StartConversationComponent } from './components/messages/start-conversation/start-conversation.component';
 import { MessageBoxComponent } from './components/messages/message-box/message-box.component';
 import { MessageColorDirective } from './directives/message-color.directive';
+import { LoadbarComponent } from './components/loadbar/loadbar.component';
+import { UserIconComponent } from './components/user-icon/user-icon.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { MessageColorDirective } from './directives/message-color.directive';
     ManagerHomeComponent,
     CoordinatorHomeComponent,
     EmployeeWeekViewComponent,
-    ManagerHomePanelComponent,
     UserSidebarComponent,
     EditTimeSheetComponent,
     EditTsWeekComponent,
@@ -56,6 +56,8 @@ import { MessageColorDirective } from './directives/message-color.directive';
     StartConversationComponent,
     MessageBoxComponent,
     MessageColorDirective,
+    LoadbarComponent,
+    UserIconComponent,
   ],
   imports: [
     BrowserModule,

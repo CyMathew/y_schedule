@@ -1,6 +1,7 @@
-<div class="side-bar" >
+<div class="sidebar">
   <h3>Schedule an Employee</h3>
   <form (ngSubmit)="trySchedule()">
+
     <!-- Filtering -->
     <div class="form-group">
       <label for="exampleFormControlSelect1">Department</label>
@@ -8,11 +9,16 @@
         <option>All</option>
       </select>
     </div>
-    <div style="overflow-y: scroll; max-height: 400px">
-      <div *ngIf="this.availEmployees!=null" id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
-        <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm" (click)="onEmployeeChange(e.userId)" style="padding: 0px; margin: 0px">
-          <input type="radio" name="employee" id="employeeOption{{i}}" autocomplete="off"  [value]="e.userId"> {{e.name}}
-        </label>
+
+    <!-- Employee select -->
+    <div class="scrollbar scrollbar-primary employee-select-outer">
+      <div class="employee-select force-overflow">
+        <div *ngIf="this.availEmployees!=null" id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
+          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm" (click)="onEmployeeChange(e.userId)"
+            style="padding: 0px; margin: 0px; border: none">
+            <input type="radio" name="employee" id="employeeOption{{i}}" autocomplete="off" [value]="e.userId"> {{e.name}}
+          </label>
+        </div>
       </div>
     </div>
     <br>
@@ -42,8 +48,9 @@
 
     <!-- Buttons -->
     <div class="form-row">
+      <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
       <div class="col">
-        <button type="submit" class="btn btn-primary btn-block" >Schedule</button>
+        <button type="submit" class="btn btn-primary btn-block">Schedule</button>
       </div>
       <div class="col">
         <button type="button" class="btn btn-warning btn-block" (click)="back()">Back</button>

@@ -59,6 +59,7 @@ export class EditTimeSheetComponent implements OnInit {
 
   sendScheduleEmp(event)
   {
+    this.fetchSchedule();
     this.selectedEmp = event;
   }
 

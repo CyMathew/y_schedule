@@ -1,7 +1,7 @@
 <br>
 <div class="row">
   <div class="col" style="text-align: right;">
-    <a class="btn btn-outline-primary btn-sm" routerLink="/manage/timesheet" [queryParams]='{week: getWeek(-1)}'>
+    <a *ngIf="allowNav" class="btn btn-outline-primary btn-sm" routerLink="/manage/timesheet" [queryParams]='{week: getWeek(-1)}'>
       <<</a>
   </div>
   <div class="col-5" style="text-align: center;">
@@ -9,21 +9,21 @@
     <h6>{{getWeekHeader()}}</h6>
   </div>
   <div class="col" style="text-align: left;">
-    <a class="btn btn-outline-primary btn-sm" routerLink="/manage/timesheet" [queryParams]='{week: getWeek(1)}'>>></a>
+    <a *ngIf="allowNav" class="btn btn-outline-primary btn-sm" routerLink="/manage/timesheet" [queryParams]='{week: getWeek(1)}'>>></a>
   </div>
 </div>
 <br>
-<table class="table" *ngIf="scheduleData.employees != null">
+<table class="table" *ngIf="scheduleData.employees != null" style="width: 100%; max-width: 1000px; margin: 20px auto">
   <thead>
     <tr>
       <th>Employee</th>
-      <th (click)="selectDay(0)">Sunday</th>
-      <th (click)="selectDay(1)">Monday</th>
-      <th (click)="selectDay(2)">Tuesday</th>
-      <th (click)="selectDay(3)">Wednesday</th>
-      <th (click)="selectDay(4)">Thursday</th>
-      <th (click)="selectDay(5)">Friday</th>
-      <th (click)="selectDay(6)">Saturday</th>
+      <th (click)="selectDay(0)" [appHighlightColumn]="{col: 0, active: hoverColumn}" (mouseenter)="onHoverColumn(0)">Sunday</th>
+      <th (click)="selectDay(1)" [appHighlightColumn]="{col: 1, active: hoverColumn}" (mouseenter)="onHoverColumn(1)">Monday</th>
+      <th (click)="selectDay(2)" [appHighlightColumn]="{col: 2, active: hoverColumn}" (mouseenter)="onHoverColumn(2)">Tuesday</th>
+      <th (click)="selectDay(3)" [appHighlightColumn]="{col: 3, active: hoverColumn}" (mouseenter)="onHoverColumn(3)">Wednesday</th>
+      <th (click)="selectDay(4)" [appHighlightColumn]="{col: 4, active: hoverColumn}" (mouseenter)="onHoverColumn(4)">Thursday</th>
+      <th (click)="selectDay(5)" [appHighlightColumn]="{col: 5, active: hoverColumn}" (mouseenter)="onHoverColumn(5)">Friday</th>
+      <th (click)="selectDay(6)" [appHighlightColumn]="{col: 6, active: hoverColumn}" (mouseenter)="onHoverColumn(6)">Saturday</th>
       <th>total</th>
     </tr>
   </thead>
@@ -31,7 +31,7 @@
     <tr *ngFor="let emp of scheduleData.employees">
       <th>{{emp.name}}</th>
 
-      <td *ngFor="let i of [0,1,2,3,4,5,6]" (click)="selectDay(i)">
+      <td *ngFor="let i of [0,1,2,3,4,5,6]" (click)="selectDay(i)" [appHighlightColumn]="{col: i, active: hoverColumn}" (mouseenter)="onHoverColumn(i)">
         <div *ngIf="emp.shifts[i] != null">
           <p>{{dateTime.getTimeString(emp["shifts"][i]["start"])}}-{{dateTime.getTimeString(emp["shifts"][i]["end"])}}</p>
         </div>

@@ -9,14 +9,16 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./edit-ts-week.component.css']
 })
 export class EditTsWeekComponent implements OnInit {
-
-  @Input('scheduleData') scheduleData: Object;
+  @Input('allowNav') allowNav: boolean = true;
+  @Input('scheduleData') scheduleData: object;
   @Output() daySelected = new EventEmitter<number>();
   @Output() weekSelected = new EventEmitter<number>();
 
   week: number;
+  hoverColumn: number = -1;
 
   constructor(private dateTime: DateTimeService, private route: ActivatedRoute, private authService: AuthService) { }
+
 
 
   ngOnInit() {
@@ -56,4 +58,7 @@ export class EditTsWeekComponent implements OnInit {
     this.weekSelected.emit(week);
   }
 
+  onHoverColumn(col){
+    this.hoverColumn = col;
+  }
 }

@@ -1,6 +1,4 @@
-<div class="col-lg-2 text-left sidenav">
-  <div *ngIf="userData!=null">
-    <p>Name: {{userData.userfname+ " " + userData.userlname}}</p>
-    <p>UserId: {{userData.userid}}</p>
-  </div>
+<div *ngIf="userData!=null" style="min-height:100vh">
+  <p>Name: {{userData.userfname+ " " + userData.userlname}}</p>
+  <p>UserId: {{userData.userid}}</p>
 </div>

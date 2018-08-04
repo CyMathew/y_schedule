@@ -126,9 +126,24 @@ public class ManagerService {
 		if (jsonObject.getString("userId").length() == 0)
 			return new JSONObject().put("result", "failure");
 
-		Integer userId = Integer.parseInt(jsonObject.getString("userId"));
-		String startTime = jsonObject.getString("startTime");
-		String endTime = jsonObject.getString("endTime");
+		System.out.println(jsonObject);
+		
+		Integer userId = null;
+
+		try {
+			userId = Integer.parseInt(jsonObject.getString("userId"));
+		} catch (NumberFormatException e) {
+			userId = null;
+		}
+
+		String startTime = null;
+		String endTime = null;
+
+		if(jsonObject.has("startTime"))
+			startTime = jsonObject.getString("startTime");
+		if(jsonObject.has("endTime"))
+			endTime = jsonObject.getString("endTime");
+		
 		String date = jsonObject.getString("date");
 
 		return setScheduleEmployee(userId, startTime, endTime, date);
@@ -136,15 +151,44 @@ public class ManagerService {
 
 	private static JSONObject setScheduleEmployee(Integer userId, String startTime, String endTime, String date) {
 
+		JSONObject schedule = new JSONObject();
+
+		if (userId == null) {
+			schedule.put("result", "failure");
+			schedule.put("message", "Please select an employee.");
+			return schedule;
+		}
+		
+		if (startTime == null) {
+			schedule.put("result", "failure");
+			schedule.put("message", "Please enter a start time.");
+			return schedule;
+		}
+		
+		if (endTime == null) {
+			schedule.put("result", "failure");
+			schedule.put("message", "Please enter an end time.");
+			return schedule;
+		}
+
 		Timestamp startTs = DateTimeHelper.getTimestamp(date, startTime);
 		Timestamp endTs = DateTimeHelper.getTimestamp(date, endTime);
 
 		UserBean b = new UserDao().getUserById(userId);
+		EmployeeService es = new EmployeeService();
 
-		new ManagerDao().createScheduleTimeBean(0, startTs, endTs, b);
+		if (endTs.before(startTs)) {
+			schedule.put("result", "failure");
+			schedule.put("message", "End time cannot be before start time.");
 
-		JSONObject schedule = new JSONObject();
-		schedule.put("result", "success");
+		} else if (!es.getEmployeeAvailableForRange(userId, startTs, endTs)) {
+			schedule.put("result", "failure");
+			schedule.put("message", UserService.getUserName(b) + " is not available for given time.");
+
+		} else {
+			new ManagerDao().createScheduleTimeBean(0, startTs, endTs, b);
+			schedule.put("result", "success");
+		}
 
 		return schedule;
 	}

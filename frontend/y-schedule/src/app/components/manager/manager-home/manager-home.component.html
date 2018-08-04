@@ -1,6 +1,5 @@
-<div class="container-fluid text-center">
-  <div class="row content">
-    <app-user-sidebar [userData]='userData'></app-user-sidebar>
-    <app-manager-home-panel ></app-manager-home-panel>
-  </div>
+
+<div *ngIf="loaded==2" id="content" style="min-height: 100%; overflow-y: hidden;">
+  <app-user-sidebar class="sidebar" [userData]='userData'></app-user-sidebar>
+  <app-edit-ts-week style="margin: 20px auto" [scheduleData]="scheduleData" [allowNav]="false"></app-edit-ts-week>
 </div>

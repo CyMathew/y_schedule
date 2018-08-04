@@ -12,7 +12,9 @@ export class ManagerHomeComponent implements OnInit {
 
   constructor(private url: GetUrlService, private authService: AuthService) { }
 
-  userData: Object;
+  loaded: number = 0;
+  scheduleData: object = null;
+  userData: object;
 
   ngOnInit() {
     let param = { action: "viewHome" };
@@ -20,10 +22,24 @@ export class ManagerHomeComponent implements OnInit {
       data => this.fillManagerData(data), 
       err => this.authService.checkSession(err)
     );
+    this.fetchSchedule();
+  }
 
+  fetchSchedule(){
+    this.authService.send("/manager.do", {action: "viewSchedule", week: "0"}).subscribe(
+      data => this.receiveSchedule(data), 
+      err => this.authService.checkSession(err)
+    );
+  }
+
+  receiveSchedule(data){
+    this.loaded++;
+    this.scheduleData = data;
+    console.log("received???", data);
   }
 
   private fillManagerData(data) {
+    this.loaded++;
     console.log("manager data:");
     console.log(data);
     this.userData = data;

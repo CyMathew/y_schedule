@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerHomePanelComponent } from './manager-home-panel.component';
+import { LoadbarComponent } from './loadbar.component';
 
-describe('ManagerHomePanelComponent', () => {
-  let component: ManagerHomePanelComponent;
-  let fixture: ComponentFixture<ManagerHomePanelComponent>;
+describe('LoadbarComponent', () => {
+  let component: LoadbarComponent;
+  let fixture: ComponentFixture<LoadbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManagerHomePanelComponent ]
+      declarations: [ LoadbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManagerHomePanelComponent);
+    fixture = TestBed.createComponent(LoadbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

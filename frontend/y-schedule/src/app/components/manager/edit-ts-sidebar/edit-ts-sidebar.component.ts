@@ -19,6 +19,9 @@ export class EditTsSidebarComponent implements OnInit {
   endTime: string;
   availableTimes: object = null;
 
+  scheduleFailure: boolean = false;
+  scheduleFailMessage: string = "";
+
   constructor(private authService: AuthService, private dtService: DateTimeService) { }
 
   ngOnInit() {
@@ -47,14 +50,15 @@ export class EditTsSidebarComponent implements OnInit {
 
   trySchedule() {
 
+    this.scheduleFailure = false;
+
     let params = { 
       action: "scheduleEmployee", 
       userId: "" + this.selectedEmp, 
       date: this.scheduleData["dates"]["" + this.currentDay], 
       startTime: this.startTime, 
-      endTime: this.endTime };
-
-    // console.log("try Schedule:", this.selectedEmp, this.startTime, this.endTime, this.scheduleData["dates"]["" + this.currentDay]);
+      endTime: this.endTime 
+    };
 
     this.authService.send("/manager.do", params)
     .subscribe(
@@ -64,21 +68,10 @@ export class EditTsSidebarComponent implements OnInit {
   }
 
   receiveScheduleResult(data) {
-
-    // for(let employee of this.availEmployees)
-    // {
-    //   if(employee["userId"] == this.selectedEmp)
-    //   {
-    //     let emp = {
-    //       empName: employee["name"],
-    //       startTime: this.startTime,
-    //       endTime: this.endTime
-    //     }
-    //     this.sendScheduleEmp.emit(emp);
-    //   }   
-    // }
-    // console.log('Added: ', this.selectedEmp);
-    // console.log("schedule result", data);
+    if(data["result"] == "failure"){
+      this.scheduleFailure = true;
+      this.scheduleFailMessage = data["message"];
+    }
 
     this.sendScheduleEmp.emit(true);
   }

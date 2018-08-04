@@ -1,12 +1,22 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, ElementRef, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appHighlightColumn]'
 })
 export class HighlightColumnDirective {
 
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
-  @Input('column') column: string;
+  @Input() appHighlightColumn: object = {col: 0, active: 0};
 
+  ngOnInit() {
+    this.el.nativeElement.style.cursor = "pointer";
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(this.appHighlightColumn["col"] == this.appHighlightColumn["active"])
+      this.el.nativeElement.style.backgroundColor = "#555555";
+    else
+      this.el.nativeElement.style.backgroundColor = "";
+  }
 }
