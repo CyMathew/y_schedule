@@ -22,6 +22,9 @@ public class CoordinatorService {
 	private UserBean useBean      = new UserBean();
 	
 	public JSONObject gateKeeper(JSONObject requestJSON) {
+		
+		System.err.println(requestJSON);
+		
 		switch ((String)requestJSON.get("action")) {
 			case "getAllRequests": return idsOfPeopleRequesting();
 			
@@ -43,15 +46,15 @@ public class CoordinatorService {
 		JSONObject json = new JSONObject();
 		JSONArray jarray = new JSONArray();
 		List<EmployeeAvailabilityBean>list = theDao.getPendingRequests();		
-		System.out.println(list.toString());
 		Set<Integer> set = new HashSet<>();
 		for(int i = 0; i < list.size(); i++) {
 			set.add((list.get(i).getUser()).getUser_id());
 		}
 		Iterator iter = set.iterator();
 		while(iter.hasNext()) {
+
 			useBean = useDao.getUserById((Integer) iter.next());
-			System.out.println(useBean.toString());
+
 			jarray.put(new JSONObject().put("empID", useBean.getUser_id()).put("empName", useBean.getUser_fname()+" "+useBean.getUser_lname()));
 		}
 		

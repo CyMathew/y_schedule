@@ -20,7 +20,7 @@ import services.EmployeeService;
 public class EmployeeServiceTest {
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void getTimesTest() {
 		EmployeeDao mockDao = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
@@ -50,37 +50,37 @@ public class EmployeeServiceTest {
 
 		JSONObject object = service.getAvailableById(30);
 		JSONArray array = object.getJSONArray("weekDetails");
+
+		assertEquals((float)9.0,      array.getJSONObject(0).get("startTime"));
+		assertEquals((float)10.0,     array.getJSONObject(0).get("endTime"));
+		assertEquals("monday",        array.getJSONObject(0).get("day"));
+		assertEquals((float)12.0,     array.getJSONObject(1).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(1).get("endTime"));
+		assertEquals("monday",        array.getJSONObject(1).get("day"));
 		
-		assertEquals(9,      array.getJSONObject(0).get("startTime"));
-		assertEquals(10,     array.getJSONObject(0).get("endTime"));
-		assertEquals("monday",    array.getJSONObject(0).get("day"));
-		assertEquals(12,     array.getJSONObject(1).get("startTime"));
-		assertEquals(17,      array.getJSONObject(1).get("endTime"));
-		assertEquals("monday",    array.getJSONObject(1).get("day"));
+		assertEquals((float)9.0,      array.getJSONObject(2).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(2).get("endTime"));
+		assertEquals("tuesday",       array.getJSONObject(2).get("day"));
 		
-		assertEquals(9,      array.getJSONObject(2).get("startTime"));
-		assertEquals(17,      array.getJSONObject(2).get("endTime"));
-		assertEquals("tuesday",   array.getJSONObject(2).get("day"));
+		assertEquals((float)9.0,      array.getJSONObject(3).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(3).get("endTime"));
+		assertEquals("wednesday",     array.getJSONObject(3).get("day"));
 		
-		assertEquals(9,      array.getJSONObject(3).get("startTime"));
-		assertEquals(17,      array.getJSONObject(3).get("endTime"));
-		assertEquals("wednesday", array.getJSONObject(3).get("day"));
+		assertEquals((float)9.0,      array.getJSONObject(4).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(4).get("endTime"));
+		assertEquals("thursday",      array.getJSONObject(4).get("day"));
 		
-		assertEquals(9,      array.getJSONObject(4).get("startTime"));
-		assertEquals(17,      array.getJSONObject(4).get("endTime"));
-		assertEquals("thursday",  array.getJSONObject(4).get("day"));
+		assertEquals((float)9.0,      array.getJSONObject(5).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(5).get("endTime"));
+		assertEquals("friday",        array.getJSONObject(5).get("day"));
 		
-		assertEquals(9,      array.getJSONObject(5).get("startTime"));
-		assertEquals(17,      array.getJSONObject(5).get("endTime"));
-		assertEquals("friday",    array.getJSONObject(5).get("day"));
+		assertEquals((float)9.0,      array.getJSONObject(6).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(6).get("endTime"));
+		assertEquals("saturday",      array.getJSONObject(6).get("day"));
 		
-		assertEquals(9,      array.getJSONObject(6).get("startTime"));
-		assertEquals(17,      array.getJSONObject(6).get("endTime"));
-		assertEquals("saturday",  array.getJSONObject(6).get("day"));
-		
-		assertEquals(9,      array.getJSONObject(7).get("startTime"));
-		assertEquals(17,      array.getJSONObject(7).get("endTime"));
-		assertEquals("sunday",    array.getJSONObject(7).get("day"));
+		assertEquals((float)9.0,      array.getJSONObject(7).get("startTime"));
+		assertEquals((float)17.0,     array.getJSONObject(7).get("endTime"));
+		assertEquals("sunday",        array.getJSONObject(7).get("day"));
 
 
 	}
@@ -88,7 +88,7 @@ public class EmployeeServiceTest {
 
 	
 	@Test
-	@Ignore
+	
 	public void editTimesTest() {
 		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
@@ -108,36 +108,14 @@ public class EmployeeServiceTest {
 			
 	}
 	
-	@Test
-	//@Ignore
-	public void editTimesTestfailure() {
-		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
-		EmployeeService service = new EmployeeService();
-		UserBean UB             = new UserBean();
-		UB.setUser_id(30);
-		Mockito.when(mockDao.updateRequests(9, 17, "monday", UB)).thenReturn("success");
-		Mockito.when(mockDao.removeAllReguests(30)).thenReturn(false);
-		service.setEd(mockDao);
-		
-		JSONArray array = new JSONArray();
-		JSONObject obj  = new JSONObject();
-		JSONObject time = new JSONObject().put("day", "monday").put("startTime", 9).put("endTime", 17);
-		array.put(time);
-		obj.put("availDetails", array);
-		
-		assertEquals("failure", service.editAvailDetails(array, UB).get("result"));
-			
-	}
 	
 	@Test
-	@Ignore
 	public void editTimesTestfailure2() {
 		EmployeeDao mockDao     = Mockito.mock(EmployeeDao.class);
 		EmployeeService service = new EmployeeService();
 		UserBean UB             = new UserBean();
 		UB.setUser_id(30);
 		Mockito.when(mockDao.updateRequests(9, 17, "monday", UB)).thenReturn("failure");
-		Mockito.when(mockDao.removeAllReguests(30)).thenReturn(true);
 		service.setEd(mockDao);
 		
 		JSONArray array = new JSONArray();

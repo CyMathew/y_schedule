@@ -1,0 +1,22 @@
+#content
+{
+    padding: 20px;
+}
+
+h2
+{
+    display: inline-block;
+    margin: 10px 0px;
+}
+
+#button-group
+{
+    margin: 20px;
+    margin-left: auto;
+    text-align: right;
+}
+
+#button-group > button
+{
+    margin-right: 10px;
+}
