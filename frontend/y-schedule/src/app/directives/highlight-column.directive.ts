@@ -15,7 +15,7 @@ export class HighlightColumnDirective {
 
   ngOnChanges(changes: SimpleChanges){
     if(this.appHighlightColumn["col"] == this.appHighlightColumn["active"])
-      this.el.nativeElement.style.backgroundColor = "#555555";
+      this.el.nativeElement.style.backgroundColor = "#273038";
     else
       this.el.nativeElement.style.backgroundColor = "";
   }

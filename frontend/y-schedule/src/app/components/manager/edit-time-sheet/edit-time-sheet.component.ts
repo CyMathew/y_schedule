@@ -49,7 +49,6 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   onWeekSelected(week){
-    
     this.week = week;
   }
 

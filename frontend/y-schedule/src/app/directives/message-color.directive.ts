@@ -19,7 +19,6 @@ export class MessageColorDirective {
   }
 
   ngOnInit() {
-    console.log("onload", this.appMessageColor);
     if (this.appMessageColor)
       this._elementClass.push("message-section message-self");
     else
