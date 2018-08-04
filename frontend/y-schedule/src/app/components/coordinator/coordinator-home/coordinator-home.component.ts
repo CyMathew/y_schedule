@@ -28,7 +28,7 @@ export class CoordinatorHomeComponent implements OnInit {
 
   showRequest(index)
   {
-    let {empID, empName} = this.userData[index]);
+    let {empID, empName} = this.userData[index];
     this.router.navigate(["coordinate/request"], {queryParams: { empID: empID, empName: empName  }});
    
   }
