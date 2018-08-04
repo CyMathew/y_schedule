@@ -22,17 +22,8 @@ public class MecuryDriver {
 	public void setup() {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		driver = new ChromeDriver();
-		// We can configure our driver's implicit wait as soon as it is
-		// instantiated.
-		// For any element, wait 3 seconds before determining a fail.
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
-		
-		/*
-		 * Implicit waits are applied by default in this case. But should we
-		 * decided that there is a specific point in time I want to wait, we
-		 * have to use explicit waits. These are one time uses and must be
-		 * executed at a specific point.
-		 */
+		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver, 7);
 
 		driver.get(url);
@@ -51,11 +42,6 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[2]/input")).sendKeys("manager");
 			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/button")).click();
 			assertNotNull(driver.findElement(By.tagName("app-user-sidebar")));
-			
-			if (driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")) != null) {
-				driver.findElement(By.xpath("/html/body/app-root/app-navbar/nav/button/span")).click();
-			}
-			
 			
 			driver.findElement(By.linkText("timesheet")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
@@ -87,10 +73,28 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
 			driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("USERNAME");
 			driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("PASSWORD");
+			driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("dogfind");
 			driver.findElement(By.xpath("//*[@id=\"button-group\"]/input")).click();
 			driver.findElement(By.xpath("//*[@id=\"button-group\"]/button")).click();
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/input")).click();
 			
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/button")).click();
 			
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/button")).click();
+			
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
+			driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("USERNAME");
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/button")).click();
+			
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
+			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
+			driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys("USERNAME");
+			driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("PASSWORD");
+			driver.findElement(By.xpath("//*[@id=\"button-group\"]/button")).click();
 			
 			driver.findElement(By.linkText("Logout")).click();
 			
@@ -203,6 +207,7 @@ public class MecuryDriver {
 
 
 		}
+	
 		
 	
 }
