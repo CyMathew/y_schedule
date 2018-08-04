@@ -20,14 +20,7 @@ import util.HibernateUtil;
 
 public class MessageDao {
 	public List<MessageBean> getMessagesByListID(Integer messageListBean) {
-//		ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
-//		Session session = HibernateUtil.getSession();
-//		Criteria crit = session.createCriteria(MessageBean.class);
-//		List<MessageBean> list1 = crit.add(Restrictions.like("messageListID.message_list_id", mlb)).list();
-//		for (MessageBean m : list1) {
-//			messages.add(m);
-//		}
-//		
+
 		Session session = HibernateUtil.getSession();
 		List<MessageBean> messages;
 		
@@ -74,6 +67,8 @@ public class MessageDao {
 		query = session.createQuery(hql);
 		query.setParameter("nmlb", messageListBean);
 		messages = (List<MessageBean>)query.list();
+		
+		session.close();
 		
 		if(messages.size() == 0)
 			return null;

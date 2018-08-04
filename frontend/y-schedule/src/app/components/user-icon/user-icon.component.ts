@@ -9,6 +9,7 @@ export class UserIconComponent implements OnInit {
 
   constructor() { }
 
+  @Input('small') small: boolean = false;
   @Input('userId') userId: number = -1;
   color: string = "red";
   icon: string = "perm_identity";
@@ -40,7 +41,7 @@ export class UserIconComponent implements OnInit {
     if (this.userId)
       this.icon = "perm_identity";
 
-    switch (this.userId % 10) {
+    switch (this.userId % 21) {
       case 0: this.icon = "person"; break;
       case 1: this.icon = "sentiment_very_satisfied"; break;
       case 2: this.icon = "whatshot"; break;
@@ -61,7 +62,7 @@ export class UserIconComponent implements OnInit {
       case 17: this.icon = "local_cafe"; break;
       case 18: this.icon = "local_florist"; break;
       case 19: this.icon = "local_library"; break;
-      case 19: this.icon = "local_bar"; break;
+      case 20: this.icon = "cake"; break;
     }
   }
 

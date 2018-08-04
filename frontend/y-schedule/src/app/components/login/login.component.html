@@ -1,21 +1,26 @@
+<app-loadbar *ngIf="loading">
+</app-loadbar>
 
-<div style="display: flex; justify-content: center; margin: 20px">
-  <app-user-icon class="flex-item"></app-user-icon>
-</div>
-
-<div style="display: flex; justify-content: center">
-  <div style="width: 250px;">
-    <form action='Login.do' method="post" (ngSubmit)="tryLogin()">
-      <div class="form-group">
-        <div class="alert alert-danger" *ngIf="invalidLogin">Invalid username or password</div>
-        <label for="username">username</label>
-        <input class="form-control" type="text" name="username" required [(ngModel)]="username">
-      </div>
-      <div class="form-group">
-        <label for="password">password</label>
-        <input class="form-control" type="password" name="password" required [(ngModel)]="password">
-      </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+<div *ngIf="!loading">
+  <div style="display: flex; justify-content: center; margin: 20px">
+    <app-user-icon class="flex-item"></app-user-icon>
   </div>
+
+  <div style="display: flex; justify-content: center">
+    <div style="width: 250px;">
+      <form action='Login.do' method="post" (ngSubmit)="tryLogin()">
+        <div class="form-group">
+          <div class="alert alert-danger" *ngIf="invalidLogin">Invalid username or password</div>
+          <label for="username">username</label>
+          <input class="form-control" type="text" name="username" required [(ngModel)]="username">
+        </div>
+        <div class="form-group">
+          <label for="password">password</label>
+          <input class="form-control" type="password" name="password" required [(ngModel)]="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+
 </div>

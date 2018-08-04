@@ -4,9 +4,9 @@
 
 <div *ngFor="let convo of messageData['messageList']">
   <div class="message-list" (click)="selectConversation(convo['messageListID'])">
-    <app-user-icon [userId]="convo['userId']" class="flex-item"></app-user-icon>
-    <div>
-      <h6>{{convo['userName']}}</h6>
+    <app-user-icon [userId]="convo['userId']" [small]="true" class="flex-item"></app-user-icon>
+    <div style="margin-left: 20px">
+      <h6>{{convo['userName']}} {{convo['userId']}}</h6>
       <p>{{convo['latestMessage']}}</p>
     </div>
   </div>

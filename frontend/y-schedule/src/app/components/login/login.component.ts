@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
+  loading: boolean = false;
   invalidLogin: boolean = false;
 
   ngOnInit() { 
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   public tryLogin() {
+    this.loading = true;
     this.invalidLogin = false;
     this.loadingService.setLoading(true);
     this.authService.login(this.username, this.password).subscribe(
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   public doLogin(data: Object) {
+    this.loading = false;
     this.loadingService.setLoading(false);
     
     console.log(data);
