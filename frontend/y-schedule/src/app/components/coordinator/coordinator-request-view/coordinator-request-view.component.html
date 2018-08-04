@@ -3,6 +3,6 @@
   <employee-week-view *ngIf="events != null" [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>
   <div id="button-group">
     <button class="btn btn-danger" (click)="sendRequestStatus('Denied')">Disapprove</button>
-    <button class="btn btn-success" (click)="sendRequestStatus('Approve')">Approve</button>
+    <button class="btn btn-success" (click)="sendRequestStatus('Approved')">Approve</button>
   </div>
 </div>

@@ -120,6 +120,32 @@ public class EmployeeDao {
 		return list;
 	}
 	
+	/**
+	 * Sets default times
+	 **/
+	public String updateDefaultRequests(float start, float end, String day, UserBean id) {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = null;
+		EmployeeAvailabilityBean bean = new EmployeeAvailabilityBean(start, end, id, day);
+
+		bean.setActive(1);
+		try{
+			tx = session.beginTransaction();
+			session.save(bean);
+			tx.commit();
+
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+			return "failure";
+		} finally {
+			session.close();
+		}
+
+		return "success";
+	}
 	
 	/*=============================================================================================================
 	 * 
