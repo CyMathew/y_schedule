@@ -82,6 +82,10 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("user/UserServlet");
 			rd.forward(request, response);
 			break;
+		case "coordinator":
+			rd = request.getRequestDispatcher("coordinator/CoordinatorServlet");
+			rd.forward(request, response);
+			break;
 		default:
 			logger.error("hullo? Invalid action");
 			response.sendError(404);

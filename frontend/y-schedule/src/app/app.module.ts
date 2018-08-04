@@ -14,7 +14,7 @@ import { EmployeeHomeComponent } from './components/employee/employee-home/emplo
 import { EmployeeAvailComponent } from './components/employee/employee-avail/employee-avail.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ManagerHomeComponent } from './components/manager/manager-home/manager-home.component';
-import { CoordinatorHomeComponent } from './components/coordinator-home/coordinator-home.component';
+import { CoordinatorHomeComponent } from './components/coordinator/coordinator-home/coordinator-home.component';
 import { UserSidebarComponent } from './components/user-sidebar/user-sidebar.component';
 import { EditTsWeekComponent } from './components/manager/edit-ts-week/edit-ts-week.component';
 import { EditTsGraphComponent } from './components/manager/edit-ts-graph/edit-ts-graph.component';
@@ -31,6 +31,7 @@ import { MessageBoxComponent } from './components/messages/message-box/message-b
 import { MessageColorDirective } from './directives/message-color.directive';
 import { LoadbarComponent } from './components/loadbar/loadbar.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
+import { CoordinatorRequestViewComponent } from './components/coordinator/coordinator-request-view/coordinator-request-view.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { UserIconComponent } from './components/user-icon/user-icon.component';
     MessageColorDirective,
     LoadbarComponent,
     UserIconComponent,
+    CoordinatorRequestViewComponent,
   ],
   imports: [
     BrowserModule,
