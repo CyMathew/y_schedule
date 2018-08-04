@@ -20,7 +20,7 @@ export class EmployeeHomeComponent implements OnInit
     
     weekNeeded = 0;
     events: any;
-
+    userData: object;
 
 
   constructor(private authService: AuthService) { }
@@ -28,6 +28,7 @@ export class EmployeeHomeComponent implements OnInit
   ngOnInit() 
   {
     this.requestWeek(+this.weekNeeded);
+    this.requestUserData();
   }
 
   requestWeek(weekOffset: number)
@@ -59,6 +60,18 @@ export class EmployeeHomeComponent implements OnInit
   getNext()
   {
     this.requestWeek(++this.weekNeeded);
+  }
+
+  requestUserData(){
+    let param = { action: "viewHome" };
+    this.authService.send("/usermain.do", param).subscribe(
+      data => this.fillUserData(data), 
+      err => this.authService.checkSession(err)
+    );
+  }
+
+  private fillUserData(data) {
+    this.userData = data;
   }
 
 }

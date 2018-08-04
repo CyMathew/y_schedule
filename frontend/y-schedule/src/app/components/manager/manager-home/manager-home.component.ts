@@ -17,11 +17,7 @@ export class ManagerHomeComponent implements OnInit {
   userData: object;
 
   ngOnInit() {
-    let param = { action: "viewHome" };
-    this.authService.send("/manager.do", param).subscribe(
-      data => this.fillManagerData(data), 
-      err => this.authService.checkSession(err)
-    );
+    this.requestUserData();
     this.fetchSchedule();
   }
 
@@ -38,10 +34,15 @@ export class ManagerHomeComponent implements OnInit {
     console.log("received???", data);
   }
 
-  private fillManagerData(data) {
-    this.loaded++;
-    console.log("manager data:");
-    console.log(data);
+  requestUserData(){
+    let param = { action: "viewHome" };
+    this.authService.send("/usermain.do", param).subscribe(
+      data => this.fillUserData(data), 
+      err => this.authService.checkSession(err)
+    );
+  }
+
+  private fillUserData(data) {
     this.userData = data;
   }
 

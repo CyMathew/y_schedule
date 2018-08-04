@@ -9,6 +9,7 @@ export class UserSidebarComponent implements OnInit {
 
   @Input('userData') userData: Object;
 
+
   constructor() { }
 
   ngOnInit() {

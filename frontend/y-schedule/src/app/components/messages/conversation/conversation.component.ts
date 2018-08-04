@@ -15,14 +15,19 @@ export class ConversationComponent implements OnInit {
   conversation: object = { messages: null, otherName: null };
   otherId: number;
   constructor(private authService: AuthService) { }
-
+  intervalId: any;
   ngOnInit() {
     this.fetchMessages();
-    setInterval(()=> {
-      this.fetchMessages(); },10000); 
-    }
-  
-  fetchMessages(){
+    this.intervalId = setInterval(() => {
+      this.fetchMessages();
+    }, 10000);
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.intervalId);
+  }
+
+  fetchMessages() {
     let params = {
       "action": "getMessagesByID",
       "messageListId": "" + this.conversationId

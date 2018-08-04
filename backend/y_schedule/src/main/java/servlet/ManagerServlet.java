@@ -45,9 +45,6 @@ public class ManagerServlet extends HttpServlet {
 		JSONObject jsonOut = null;
 
 		switch (r.getAction()) {
-		case "viewHome":
-			jsonOut = ManagerService.selectEmpInfo(r.getUserId());
-			break;
 		case "viewSchedule":
 			jsonOut = ManagerService.selectScheduledTimesByWeek(r.getStoreId(), r.getParameters());
 			break;
@@ -63,7 +60,6 @@ public class ManagerServlet extends HttpServlet {
 		}
 		
 		JSONHelper.sendResponse(response, jsonOut);
-		logger.info("JSON Object Sent");
 	}
 
 	/**

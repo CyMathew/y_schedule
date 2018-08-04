@@ -75,7 +75,7 @@
     <servlet-name>EmployeeServlet</servlet-name>
     <url-pattern>/employee/EmployeeServlet</url-pattern>
   </servlet-mapping>
-   <filter>
+  <filter>
     <display-name>ManagerFilter</display-name>
     <filter-name>ManagerFilter</filter-name>
     <filter-class>filters.ManagerFilter</filter-class>
@@ -117,5 +117,15 @@
   <servlet-mapping>
     <servlet-name>MessageServlet</servlet-name>
     <url-pattern>/user/MessageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserServlet</display-name>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/user/UserServlet</url-pattern>
   </servlet-mapping>
 </web-app>

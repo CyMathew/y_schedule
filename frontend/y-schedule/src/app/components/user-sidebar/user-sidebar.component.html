@@ -1,3 +1,6 @@
+<div style="display: flex; justify-content: center; margin: 20px">
+  <app-user-icon [userId]="userData['userid']" class="flex-item"></app-user-icon>
+</div>
 <div *ngIf="userData!=null" style="min-height:100vh">
   <p>Name: {{userData.userfname+ " " + userData.userlname}}</p>
   <p>UserId: {{userData.userid}}</p>
