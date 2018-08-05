@@ -1,4 +1,27 @@
+header
+{
+	display: flex;
+	margin-bottom: 40px;
+	padding-bottom: 15px;
+	align-items: center;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
 
+header > *
+{
+	margin-right: 20px;
+}
+
+header > h3
+{
+	display: inline-block;
+	margin-top: 5px;
+}
+
+header > button
+{
+	border-radius: 50%;
+}
 
 .message-section {
 	background: #273038;

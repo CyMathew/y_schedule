@@ -1,3 +1,7 @@
-<app-message-list *ngIf="!showConvo" [messageData]="messageData" (convoSelected)="onConvoSelected($event)"></app-message-list>
-<app-start-conversation *ngIf="!showConvo" (convoSelected)="onConvoSelected($event)"></app-start-conversation>
-<app-conversation *ngIf="showConvo" [conversationId]="conversationId" (backToMainView)="onBack($event)"></app-conversation>
+<div id="content">
+
+    <app-start-conversation *ngIf="!showConvo" (convoSelected)="onConvoSelected($event)"></app-start-conversation>
+    <app-conversation *ngIf="showConvo" [conversationId]="conversationId" (backToMainView)="onBack($event)"></app-conversation>
+    <app-message-list *ngIf="!showConvo" [messageData]="messageData" (convoSelected)="onConvoSelected($event)"></app-message-list>
+
+</div>

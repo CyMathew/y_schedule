@@ -1,0 +1,32 @@
+#convoStarterDiv
+{
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    margin-bottom: -60px;
+}
+
+form
+{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 550px;
+    margin-left: auto;
+    align-items: center;
+    z-index: 2;
+}
+
+form > *
+{
+    margin-right: 20px;
+}
+
+form > span
+{
+    min-width: 100px;
+}
+
+form > select
+{
+    min-width: 250px;
+}
