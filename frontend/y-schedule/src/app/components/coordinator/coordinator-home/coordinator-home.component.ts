@@ -9,9 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CoordinatorHomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
-
   userData = [];
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     let param = { action: "getAllRequests" };
