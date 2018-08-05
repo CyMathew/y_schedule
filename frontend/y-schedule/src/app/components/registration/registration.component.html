@@ -1,38 +1,38 @@
-<div id="content" class="container-fluid">
+<div id="content">
   <h2>Register New Employee</h2>
-  <form action="#" class="container-fluid" (ngSubmit)="register()">
-    <div class="form-group col-md-6">
+  <form action="#" class="card" (ngSubmit)="register()">
+    <div>
       <div class="alert alert-danger" *ngIf="inputNotValid.first_name">Please enter a first name</div>
       <label for="firstname">First name</label>
       <input type="text" [(ngModel)]="user.first_name"  class="form-control" name="firstname" >
     </div>
-    <div class="form-group col-md-6">
+    <div>
       <div class="alert alert-danger" *ngIf="inputNotValid.last_name">Please enter a last name</div>
       <label for="lastname">Last name</label>
       <input type="text" [(ngModel)]="user.last_name" class="form-control" name="lastname" >
     </div>
   
-    <div class="form-group col-md-6">
+    <div>
       <div class="alert alert-danger" *ngIf="inputNotValid.username">Please enter a username</div>
       <div class="alert alert-danger" *ngIf="userTaken">Username taken</div>
       <label for="username">Username</label> 
       <input type="text" [(ngModel)]="user.username" class="form-control" name="username" id="username" >
     </div>
   
-    <div class="form-group col-md-6">
+    <div>
       <div class="alert alert-danger" *ngIf="inputNotValid.password">Please enter a password</div>
       <div class="alert alert-danger" *ngIf="passNoMatch">Passwords don't match</div>
       <label for="password">Password</label>
       <input type="password" [(ngModel)]="user.password" class="form-control" name="password" id="password" >
     </div>
     
-    <div class="form-group col-md-6">
+    <div>
       <div class="alert alert-danger" *ngIf="inputNotValid.confirmPassword">Please enter a password</div>
       <label for="confirm_password">Confirm Password</label>
       <input type="password" [(ngModel)]="user.confirmPassword" class="form-control" name="confirm_password" id="confirm_password" >
     </div>
     
-    <div class="form-group col-md-6" id="button-group">
+    <div id="button-group">
       <input (click)="reset()" type="reset" class="btn btn-secondary">  
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>

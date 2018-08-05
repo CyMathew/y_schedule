@@ -1,0 +1,35 @@
+a
+{
+    border-radius: 50%;
+    border: none;
+    color: white;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
+}
+
+table
+{
+    width: 100%; 
+    max-width: 1000px; 
+    margin: 20px auto;
+}
+
+.card
+{
+    max-width: 1000px; 
+    margin: 10px auto;
+    padding: 5px 15px;
+    background-color: #273038;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
+}
+
+th
+{
+    min-width: 50px;
+}
+
+td
+{
+    min-width: 50px;
+}
