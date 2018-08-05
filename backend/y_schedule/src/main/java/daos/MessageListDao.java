@@ -31,6 +31,8 @@ public class MessageListDao {
 		query.setParameter("nuid2", id);
 		messages = (ArrayList<MessageListBean>)query.list();
 
+		session.close();
+		
 		return messages;
 	}
 	

@@ -26,6 +26,9 @@ public class ManagerDao {
 		query = session.createQuery(hql);
 		query.setParameter("nuid", userId);
 		bean = (ScheduleTimeBean)query.uniqueResult();
+		
+		session.close();
+		
 		return bean;
 	}
 	public ScheduleTimeBean getScheduleByScheduleID(Integer Schedule_id) {
@@ -38,6 +41,9 @@ public class ManagerDao {
 		query = session.createQuery(hql);
 		query.setParameter("nuid", Schedule_id);
 		bean = (ScheduleTimeBean)query.uniqueResult();
+		
+		session.close();
+		
 		return bean;
 	}
 	public List<ScheduleTimeBean> getScheduleByStoreId(Integer id, Timestamp startTime, Timestamp endTime) {
@@ -47,6 +53,8 @@ public class ManagerDao {
 				.add(Restrictions.between("startTime", startTime, endTime)).list();
 		//.add(Restrictions.like("users.store_Id", id))
 		Transaction tx = null;
+		
+		session.close();
 		return list;
 	}
 	
@@ -64,6 +72,9 @@ public class ManagerDao {
 		query.setParameter("EndTime", end);
 		query.setParameter("nuid", userId);
 		query.executeUpdate();
+		
+		session.close();
+		
 		return bean;
 	} 
 	public String createScheduleTimeBean(Integer schId, Timestamp start, Timestamp end, UserBean id) {

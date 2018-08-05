@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <h3>Schedule an Employee</h3>
+  <h4>Schedule Employee</h4>
   <form (ngSubmit)="trySchedule()">
 
     <!-- Filtering -->
@@ -12,10 +12,9 @@
 
     <!-- Employee select -->
     <div class="scrollbar scrollbar-primary employee-select-outer">
-      <div class="employee-select force-overflow">
+      <div class="force-overflow">
         <div *ngIf="this.availEmployees!=null" id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
-          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm" (click)="onEmployeeChange(e.userId)"
-            style="padding: 0px; margin: 0px; border: none">
+          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm employee-select" (click)="onEmployeeChange(e.userId)">
             <input type="radio" name="employee" id="employeeOption{{i}}" autocomplete="off" [value]="e.userId"> {{e.name}}
           </label>
         </div>
@@ -25,18 +24,17 @@
 
     <!-- Enter Time -->
     <div>
-      <p>Work Status:</p>
       <p>Hours Scheduled:</p>
     </div>
     <div class="form-row">
-      <div class="col">
-        <input name="startTime" [(ngModel)]="startTime" type="time" class="form-control" placeholder="Start" style="min-width: 60px;">
+      <div class="col-6">
+        start
+        <input name="startTime" [(ngModel)]="startTime" type="time" class="form-control" placeholder="Start">
       </div>
-      <div class="col-1">
-        to
-      </div>
-      <div class="col">
-        <input name="endTime" [(ngModel)]="endTime" type="time" class="form-control" placeholder="End" style="min-width: 60px;">
+
+      <div class="col-6">
+        end
+        <input name="endTime" [(ngModel)]="endTime" type="time" class="form-control" placeholder="End">
       </div>
     </div>
     <br>
@@ -47,13 +45,15 @@
     </div>
 
     <!-- Buttons -->
-    <div class="form-row">
+    <div>
       <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
-      <div class="col">
-        <button type="submit" class="btn btn-primary btn-block">Schedule</button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-warning btn-block" (click)="back()">Back</button>
+      <div class="form-row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary btn-block">Schedule</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-warning btn-block" (click)="back()">Back</button>
+        </div>
       </div>
     </div>
 

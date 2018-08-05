@@ -25,6 +25,7 @@ export class EditTimeSheetComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         this.week = parseInt(params["week"]);
+        this.showWeek = true;
         this.fetchSchedule();
       });
   }
