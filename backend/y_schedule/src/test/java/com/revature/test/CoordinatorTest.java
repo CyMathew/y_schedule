@@ -40,7 +40,6 @@ public class CoordinatorTest {
 	}
 
 	@Test
-	@Ignore
 	public void getListOfEmpsThatHavePendingRequests() {
 		CoordinatorService coorser = new CoordinatorService();
 		
