@@ -7,9 +7,9 @@
 </div> -->
 
 <div id="content">
-  <h2>Request List</h2>
+  <h2>Pending Request List</h2>
 
-  <p id="emptyMessage"  *ngIf="userData != null">Empty request list :)</p>
+  <p id="emptyMessage"  *ngIf="userData.length == 0">Empty request list :)</p>
   <div id="requestList" *ngFor="let user of userData; index as i">
       <div class="container" (click)="showRequest(i)">
         <img class="label" src="../../../assets/tag_hor.svg" alt="label">

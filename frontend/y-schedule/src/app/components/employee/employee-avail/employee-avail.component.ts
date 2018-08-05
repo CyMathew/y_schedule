@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DateTimeService } from 'src/app/services/date-time.service';
@@ -44,7 +45,7 @@ export class EmployeeAvailComponent implements OnInit
   };
 
 
-  constructor(private authService: AuthService, private dateTimeService: DateTimeService) { }
+  constructor(private authService: AuthService, private dateTimeService: DateTimeService, private router: Router) { }
 
   ngOnInit() 
   {
@@ -193,6 +194,8 @@ export class EmployeeAvailComponent implements OnInit
   sendStatus(data)
   {
     console.log('Status: ', data);
+    if(data["result"] == "success")
+      this.router.navigate(["home"]);
   }
 
 

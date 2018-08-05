@@ -1,0 +1,36 @@
+#loginDiv
+{
+    display: flex;
+    flex-flow: column nowrap;
+    width: 300px;
+    align-items: center;
+    padding: 30px;
+    margin: auto;
+    margin-top: 10vh;
+}
+
+.card
+{
+  background-color: #273038;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
+}
+
+label
+{
+    display: block;
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+app-user-icon
+{
+    margin: 20px;
+}
+
+button
+{
+    margin: 20px 0; 
+    width: 100%;
+}

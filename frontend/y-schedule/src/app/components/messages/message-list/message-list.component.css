@@ -1,11 +1,45 @@
-.message-list{
+#convoBox
+{
+	z-index: 1;
+}
+
+h3
+{
+	display: inline-block;
+    margin: 20px 0;
+}
+
+.message{
     display: flex;
-	background: #273038;
+	background-color: #273038;
 	border-radius: 3px;
 	margin: 1px;
 	box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.2);
 	color: #FFFFFF;
-	padding: 10px;
+	padding: 10px 20px;
+	margin: 5px 0px;
 	overflow: hidden;
+	align-items: center;
+	transition: background-color .25s ease-in-out;
+	cursor: pointer;
 }
 
+.message:hover
+{
+	background-color: #333d46;
+}
+
+.message-details
+{
+	margin-left: 20px;
+}
+
+.message-details > h6
+{
+	margin-top: 10px;
+}
+
+.mesage-details > p
+{
+	color: rgba(255, 255, 255, .3);
+}

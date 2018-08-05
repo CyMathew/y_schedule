@@ -26,5 +26,8 @@
 </div>
 
 <!-- <employee-week-view  [storeHours]="storeHours"></employee-week-view> -->
-<employee-week-view *ngIf="events != null" [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>
+<div id="calendar">
+  <h2>Availability Schedule</h2>
+  <employee-week-view *ngIf="events != null" [storeHours]="storeHours" [eventsJSON]="events"></employee-week-view>
+</div>
 </div>

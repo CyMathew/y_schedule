@@ -1,15 +1,50 @@
 #content
 {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     margin-top: 40px;
 }
 
 h2
 {
+    display: inline-block;
     text-align: center;
-    margin: 20px 0px;
+    margin: 40px 0px;
 }
+
+form
+{
+    width: 350px;
+    padding: 20px 30px 0px 30px;
+}
+
+input
+{
+    margin-bottom: 10px;
+}
+
+input[type="reset"]
+{
+    margin-bottom: 0;
+}
+
+#button-group
+{
+    margin: 20px 0px;
+    text-align: right;
+}
+
 
 #button-group > *
 {
     margin-right: 10px;
+}
+
+.card
+{
+  background-color: #273038;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
 }
