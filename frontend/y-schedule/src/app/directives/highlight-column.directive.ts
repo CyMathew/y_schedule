@@ -10,13 +10,14 @@ export class HighlightColumnDirective {
   @Input() appHighlightColumn: object = {col: 0, active: 0};
 
   ngOnInit() {
-    this.el.nativeElement.style.cursor = "pointer";
+    
   }
 
   ngOnChanges(changes: SimpleChanges){
-    if(this.appHighlightColumn["col"] == this.appHighlightColumn["active"])
-      this.el.nativeElement.style.backgroundColor = "#555555";
-    else
+    if(this.appHighlightColumn["col"] == this.appHighlightColumn["active"]){
+      this.el.nativeElement.style.backgroundColor = "#333d46";
+      this.el.nativeElement.style.cursor = "pointer";
+    }else
       this.el.nativeElement.style.backgroundColor = "";
   }
 }

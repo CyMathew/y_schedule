@@ -23,10 +23,9 @@ export class MessageBoxComponent implements OnInit {
     let params = {
       action: "createMessage",
       messageListId: "" + this.conversationId,
-      message: this.messageText
+      message: this.messageText,
+      otherId: "" + this.otherId
     }
-
-    console.log(params);
 
     this.authService.send("/message.do", params).subscribe(
       data => this.receiveMessages(data),
@@ -37,7 +36,6 @@ export class MessageBoxComponent implements OnInit {
   }
 
   receiveMessages(data){
-    //console.log("receiveMessagesBox", data)
     this.messageUpdate.emit(data);
   }
 

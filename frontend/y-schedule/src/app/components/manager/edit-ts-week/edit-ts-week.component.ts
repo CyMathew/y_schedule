@@ -14,7 +14,7 @@ export class EditTsWeekComponent implements OnInit {
   @Output() daySelected = new EventEmitter<number>();
   @Output() weekSelected = new EventEmitter<number>();
 
-  week: number;
+  week: number = 0;
   hoverColumn: number = -1;
 
   constructor(private dateTime: DateTimeService, private route: ActivatedRoute, private authService: AuthService) { }
@@ -23,42 +23,44 @@ export class EditTsWeekComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams
-    .subscribe(params => {
-      this.updateWeek(parseInt(params["week"])), 
-      err => this.authService.checkSession(err)
-    });
+      .subscribe(params => {
+        this.updateWeek(parseInt(params["week"])),
+          err => this.authService.checkSession(err)
+      });
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    console.log("view init");
+  ngOnChanges(changes: SimpleChanges) {
     this.updateWeek(this.week);
   }
 
   selectDay(day) {
-    if(this.week == 1 || this.week == 2){
-      console.log("emit day: " + day);
+    if (this.week == 1 || this.week == 2) {
       this.daySelected.emit(day);
     }
   }
 
-  getWeek(n: number){
+  getWeek(n: number) {
     return this.week + n;
   }
 
-  getWeekHeader(){
-    if(this.scheduleData["dates"] == null)
+  getWeekHeader() {
+    if (this.scheduleData == null)
       return "...";
-    else{
+    else {
       return this.scheduleData["dates"]["0"] + " - " + this.scheduleData["dates"]["6"];
     }
   }
 
-  updateWeek(week: number){
+  updateWeek(week: number) {
+
+    this.hoverColumn = -1;
     this.week = week;
     this.weekSelected.emit(week);
+
   }
 
-  onHoverColumn(col){
-    this.hoverColumn = col;
+  onHoverColumn(col) {
+    if (this.week == 1 || this.week == 2)
+      this.hoverColumn = col;
   }
 }

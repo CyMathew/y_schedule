@@ -27,10 +27,6 @@ export class LoginComponent implements OnInit {
     this.authService.navigateToRoleHome();
   }
 
-  ngAfterViewInit() {
-    console.log(this.url.get());
-  }
-
   public tryLogin() {
     this.loading = true;
     this.invalidLogin = false;
@@ -44,8 +40,6 @@ export class LoginComponent implements OnInit {
   public doLogin(data: Object) {
     this.loading = false;
     this.loadingService.setLoading(false);
-    
-    console.log(data);
 
     if (data["result"] == "success") {
       this.authService.setSession(data, this.username);

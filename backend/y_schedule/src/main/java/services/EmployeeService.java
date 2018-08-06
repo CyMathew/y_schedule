@@ -2,11 +2,12 @@ package services;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
+import java.util.HashSet;
 
 //import static org.mockito.Matchers.intThat;
 
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,7 +16,6 @@ import beans.EmployeeAvailabilityBean;
 import beans.ScheduleTimeBean;
 import beans.UserBean;
 import daos.EmployeeDao;
-import daos.ManagerDao;
 import daos.UserDao;
 import util.DateTimeHelper;
 
@@ -129,11 +129,18 @@ public class EmployeeService {
 		JSONArray availEmployees = new JSONArray();
 
 		List<EmployeeAvailabilityBean> list = new EmployeeDao().getStartTimesByDay(weekday);
-
-		for (EmployeeAvailabilityBean b : list) {
-			JSONObject temp = new JSONObject();
-			temp.put("userId", b.getUser().getUser_id());
+		Set<Integer> users = new HashSet<>();
+		
+		for (EmployeeAvailabilityBean b : list) {	
+			//check if the user has already been added
+			Integer userId = b.getUser().getUser_id();
+			if(users.contains(userId))
+				continue;
+			
+			JSONObject temp = new JSONObject();			
+			temp.put("userId", userId);
 			temp.put("name", b.getUser().getUser_fname() + " " + b.getUser().getUser_lname());
+			users.add(userId);
 			availEmployees.put(temp);
 		}
 

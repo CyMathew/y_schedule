@@ -221,4 +221,31 @@ public class ManagerService {
 		return obj;
 	}
 
+	public static JSONObject unScheduleEmployee(JSONObject jsonObject) {
+		Integer userId = null;
+
+		try {
+			userId = Integer.parseInt(jsonObject.getString("userId"));
+		} catch (NumberFormatException e) {
+			userId = null;
+		}
+
+		String date = jsonObject.getString("date");
+		
+		return unScheduleEmployee(userId, date);
+	}
+
+	private static JSONObject unScheduleEmployee(Integer userId, String date) {
+		
+		Timestamp start = DateTimeHelper.getTimestamp(date, "00:00");
+		Timestamp end = DateTimeHelper.getTimestamp(date, "23:59");
+		
+		new ManagerDao().removeScheduleTimeBean(userId, start, end);
+		
+		JSONObject schedule = new JSONObject();
+		schedule.put("result", "success");
+		
+		return schedule;
+	}
+
 }

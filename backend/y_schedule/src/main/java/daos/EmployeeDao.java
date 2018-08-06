@@ -38,6 +38,8 @@ public class EmployeeDao {
 			e.printStackTrace();
 			tx.rollback();
 			return false;
+		} finally {
+			session.close();
 		}
 		return true;
 	}
@@ -75,6 +77,9 @@ public class EmployeeDao {
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id))
 				.add(Restrictions.like("day", day)).list();
+		
+		session.close();
+		
 		return list;
 	}
 
@@ -87,6 +92,9 @@ public class EmployeeDao {
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("active", 1))
 												  .add(Restrictions.like("day", day)).list();
+		
+		session.close();
+		
 		return list;
 	}
 
@@ -95,6 +103,9 @@ public class EmployeeDao {
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("active", 1))
 				                                  .add(Restrictions.like("user.user_id", id)).list();
+		
+		session.close();
+		
 		return list;
 	}
 
@@ -105,6 +116,8 @@ public class EmployeeDao {
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("user.user_id", id))
 				.add(Restrictions.like("day", weekday)).add(Restrictions.le("starttime", start))
 				.add(Restrictions.ge("endtime", end)).list();
+		
+		session.close();
 
 		return list;
 
@@ -116,6 +129,8 @@ public class EmployeeDao {
 		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", id))
 				.add(Restrictions.between("startTime", startTime, endTime)).list();
 		Transaction tx = null;
+		
+		session.close();
 		
 		return list;
 	}
@@ -234,6 +249,9 @@ public class EmployeeDao {
 		Criteria crit = session.createCriteria(EmployeeAvailabilityBean.class);
 		List<EmployeeAvailabilityBean> list = crit.add(Restrictions.like("active", 0))
 				                                  .add(Restrictions.like("user.user_id", id)).list();
+		
+		session.close();
+		
 		return list;
 	}
 

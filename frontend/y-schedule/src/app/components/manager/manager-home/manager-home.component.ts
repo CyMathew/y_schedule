@@ -31,7 +31,6 @@ export class ManagerHomeComponent implements OnInit {
   receiveSchedule(data){
     this.loaded++;
     this.scheduleData = data;
-    console.log("received???", data);
   }
 
   requestUserData(){

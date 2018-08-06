@@ -5,7 +5,7 @@
     <div class="message" (click)="selectConversation(convo['messageListID'])">
       <app-user-icon [userId]="convo['userId']" [small]="true"></app-user-icon>
       <div class="message-details">
-        <h6>{{convo['userName']}}: {{convo['userId']}}</h6>
+        <h6>{{convo['userName']}}</h6>
         <p>{{convo['latestMessage']}}</p>
       </div>
     </div>

@@ -14,6 +14,11 @@ public class CoodinatorDao {
 		Query query = null;
 		String hql = "FROM EmployeeAvailabilityBean WHERE active = 0";
 		query = session.createQuery(hql);
-		return query.list();
+		
+		List<EmployeeAvailabilityBean> list = query.list();
+		
+		session.close();
+		
+		return list;
 	}
 }

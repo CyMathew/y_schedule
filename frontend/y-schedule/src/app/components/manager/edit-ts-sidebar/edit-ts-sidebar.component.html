@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <h3>Schedule an Employee</h3>
+  <h4>Schedule Employee</h4>
   <form (ngSubmit)="trySchedule()">
 
     <!-- Filtering -->
@@ -12,50 +12,52 @@
 
     <!-- Employee select -->
     <div class="scrollbar scrollbar-primary employee-select-outer">
-      <div class="employee-select force-overflow">
+      <div class="force-overflow">
         <div *ngIf="this.availEmployees!=null" id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
-          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm" (click)="onEmployeeChange(e)"
-            style="padding: 0px; margin: 0px; border: none">
+          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm employee-select" (click)="onEmployeeChange(e)">
             <input type="radio" name="employee" id="employeeOption{{i}}" autocomplete="off" [value]="e.userId"> {{e.name}}
           </label>
         </div>
       </div>
     </div>
-    <div class="alert alert-danger" *ngIf="inputNotValid.empNotSelected">Please select an employee</div>
-    <br>
-
     <!-- Enter Time -->
-    <div>
-      <p>Work Status:</p>
+    <div style="height: 450px">
+      <div class="alert alert-danger" *ngIf="inputNotValid.empNotSelected">Please select an employee</div>
+      <br>
       <p>Hours Scheduled:</p>
-    </div>
-    <div *ngIf="availableTimes != null">
-      <p>Times Available:</p>
-      <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
-    </div>
-    <div class="alert alert-danger" *ngIf="inputNotValid.startTimeInvalid">Please select a start time</div>
-    <div class="alert alert-danger" *ngIf="inputNotValid.endTimeInvalid">Please select an end time</div>
-    <div class="alert alert-danger" *ngIf="inputNotValid.timesInvalid">Start time is too close to end time</div>
-    <div class="form-row">
-      <div class="col">
-        <input name="startTime" [(ngModel)]="startTime" type="time" class="form-control" placeholder="Start" style="min-width: 60px;">
+      <div class="alert alert-danger" *ngIf="inputNotValid.startTimeInvalid">Please select a start time</div>
+      <div class="alert alert-danger" *ngIf="inputNotValid.endTimeInvalid">Please select an end time</div>
+      <div class="alert alert-danger" *ngIf="inputNotValid.timesInvalid">Start time is too close to end time</div>
+      <div class="form-row">
+        <div class="col-6">
+          <label for="startTime">start</label>
+          <input name="startTime" [(ngModel)]="startTime" type="time" class="form-control" placeholder="Start">
+        </div>
+        <div class="col-6">
+          <label for="endTime">end</label>
+          <input name="endTime" [(ngModel)]="endTime" type="time" class="form-control" placeholder="End">
+        </div>
       </div>
-      <div class="col-1">
-        to
+      <div *ngIf="availableTimes != null">
+        <p>Times Available:</p>
+        <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
       </div>
-      <div class="col">
-        <input name="endTime" [(ngModel)]="endTime" type="time" class="form-control" placeholder="End" style="min-width: 60px;">
-      </div>
+
+      <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
     </div>
-    <br>
 
     <!-- Buttons -->
+
     <div class="form-row">
-      <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
-      <div class="col">
+      <div class="col-6">
         <button type="submit" class="btn btn-primary btn-block">Schedule</button>
       </div>
-      <div class="col">
+      <div class="col-6">
+        <button type="button" class="btn btn-danger btn-block" (click)="tryRemoveFromSchedule()">Unschedule</button>
+      </div>
+    </div>
+    <div class="form-row" style="margin-top: 12px">
+      <div class="col-6">
         <button type="button" class="btn btn-warning btn-block" (click)="back()">Back</button>
       </div>
     </div>

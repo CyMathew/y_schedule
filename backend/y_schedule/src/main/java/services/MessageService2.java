@@ -69,14 +69,11 @@ public class MessageService2 {
 	}
 
 	public static JSONObject createMessageList(Integer userId, Integer otherUser) {
-		MessageListDao mld = new MessageListDao();
+
 		UserBean userbean = new UserDao().getUserById(userId);
 		UserBean userbeanOther = new UserDao().getUserById(otherUser);
 
-		MessageListBean b = mld.getMessageListByUsers(userbean, userbeanOther);
-
-		if (b == null)
-			b = mld.createNewMessageList(userbean, userbeanOther);
+		MessageListBean b = getOrCreateMessageList(userbean, userbeanOther);
 
 		return new JSONObject().put("messageListId", b.getMessage_list_id());
 	}
@@ -114,37 +111,34 @@ public class MessageService2 {
 		return jsonOut;
 	}
 
-	private static UserBean conversationGetOther(Integer userId, Integer messageListId) {
-
-		System.err.println("userId: " + userId);
-		System.err.println("messageListId: " + messageListId);
-
-		MessageListBean mlb = new MessageListDao().getMessageListById(messageListId);
-
-		if (mlb.getUser1().getUser_id() == userId)
-			return mlb.getUser2();
-		else
-			return mlb.getUser1();
-	}
-
 	public static JSONObject createMessage(Integer userId, JSONObject parameters) {
 
 		Integer messageListId = Integer.parseInt(parameters.getString("messageListId"));
+		Integer otherId = Integer.parseInt(parameters.getString("otherId"));
 		String message = parameters.getString("message");
 
-		return createMessage(userId, messageListId, message);
+		return createMessage(userId, otherId, messageListId, message);
 	}
 
-	public static JSONObject createMessage(Integer userId, Integer messageListId, String message) {
+	public static JSONObject createMessage(Integer userId, Integer otherId, Integer messageListId, String message) {
 
 		Timestamp now = Timestamp.valueOf(LocalDateTime.now());
 
-		MessageListBean mlb = new MessageListDao().getMessageListById(messageListId);
+		MessageListBean mlb;
+		
+		if(messageListId == -1) {
+			UserBean userbean = new UserDao().getUserById(userId);
+			UserBean userbeanOther = new UserDao().getUserById(otherId);
+			mlb = getOrCreateMessageList(userbean, userbeanOther);
+		}else {
+			mlb = new MessageListDao().getMessageListById(messageListId);
+		}
+		
 		UserBean user = new UserDao().getUserById(userId);
 
 		new MessageDao().createNewMessage(user, message, now, mlb);
 
-		return getMessagesByListId(userId, messageListId);
+		return getMessagesByListId(userId, mlb.getMessage_list_id());
 	}
 
 	public static JSONObject getCoworkers(Integer userId, Integer storeId) {
@@ -165,4 +159,26 @@ public class MessageService2 {
 		return new JSONObject().put("coworkers", coworkerArray);
 	}
 
+	private static UserBean conversationGetOther(Integer userId, Integer messageListId) {
+
+		System.err.println("userId: " + userId);
+		System.err.println("messageListId: " + messageListId);
+
+		MessageListBean mlb = new MessageListDao().getMessageListById(messageListId);
+
+		if (mlb.getUser1().getUser_id() == userId)
+			return mlb.getUser2();
+		else
+			return mlb.getUser1();
+	}
+	
+	private static MessageListBean getOrCreateMessageList(UserBean userbean, UserBean userbeanOther) {
+
+		MessageListDao mld = new MessageListDao();
+		MessageListBean b = mld.getMessageListByUsers(userbean, userbeanOther);
+
+		if (b == null)
+			b = mld.createNewMessageList(userbean, userbeanOther);
+		return b;
+	}
 }

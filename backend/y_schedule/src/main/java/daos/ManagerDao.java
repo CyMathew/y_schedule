@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import beans.EmployeeAvailabilityBean;
 import beans.ScheduleTimeBean;
 import util.HibernateUtil;
 import beans.UserBean;
@@ -26,6 +27,9 @@ public class ManagerDao {
 		query = session.createQuery(hql);
 		query.setParameter("nuid", userId);
 		bean = (ScheduleTimeBean)query.uniqueResult();
+		
+		session.close();
+		
 		return bean;
 	}
 	public ScheduleTimeBean getScheduleByScheduleID(Integer Schedule_id) {
@@ -38,6 +42,9 @@ public class ManagerDao {
 		query = session.createQuery(hql);
 		query.setParameter("nuid", Schedule_id);
 		bean = (ScheduleTimeBean)query.uniqueResult();
+		
+		session.close();
+		
 		return bean;
 	}
 	public List<ScheduleTimeBean> getScheduleByStoreId(Integer id, Timestamp startTime, Timestamp endTime) {
@@ -47,6 +54,8 @@ public class ManagerDao {
 				.add(Restrictions.between("startTime", startTime, endTime)).list();
 		//.add(Restrictions.like("users.store_Id", id))
 		Transaction tx = null;
+		
+		session.close();
 		return list;
 	}
 	
@@ -64,6 +73,9 @@ public class ManagerDao {
 		query.setParameter("EndTime", end);
 		query.setParameter("nuid", userId);
 		query.executeUpdate();
+		
+		session.close();
+		
 		return bean;
 	} 
 	public String createScheduleTimeBean(Integer schId, Timestamp start, Timestamp end, UserBean id) {
@@ -86,6 +98,33 @@ public class ManagerDao {
 			session.close();
 		}
 		return "success";
+	}
+	
+
+	public boolean removeScheduleTimeBean(Integer userId, Timestamp startTime, Timestamp endTime) {
+		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
+		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", userId))
+				.add(Restrictions.between("startTime", startTime, endTime)).list();
+		
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			for (ScheduleTimeBean i : list) {
+				session.delete(i);
+			}
+			tx.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+		
+		return true;
 	}
 	
 }

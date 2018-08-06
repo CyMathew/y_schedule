@@ -46,7 +46,6 @@ export class MessagesMainComponent implements OnInit {
   
 
   receiveConversations(data) {
-    console.log("receive conversations", data);
     this.messageData = data;
   }
 

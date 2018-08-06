@@ -58,6 +58,9 @@ public class UserDao {
 		query.setParameter("nuname", username);
 		bean = (UserBean)query.uniqueResult();
 		logger.info("UserName" + username);
+		
+		session.close();
+		
 		if(bean != null) {
 			return bean.getSec_lvl();
 		}else return 0;
@@ -75,6 +78,8 @@ public class UserDao {
 		query.setParameter("nuname", username);
 		bean = (UserBean)query.uniqueResult();
 
+		session.close();
+		
 		return bean;		
 	}
 
@@ -90,6 +95,8 @@ public class UserDao {
 		query.setParameter("nuid", userId);
 		bean = (UserBean)query.uniqueResult();
 
+		session.close();
+		
 		return bean;
 	}
 
@@ -104,6 +111,8 @@ public class UserDao {
 		query = session.createQuery(hql);
 		query.setParameter("nsid", storeId);
 		beans = query.list();
+		
+		session.close();
 		
 		return beans;
 	}
