@@ -30,13 +30,11 @@ export class EditTsWeekComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("view init");
     this.updateWeek(this.week);
   }
 
   selectDay(day) {
     if (this.week == 1 || this.week == 2) {
-      console.log("emit day: " + day);
       this.daySelected.emit(day);
     }
   }
@@ -46,7 +44,7 @@ export class EditTsWeekComponent implements OnInit {
   }
 
   getWeekHeader() {
-    if (this.scheduleData["dates"] == null)
+    if (this.scheduleData == null)
       return "...";
     else {
       return this.scheduleData["dates"]["0"] + " - " + this.scheduleData["dates"]["6"];

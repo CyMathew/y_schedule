@@ -28,7 +28,6 @@ export class EditTsGraphComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes", changes);
     this.setEmpArray(this.scheduleData["employees"]);
   }
 

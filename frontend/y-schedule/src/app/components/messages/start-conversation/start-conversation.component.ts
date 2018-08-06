@@ -39,7 +39,6 @@ export class StartConversationComponent implements OnInit {
   }
 
   tryAddConvo() {
-    console.log("coworkerForm", this.coworkerForm.value['coworkerId']);
     let params = {
       action: "createMessageList",
       otherId: "" + this.coworkerForm.value['coworkerId']

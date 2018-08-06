@@ -17,7 +17,7 @@ export class EditTimeSheetComponent implements OnInit {
   week: number;
   currentDay: number;
   UTCDates: number[];
-  scheduleData: Object = {employees:null, dates:null};
+  scheduleData: Object = null;
 
   selectedEmp: object;
 
@@ -31,7 +31,7 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   fetchSchedule(){
-    console.log("fetching week: " + this.week);
+    this.scheduleData == null
     this.authService.send("/manager.do", {action: "viewSchedule", week: ""+this.week}).subscribe(
       data => this.receiveSchedule(data), 
       err => this.authService.checkSession(err)
@@ -40,11 +40,9 @@ export class EditTimeSheetComponent implements OnInit {
 
   receiveSchedule(data){
     this.scheduleData = data;
-    console.log(data);
   }
 
   onDaySelected(day){
-    //console.log("parent got: " + day);
     this.currentDay = day;
     this.showWeek = false;
   }

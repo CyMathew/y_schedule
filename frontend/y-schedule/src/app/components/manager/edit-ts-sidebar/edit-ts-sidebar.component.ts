@@ -35,7 +35,6 @@ export class EditTsSidebarComponent implements OnInit {
   }
 
   receiveAvailableEmployees(data: object) {
-    console.log("availEmployees", data);
     this.availEmployees = data["availEmployees"];
   }
 
@@ -78,6 +77,5 @@ export class EditTsSidebarComponent implements OnInit {
 
   receiveAvailResult(data){
     this.availableTimes = data;
-    console.log("available times", data);
   }
 }

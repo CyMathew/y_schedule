@@ -39,7 +39,6 @@ export class ConversationComponent implements OnInit {
   }
 
   receiveMessages(data) {
-    console.log("receive messages", data);
     this.conversation = data;
     this.otherId = data["otherId"];
   }

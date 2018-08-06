@@ -48,7 +48,6 @@ export class EmployeeHomeComponent implements OnInit
   {
     this.displayDates.beginDate = data["dates"][0];
     this.displayDates.endDate = data["dates"][6];
-    // console.log(data["employee"]["shifts"]);
     this.events = data["employee"]["shifts"];
   }
 
