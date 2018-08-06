@@ -33,11 +33,8 @@ export class EditTsGraphComponent implements OnInit {
   }
 
   setEmpArray(employees) {
-
-    console.log('Going through employee array');
-
     for (let employee of employees) {
-      console.log(employee);
+      // console.log(employee);
       let empName = employee["name"];
       let shifts = employee["shifts"];
       for (let shift in shifts) {
