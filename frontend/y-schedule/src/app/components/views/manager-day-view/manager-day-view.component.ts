@@ -58,7 +58,7 @@ export class ManagerDayViewComponent implements OnInit
       'border-radius': '5px',
       'grid-template-columns': '100px repeat(' + this.storeHoursArray.length + ', 1fr)',
       'grid-template-rows': '50px repeat(' + this.empArray.length + ', 1fr)',
-      'grid-row-gap': '3px',
+      'grid-row-gap': '5px',
     }
   }
 
