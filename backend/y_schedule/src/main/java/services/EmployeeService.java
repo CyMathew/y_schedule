@@ -79,7 +79,10 @@ public class EmployeeService {
 		return reply;
 
 	}
-
+	
+	/**
+	 * Sets the default times for an employee
+	 **/
 	public void setDefaultAvailability(UserBean user) {
 
 		float start = 9f;
@@ -88,7 +91,7 @@ public class EmployeeService {
 		ed.removeAllReguests(user.getUser_id());
 
 		for (int i = 1; i < 6; i++)
-			ed.updateRequests(start, end, DateTimeHelper.getDayOfWeekName(i), user);
+			ed.updateDefaultRequests(start, end, DateTimeHelper.getDayOfWeekName(i), user);
 	}
 
 	/**
