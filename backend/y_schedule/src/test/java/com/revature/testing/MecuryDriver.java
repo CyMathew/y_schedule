@@ -38,12 +38,12 @@ public class MecuryDriver {
 	@Test
 	public void logInToMercury() {
 			
-			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[1]/input")).sendKeys("manager");
-			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[2]/input")).sendKeys("manager");
-			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/button")).click();
+			driver.findElement(By.xpath("//*[@id=\"loginDiv\"]/form/div[1]/input")).sendKeys("manager");
+			driver.findElement(By.xpath("//*[@id=\"loginDiv\"]/form/div[2]/input")).sendKeys("manager");
+			driver.findElement(By.xpath("//*[@id=\"loginDiv\"]/form/button")).click();
 			assertNotNull(driver.findElement(By.tagName("app-user-sidebar")));
 			
-			driver.findElement(By.linkText("timesheet")).click();
+			driver.findElement(By.linkText("Timesheet")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
@@ -53,21 +53,21 @@ public class MecuryDriver {
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
 			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
-			driver.findElement(By.linkText("Register Employee")).click();
-			driver.findElement(By.linkText("timesheet")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
-			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/thead/tr/th[3]")).click();
+//			driver.findElement(By.linkText("Register Employee")).click();
+//			driver.findElement(By.linkText("timesheet")).click();
+//			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
+//			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/div/div[3]/a")).click();
+//			driver.findElement(By.xpath("/html/body/app-root/app-edit-time-sheet/div/app-edit-ts-week/table/thead/tr/th[3]")).click();
+//			
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[1]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[2]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[3]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[4]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[5]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[6]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[7]")).click();
+//			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[8]")).click();
 			
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[1]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[2]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[3]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[4]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[5]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[6]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[7]")).click();
-			driver.findElement(By.xpath("//*[@id=\"employeeSelect\"]/label[8]")).click();
-		
 			driver.findElement(By.linkText("Register Employee")).click();
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[1]/input")).sendKeys("FIRST NAME");
 			driver.findElement(By.xpath("//*[@id=\"content\"]/form/div[2]/input")).sendKeys("LAST NAME");
@@ -98,10 +98,11 @@ public class MecuryDriver {
 			
 			driver.findElement(By.linkText("Logout")).click();
 			
-			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[1]/input")).sendKeys("gai");
-			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/div[2]/input")).sendKeys("g");
-			driver.findElement(By.xpath("/html/body/app-root/app-login/div/div/div/form/button")).click();
-			driver.findElement(By.xpath("//*[@id=\"navbarNavDropdown\"]/ul/li[2]/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"loginDiv\"]/form/div[1]/input")).sendKeys("gai");
+			driver.findElement(By.xpath("//*[@id=\"loginDiv\"]/form/div[2]/input")).sendKeys("g");
+			driver.findElement(By.xpath("//*[@id=\"loginDiv\"]/form/button")).click();
+			
+			driver.findElement(By.xpath("//*[@id=\"navbarNavDropdown\"]/ul/li[1]/a")).click();
 			
 			Select daySelect = new Select(driver.findElement(By.xpath("//*[@id=\"daySelect\"]")));
 			daySelect.selectByVisibleText("Sunday");
