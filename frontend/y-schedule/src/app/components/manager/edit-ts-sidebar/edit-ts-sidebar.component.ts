@@ -187,7 +187,7 @@ export class EditTsSidebarComponent implements OnInit {
 
       this.authService.send("/manager.do", params)
       .subscribe(
-        data => this.sendScheduleEmp.emit(true), 
+        data => this.receiveScheduleResult(data), 
         err => this.authService.checkSession(err)
       );
     }

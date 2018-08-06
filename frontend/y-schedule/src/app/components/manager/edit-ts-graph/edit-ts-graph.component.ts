@@ -24,7 +24,6 @@ export class EditTsGraphComponent implements OnInit {
   @Input('scheduleData') scheduleData: Object;
 
   ngOnInit() {
-    this.setEmpArray(this.scheduleData["employees"]);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -32,14 +31,15 @@ export class EditTsGraphComponent implements OnInit {
   }
 
   setEmpArray(employees) {
+    this.empArray = [];
     for (let employee of employees) {
       // console.log(employee);
       let empName = employee["name"];
       let shifts = employee["shifts"];
       for (let shift in shifts) {
         // console.log(shift);
-        // console.log("Emp: ", empName, "Shift: ", shifts[shift]);
         if (shifts[shift]["day"] == this.currentDay) {
+          console.log("Emp: ", empName, "Shift: ", shifts[shift]);
           let eventJSON = {
             empName: empName,
             startTime: shifts[shift]["start"],
