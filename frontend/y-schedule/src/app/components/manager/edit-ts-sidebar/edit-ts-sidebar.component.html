@@ -14,37 +14,41 @@
     <div class="scrollbar scrollbar-primary employee-select-outer">
       <div class="force-overflow">
         <div *ngIf="this.availEmployees!=null" id="employeeSelect" class="btn-group-toggle" data-toggle="buttons">
-          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm employee-select" (click)="onEmployeeChange(e.userId)">
+          <label *ngFor="let e of this.availEmployees" class="btn btn-block btn-outline-primary btn-sm employee-select" (click)="onEmployeeChange(e)">
             <input type="radio" name="employee" id="employeeOption{{i}}" autocomplete="off" [value]="e.userId"> {{e.name}}
           </label>
         </div>
       </div>
     </div>
+    <div class="alert alert-danger" *ngIf="inputNotValid.empNotSelected">Please select an employee</div>
     <br>
 
     <!-- Enter Time -->
     <div style="height: 450px">
       <p>Hours Scheduled:</p>
+      <div class="alert alert-danger" *ngIf="inputNotValid.startTimeInvalid">Please select a start time</div>
+      <div class="alert alert-danger" *ngIf="inputNotValid.endTimeInvalid">Please select an end time</div>
+      <div class="alert alert-danger" *ngIf="inputNotValid.timesInvalid">Start time is too close to end time</div>
       <div class="form-row">
         <div class="col-6">
           <label for="startTime">start</label>
           <input name="startTime" [(ngModel)]="startTime" type="time" class="form-control" placeholder="Start">
         </div>
         <div class="col-6">
-            <label for="endTime">end</label>
+          <label for="endTime">end</label>
           <input name="endTime" [(ngModel)]="endTime" type="time" class="form-control" placeholder="End">
         </div>
       </div>
-      <br>
       <div *ngIf="availableTimes != null">
-        <p>Times Available:</p>
+          <p>Times Available:</p>
+          <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
+        </div>
 
-        <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
-      </div>
+        <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
     </div>
 
     <!-- Buttons -->
-    <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
+    
     <div class="form-row">
       <div class="col">
         <button type="submit" class="btn btn-primary btn-block">Schedule</button>
