@@ -72,8 +72,9 @@ export class EditTsSidebarComponent implements OnInit {
           }
         }
       }
+      return true;
     }
-    return true;
+    return false;
   }
 
   trySchedule() {
@@ -169,5 +170,26 @@ export class EditTsSidebarComponent implements OnInit {
 
   receiveAvailResult(data){
     this.availableTimes = data;
+  }
+
+
+  tryRemoveFromSchedule(){
+    if(typeof this.selectedEmpID != "undefined") {
+      this.scheduleFailure = false;
+        
+      let params = { 
+        action: "unScheduleEmployee", 
+        userId: "" + this.selectedEmpID, 
+        date: this.scheduleData["dates"]["" + this.currentDay], 
+        startTime: this.startTime, 
+        endTime: this.endTime 
+      };
+
+      this.authService.send("/manager.do", params)
+      .subscribe(
+        data => this.sendScheduleEmp.emit(true), 
+        err => this.authService.checkSession(err)
+      );
+    }
   }
 }

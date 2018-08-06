@@ -20,11 +20,10 @@
         </div>
       </div>
     </div>
-    <div class="alert alert-danger" *ngIf="inputNotValid.empNotSelected">Please select an employee</div>
-    <br>
-
     <!-- Enter Time -->
     <div style="height: 450px">
+      <div class="alert alert-danger" *ngIf="inputNotValid.empNotSelected">Please select an employee</div>
+      <br>
       <p>Hours Scheduled:</p>
       <div class="alert alert-danger" *ngIf="inputNotValid.startTimeInvalid">Please select a start time</div>
       <div class="alert alert-danger" *ngIf="inputNotValid.endTimeInvalid">Please select an end time</div>
@@ -40,20 +39,25 @@
         </div>
       </div>
       <div *ngIf="availableTimes != null">
-          <p>Times Available:</p>
-          <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
-        </div>
+        <p>Times Available:</p>
+        <p *ngFor="let time of availableTimes['times']">{{dtService.getTimeString(time["start"])}}-{{dtService.getTimeString(time["end"])}}</p>
+      </div>
 
-        <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
+      <div class="alert alert-danger" *ngIf="scheduleFailure">{{scheduleFailMessage}}</div>
     </div>
 
     <!-- Buttons -->
-    
+
     <div class="form-row">
-      <div class="col">
+      <div class="col-6">
         <button type="submit" class="btn btn-primary btn-block">Schedule</button>
       </div>
-      <div class="col">
+      <div class="col-6">
+        <button type="button" class="btn btn-danger btn-block" (click)="tryRemoveFromSchedule()">Unschedule</button>
+      </div>
+    </div>
+    <div class="form-row" style="margin-top: 12px">
+      <div class="col-6">
         <button type="button" class="btn btn-warning btn-block" (click)="back()">Back</button>
       </div>
     </div>

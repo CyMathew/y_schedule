@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import beans.EmployeeAvailabilityBean;
 import beans.ScheduleTimeBean;
 import util.HibernateUtil;
 import beans.UserBean;
@@ -97,6 +98,33 @@ public class ManagerDao {
 			session.close();
 		}
 		return "success";
+	}
+	
+
+	public boolean removeScheduleTimeBean(Integer userId, Timestamp startTime, Timestamp endTime) {
+		Session session = HibernateUtil.getSession();
+		Criteria crit = session.createCriteria(ScheduleTimeBean.class);
+		List<ScheduleTimeBean> list = crit.add(Restrictions.like("users.user_id", userId))
+				.add(Restrictions.between("startTime", startTime, endTime)).list();
+		
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			for (ScheduleTimeBean i : list) {
+				session.delete(i);
+			}
+			tx.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+		
+		return true;
 	}
 	
 }
