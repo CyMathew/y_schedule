@@ -1,6 +1,4 @@
-.side-bar{
-    min-width: 300px;
-}
+
 
 .employee-select {
     color: black;
@@ -43,4 +41,11 @@
 
 .form-control {
     padding: 2px 4px;
+}
+
+label
+{
+    display: block;
+    margin: 5px 0;
+    font-size: 12px;
 }
