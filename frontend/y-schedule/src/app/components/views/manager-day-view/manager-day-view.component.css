@@ -8,6 +8,14 @@
     grid-template-rows: 50px 50px 50px;
 } */
 
+.card
+{
+  background-color: #273038;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .25);
+}
+
 span
 {
     display: flex;
@@ -15,6 +23,7 @@ span
     justify-content: center;
     border-right: 1px dotted gray;
     border-bottom: 1px dotted gray;
+    padding: 0 5px;
 }
 
 p
@@ -34,6 +43,7 @@ p
 {
     grid-column: 1/1;
     height: 100%;
+    padding: 5px 10px;
 }
 
 .timeslot
@@ -42,9 +52,17 @@ p
     font-size: 10px;
     padding: 3px;
     padding-left: 5px;
-    background-color: #75E361;
+    background-color: #1D59BF;
     border-radius: 3px;
     box-shadow: 0 1px 5px rgba(0,0,0,.25);
     /* resize: vertical;
     overflow: hidden; */
+}
+
+@media (max-width: 1200px)
+{
+    .hour
+    {
+        font-size: 10px;
+    }
 }
